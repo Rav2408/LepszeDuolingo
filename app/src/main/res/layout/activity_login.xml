@@ -24,7 +24,7 @@
         android:id="@+id/titleName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lepsze\nDuolingo"
+        android:text="LOGIN"
         android:textColor="@color/MainLight"
         android:textSize="48sp"
         android:textStyle="bold"
