@@ -25,6 +25,8 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton = (Button) findViewById(R.id.confirmRegisterButton);
         registerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                // for testing
+                startActivity(new Intent(RegisterActivity.this, TitleActivity.class));
                 // TODO: put register logic here
             }
         });
