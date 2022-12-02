@@ -1,16 +1,15 @@
-package pl.edu.pb.lepszeduolingo.ui.home;
+package pl.edu.pb.lepszeduolingo.ui.difficulty2;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class Difficulty2ViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public Difficulty2ViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
     }
 
     public LiveData<String> getText() {

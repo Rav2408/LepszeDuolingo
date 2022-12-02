@@ -1,4 +1,4 @@
-package pl.edu.pb.lepszeduolingo.ui.slideshow;
+package pl.edu.pb.lepszeduolingo.ui.dictionary;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,24 +12,23 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import pl.edu.pb.lepszeduolingo.R;
-import pl.edu.pb.lepszeduolingo.databinding.FragmentSlideshowBinding;
+import pl.edu.pb.lepszeduolingo.databinding.FragmentDictionaryBinding;
 
-public class SlideshowFragment extends Fragment {
+public class DictionaryFragment extends Fragment {
 
-    private SlideshowViewModel slideshowViewModel;
-    private FragmentSlideshowBinding binding;
+    private DictionaryViewModel dictionaryViewModel;
+    private FragmentDictionaryBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+        dictionaryViewModel =
+                new ViewModelProvider(this).get(DictionaryViewModel.class);
 
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentDictionaryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        final TextView textView = binding.textDictionary;
+        dictionaryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

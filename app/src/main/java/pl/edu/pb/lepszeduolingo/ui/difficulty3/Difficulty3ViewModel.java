@@ -1,16 +1,15 @@
-package pl.edu.pb.lepszeduolingo.ui.gallery;
+package pl.edu.pb.lepszeduolingo.ui.difficulty3;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class Difficulty3ViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public Difficulty3ViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
     }
 
     public LiveData<String> getText() {
