@@ -1,4 +1,4 @@
-package pl.edu.pb.lepszeduolingo.ui.gallery;
+package pl.edu.pb.lepszeduolingo.ui.difficulty2;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,24 +12,23 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import pl.edu.pb.lepszeduolingo.R;
-import pl.edu.pb.lepszeduolingo.databinding.FragmentGalleryBinding;
+import pl.edu.pb.lepszeduolingo.databinding.FragmentDifficulty2Binding;
 
-public class GalleryFragment extends Fragment {
+public class Difficulty2Fragment extends Fragment {
 
-    private GalleryViewModel galleryViewModel;
-    private FragmentGalleryBinding binding;
+    private Difficulty2ViewModel difficulty2ViewModel;
+    private FragmentDifficulty2Binding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
+        difficulty2ViewModel =
+                new ViewModelProvider(this).get(Difficulty2ViewModel.class);
 
-        binding = FragmentGalleryBinding.inflate(inflater, container, false);
+        binding = FragmentDifficulty2Binding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textGallery;
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        final TextView textView = binding.textDifficulty2;
+        difficulty2ViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

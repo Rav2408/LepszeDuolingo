@@ -1,4 +1,4 @@
-package pl.edu.pb.lepszeduolingo.ui.slideshow;
+package pl.edu.pb.lepszeduolingo.ui.difficulty1;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,24 +12,23 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import pl.edu.pb.lepszeduolingo.R;
-import pl.edu.pb.lepszeduolingo.databinding.FragmentSlideshowBinding;
+import pl.edu.pb.lepszeduolingo.databinding.FragmentDifficulty1Binding;
 
-public class SlideshowFragment extends Fragment {
+public class Difficulty1Fragment extends Fragment {
 
-    private SlideshowViewModel slideshowViewModel;
-    private FragmentSlideshowBinding binding;
+    private Difficulty1ViewModel difficulty1ViewModel;
+    private FragmentDifficulty1Binding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+        difficulty1ViewModel =
+                new ViewModelProvider(this).get(Difficulty1ViewModel.class);
 
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentDifficulty1Binding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        final TextView textView = binding.textDifficulty1;
+        difficulty1ViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
