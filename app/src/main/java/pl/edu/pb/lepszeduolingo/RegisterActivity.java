@@ -10,6 +10,7 @@ import android.widget.Button;
 public class RegisterActivity extends AppCompatActivity {
     Button getBack;
     Button registerButton;
+    String emailPattern = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
