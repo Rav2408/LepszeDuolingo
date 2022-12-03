@@ -60,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
     }
     private void performAuth() {
         String email = inputEmail.getText().toString();
+        // user with that email
         Optional<User> user = data.stream().filter(c -> c.getEmail().equals(email)).findAny();
         String password = inputPassword.getText().toString();
         if(!user.isPresent()){
@@ -68,7 +69,8 @@ public class LoginActivity extends AppCompatActivity {
             inputPassword.setError("Wrong Password");
         } else {
             // success
-            // TODO: set current user?
+            // TODO: add loading anim
+            // TODO: set current user
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
         }
     }
