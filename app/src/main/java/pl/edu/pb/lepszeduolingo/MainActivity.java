@@ -2,20 +2,21 @@ package pl.edu.pb.lepszeduolingo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.Menu;
+import android.view.MenuItem;
 
-import com.google.android.material.navigation.NavigationView;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.navigation.NavigationView;
 
 import pl.edu.pb.lepszeduolingo.databinding.ActivityMainBinding;
+import pl.edu.pb.lepszeduolingo.rest.IVolley;
+import pl.edu.pb.lepszeduolingo.rest.VolleyRequest;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,7 +45,59 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        //TODO przykładowe zapytanie GET - aby z niego skorzystać należy odpalić server i zmienić tutaj adres IP
+        VolleyRequest.getInstance(this, new IVolley() {
+            @Override
+            public void onResponse(String responde) {
+                //Show result from API
+                //Toast.makeText(getActivity(),""+responde,Toast.LENGTH_SHORT).show();
+                System.out.println("lalalal"+responde);
+            }
+        }).getRequest("http://192.168.56.1:8090/language");
+
+//        //    final TextView textView = (TextView) findViewById(R.id.text);
+//// ...
+//
+//        // Instantiate the RequestQueue.
+//        RequestQueue queue = Volley.newRequestQueue(this);
+//        String url = "http://192.168.56.1:8091/example";
+//
+//        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+//            @Override
+//            public void onResponse(JSONArray response) {
+//                Toast.makeText(MainActivity.this, response.toString(),Toast.LENGTH_LONG);
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Toast.makeText(MainActivity.this, "Something Wrong",Toast.LENGTH_LONG);
+//            }
+//        });
+//        queue.add(request);
+//
+//        // Request a string response from the provided URL.
+//        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        // Display the first 500 characters of the response string.
+////                    textView.setText("Response is: " + response.substring(0,500));
+//                        System.out.println("Response is: " + response.substring(0,500));
+//                    }
+//                }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+////            textView.setText("That didn't work!");
+//                error.printStackTrace();
+//                //System.out.println("Response is: " + ;);
+//            }
+//        });
+//
+//        // Add the request to the RequestQueue.
+//        queue.add(stringRequest);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
