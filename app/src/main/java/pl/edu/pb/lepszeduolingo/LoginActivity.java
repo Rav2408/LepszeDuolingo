@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         data.add(new User("fajnyemail@gmail.com", "fajnehaslo123!"));
         data.add(new User("trudnyemail@gmail.com", "trudnehaslo"));
         data.add(new User("skrzynkapocztowa@gmail.com", "adminadmin"));
+        data.add(new User("123", "123"));
         // Buttons logic
         getBack = (Button) findViewById(R.id.getBackLoginButton);
         getBack.setOnClickListener(new View.OnClickListener() {

@@ -4,20 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.dictionary.DictionaryFragment">
+    tools:context=".ui.dictionary.DictionaryFragment"
+    android:background="@color/Main">
+
+    <ImageView
+        android:id="@+id/dictionaryHeader"
+        android:layout_width="413dp"
+        android:layout_height="70dp"
+        android:src="@drawable/rectangle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/text_dictionary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="DICTIONARY"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:id="@+id/unlocked"
+        android:layout_width="320dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:text="Unlocked 000/000"
+        android:textColor="@color/MainLight"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@+id/dictionaryHeader"
+        app:layout_constraintEnd_toEndOf="@+id/dictionaryHeader"
+        app:layout_constraintHorizontal_bias="0.817"
+        app:layout_constraintStart_toStartOf="@+id/dictionaryHeader"
+        app:layout_constraintTop_toTopOf="@+id/dictionaryHeader"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/dictRecyclerView"
+        android:layout_width="409dp"
+        android:layout_height="659dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/dictionaryHeader" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
