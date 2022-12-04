@@ -4,20 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.difficulty1.Difficulty1Fragment">
+    tools:context=".ui.difficulty1.Difficulty1Fragment"
+    android:background="@color/Main">
 
-    <TextView
-        android:id="@+id/text_difficulty1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:text="Difficulty 1"
+    <ImageView
+        android:id="@+id/challangeWrapper"
+        android:layout_width="411dp"
+        android:layout_height="106dp"
+        android:src="@drawable/rectangle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/chalanngeButton"
+        android:layout_width="253dp"
+        android:layout_height="64dp"
+        android:background="@color/MainLight"
+        android:text="Challange Mode"
+        android:textColor="#78909C"
+        android:textSize="24sp"
+        app:flow_horizontalAlign="center"
+        app:flow_verticalAlign="center"
+        app:layout_constraintBottom_toBottomOf="@+id/challangeWrapper"
+        app:layout_constraintEnd_toEndOf="@+id/challangeWrapper"
+        app:layout_constraintStart_toStartOf="@+id/challangeWrapper"
+        app:layout_constraintTop_toTopOf="@+id/challangeWrapper" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/diffRecyclerView"
+        android:layout_width="409dp"
+        android:layout_height="623dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/challangeWrapper" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
