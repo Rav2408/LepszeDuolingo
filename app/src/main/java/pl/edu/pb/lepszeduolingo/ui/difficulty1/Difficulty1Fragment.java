@@ -11,8 +11,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import pl.edu.pb.lepszeduolingo.R;
 import pl.edu.pb.lepszeduolingo.databinding.FragmentDifficulty1Binding;
+import pl.edu.pb.lepszeduolingo.ui.dictionary.Dict_RecyclerViewAdapter;
 
 public class Difficulty1Fragment extends Fragment {
 
@@ -27,13 +31,11 @@ public class Difficulty1Fragment extends Fragment {
         binding = FragmentDifficulty1Binding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDifficulty1;
-        difficulty1ViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        // set recycler view
+        RecyclerView recyclerView = root.findViewById(R.id.diffRecyclerView);
+        Diff_RecyclerViewAdapter adapter = new Diff_RecyclerViewAdapter();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        recyclerView.setAdapter(adapter);
         return root;
     }
 

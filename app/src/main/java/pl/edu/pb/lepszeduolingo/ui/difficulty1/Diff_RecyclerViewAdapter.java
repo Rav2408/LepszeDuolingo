@@ -1,6 +1,5 @@
-package pl.edu.pb.lepszeduolingo.ui.dictionary;
+package pl.edu.pb.lepszeduolingo.ui.difficulty1;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,37 +11,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import pl.edu.pb.lepszeduolingo.R;
 
-public class Dict_RecyclerViewAdapter extends RecyclerView.Adapter<Dict_RecyclerViewAdapter.ViewHolder> {
-    Context context;
-
-    public Dict_RecyclerViewAdapter(Context context){
-        this.context = context;
-    }
+public class Diff_RecyclerViewAdapter  extends RecyclerView.Adapter<Diff_RecyclerViewAdapter.ViewHolder> {
     @NonNull
     @Override
-    public Dict_RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Diff_RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.dict_recycler_view_row, parent, false);
-        return new Dict_RecyclerViewAdapter.ViewHolder(view);
+        View view = layoutInflater.inflate(R.layout.diff_recycler_view_row, parent, false);
+        return new Diff_RecyclerViewAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Dict_RecyclerViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull Diff_RecyclerViewAdapter.ViewHolder holder, int position) {
 
     }
-
     @Override
     public int getItemCount() {
-        return 20;
+        return 5;
     }
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView imageView;
         TextView textView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.dictImage);
             textView = itemView.findViewById(R.id.diffCategory);
             // TODO: here set image and base word
         }
