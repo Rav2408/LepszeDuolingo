@@ -6,20 +6,25 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class LearnActivity extends AppCompatActivity {
     Button answerView_1, answerView_2, answerView_3, answerView_4;
     TextView questionViewText;
     CardView questionWrapper;
     MutableLiveData<Integer> answer = new MutableLiveData<>();
+    Toast answerMessage;
     // test data
-    Integer correctAnswer = 0;
+    Random rand = new Random();
+    Integer correctAnswer = rand.nextInt(4);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,20 +36,39 @@ public class LearnActivity extends AppCompatActivity {
         questionViewText = findViewById(R.id.question_view);
         questionWrapper = findViewById(R.id.question_wrapper);
         setParams();
-        // default
-        answer.setValue(-1);
         getAnswer();
-        // listen for answer
-        answer.observe(this, new Observer<Integer>(){
-            @Override
-            public void onChanged(Integer chosenAnswer) {
-                if(Objects.equals(chosenAnswer, correctAnswer)){
-                    Log.d(TAG, String.format("Good answer: %2d", chosenAnswer));
-                }else{
-                    Log.d(TAG, String.format("Wrong Answer: %2d", chosenAnswer));
-                }
+        handleAnswer();
+    }
+    void handleAnswer(){
+        answer.observe(this, chosenAnswer -> {
+            if(Objects.equals(chosenAnswer, correctAnswer)){
+                // test
+                Log.d(TAG, String.format("Good answer: %2d", chosenAnswer));
+                // remove that question from list and db
+                // givenList.removeIf(givenList -> givenList.getId().equals(Id));
+                showMessage("Correct answer");
+                recreate();
+            }else{
+                // test
+                Log.d(TAG, String.format("Wrong Answer: %2d", chosenAnswer));
+                // question stays
+                showMessage("Wrong answer");
+                recreate();
             }
         });
+    }
+    void showMessage(String message){
+        answerMessage = Toast.makeText(this, message,
+                Toast.LENGTH_LONG);
+        answerMessage.show();
+        // make toast disappear faster
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                answerMessage.cancel();
+            }
+        }, 300);
     }
     void setParams(){
         // TODO: pass correct params
@@ -55,6 +79,11 @@ public class LearnActivity extends AppCompatActivity {
         *   questionWrapper.setBackgroundColor(tutaj zdjecie);
         * }
         * */
+        /*
+        // random value from locked words
+            Random rand = new Random();
+            int Id = givenList.get(rand.nextInt(givenList.size()));
+        */
         questionViewText.setText("Fajne pytanie tej");
         answerView_1.setText("tak");
         answerView_2.setText("nie");
