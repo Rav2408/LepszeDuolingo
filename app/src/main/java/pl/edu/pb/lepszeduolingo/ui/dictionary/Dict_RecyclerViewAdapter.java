@@ -1,6 +1,5 @@
 package pl.edu.pb.lepszeduolingo.ui.dictionary;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,19 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import pl.edu.pb.lepszeduolingo.R;
+import pl.edu.pb.lepszeduolingo.ui.difficulty1.Diff_RecyclerViewAdapter;
 
 public class Dict_RecyclerViewAdapter extends RecyclerView.Adapter<Dict_RecyclerViewAdapter.ViewHolder> {
-    Context context;
-
-    public Dict_RecyclerViewAdapter(Context context){
-        this.context = context;
+    private onWordListener onWordListener;
+    public Dict_RecyclerViewAdapter(onWordListener onWordListener){
+        this.onWordListener = onWordListener;
     }
     @NonNull
     @Override
     public Dict_RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.dict_recycler_view_row, parent, false);
-        return new Dict_RecyclerViewAdapter.ViewHolder(view);
+        return new Dict_RecyclerViewAdapter.ViewHolder(view, onWordListener);
     }
 
     @Override
@@ -35,16 +34,26 @@ public class Dict_RecyclerViewAdapter extends RecyclerView.Adapter<Dict_Recycler
     public int getItemCount() {
         return 20;
     }
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        onWordListener onWordListener;
         ImageView imageView;
         TextView textView;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, onWordListener onWordListener) {
             super(itemView);
-
+            this.onWordListener = onWordListener;
             imageView = itemView.findViewById(R.id.dictImage);
-            textView = itemView.findViewById(R.id.diffCategory);
-            // TODO: here set image and base word
+            textView = itemView.findViewById(R.id.wordTranslationText);
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            onWordListener.onWordClick(getAdapterPosition());
+        }
+    }
+    public interface onWordListener{
+        void onWordClick(int position);
     }
 }

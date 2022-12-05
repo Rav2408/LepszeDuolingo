@@ -7,3 +7,5 @@ m
 =app/src/main/java/pl/edu/pb/lepszeduolingo/TitleActivity.java,9\d\9de34e2c69fee99f82d367d3f2e97c70a6ae1038
 p
 @app/src/main/java/pl/edu/pb/lepszeduolingo/RegisterActivity.java,9\1\9163af1cafc6171a607fd372c155130c3caac6c5
+ƒ
+Sapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/difficulty1/Difficulty1ViewModel.java,4\4\4454494c0e778d7df8ad12dbf7444844641d5905

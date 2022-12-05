@@ -23,7 +23,7 @@
             android:layout_height="70dp">
 
             <TextView
-                android:id="@+id/diffCategory"
+                android:id="@+id/wordTranslationText"
                 android:layout_width="231dp"
                 android:layout_height="43dp"
                 android:text="Category"
