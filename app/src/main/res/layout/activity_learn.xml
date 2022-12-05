@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Main"
+    tools:context=".LearnActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/answer_wrapper"
+        android:layout_width="411dp"
+        android:layout_height="375dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/answer_1"
+            android:layout_width="135dp"
+            android:layout_height="128dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="48dp"
+            android:background="@color/MainDark"
+            android:text="Answer"
+            android:textColor="@color/MainLight"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/answer_2"
+            android:layout_width="135dp"
+            android:layout_height="128dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="48dp"
+            android:background="@color/MainDark"
+            android:text="Answer"
+            android:textColor="@color/MainLight"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/answer_3"
+            android:layout_width="135dp"
+            android:layout_height="128dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginBottom="48dp"
+            android:background="@color/MainDark"
+            android:text="Answer"
+            android:textColor="@color/MainLight"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/answer_4"
+            android:layout_width="135dp"
+            android:layout_height="128dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="48dp"
+            android:background="@color/MainDark"
+            android:text="Answer"
+            android:textColor="@color/MainLight"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/question_wrapper"
+        android:layout_width="311dp"
+        android:layout_height="311dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="48dp"
+        android:textAlignment="center"
+        app:cardBackgroundColor="@color/MainLight"
+        app:layout_constraintBottom_toTopOf="@+id/answer_wrapper"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <TextView
+            android:id="@+id/question_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="a a a a a a a a a a a a a a a a a a a a a a a a a"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/MainDark"
+            android:textSize="24sp" />
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

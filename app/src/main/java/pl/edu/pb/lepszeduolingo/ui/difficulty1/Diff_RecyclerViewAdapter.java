@@ -12,12 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import pl.edu.pb.lepszeduolingo.R;
 
 public class Diff_RecyclerViewAdapter  extends RecyclerView.Adapter<Diff_RecyclerViewAdapter.ViewHolder> {
+    private onCategoryListener onCategoryListener;
+    public Diff_RecyclerViewAdapter(onCategoryListener onCategoryListener){
+        this.onCategoryListener = onCategoryListener;
+    }
     @NonNull
     @Override
     public Diff_RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.diff_recycler_view_row, parent, false);
-        return new Diff_RecyclerViewAdapter.ViewHolder(view);
+        return new Diff_RecyclerViewAdapter.ViewHolder(view, onCategoryListener);
     }
 
     @Override
@@ -28,14 +32,25 @@ public class Diff_RecyclerViewAdapter  extends RecyclerView.Adapter<Diff_Recycle
     public int getItemCount() {
         return 5;
     }
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView textView;
+        onCategoryListener onCategoryListener;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, onCategoryListener onCategoryListener) {
             super(itemView);
-
+            this.onCategoryListener = onCategoryListener;
             textView = itemView.findViewById(R.id.diffCategory);
             // TODO: here set image and base word
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            onCategoryListener.onCategoryClick(getAdapterPosition());
+        }
+    }
+    public interface onCategoryListener{
+        void onCategoryClick(int position);
     }
 }
