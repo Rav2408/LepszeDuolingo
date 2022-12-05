@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
             // success
             // TODO: add loading anim
             // TODO: set current user
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
         }
     }
 }
