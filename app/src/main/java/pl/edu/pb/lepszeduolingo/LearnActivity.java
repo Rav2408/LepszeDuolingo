@@ -69,12 +69,7 @@ public class LearnActivity extends AppCompatActivity {
         answerMessage.show();
         // make toast disappear faster
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                answerMessage.cancel();
-            }
-        }, delay);
+        handler.postDelayed(() -> answerMessage.cancel(), delay);
     }
     void setParams(){
         // TODO: pass correct params
@@ -97,29 +92,9 @@ public class LearnActivity extends AppCompatActivity {
         answerView_4.setText("wuchta wiary");
     }
     void getAnswer(){
-        answerView_1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                answer.setValue(0);
-            }
-        });
-        answerView_2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                answer.setValue(1);
-            }
-        });
-        answerView_3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                answer.setValue(2);
-            }
-        });
-        answerView_4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                answer.setValue(3);
-            }
-        });
+        answerView_1.setOnClickListener(v -> answer.setValue(0));
+        answerView_2.setOnClickListener(v -> answer.setValue(1));
+        answerView_3.setOnClickListener(v -> answer.setValue(2));
+        answerView_4.setOnClickListener(v -> answer.setValue(3));
     }
 }
