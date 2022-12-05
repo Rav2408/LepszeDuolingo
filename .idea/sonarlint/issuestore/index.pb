@@ -7,13 +7,5 @@ m
 =app/src/main/java/pl/edu/pb/lepszeduolingo/TitleActivity.java,9\d\9de34e2c69fee99f82d367d3f2e97c70a6ae1038
 p
 @app/src/main/java/pl/edu/pb/lepszeduolingo/RegisterActivity.java,9\1\9163af1cafc6171a607fd372c155130c3caac6c5
-Å
-Qapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/dictionary/DictionaryViewModel.java,d\7\d7354acfc86447601aee02fdda93bad64a46596e
-Ü
-Vapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/dictionary/Dict_RecyclerViewAdapter.java,7\f\7f6ce746f1c09de9ae4badffaae4e34aaaac5cc0
-Ä
-Papp/src/main/java/pl/edu/pb/lepszeduolingo/ui/dictionary/DictionaryFragment.java,e\3\e343dde7ca18a59aeec8bbb7f70ddbb176ff09b4
 É
 Sapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/difficulty1/Difficulty1ViewModel.java,4\4\4454494c0e778d7df8ad12dbf7444844641d5905
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e

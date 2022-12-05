@@ -3,7 +3,6 @@ package pl.edu.pb.lepszeduolingo.ui.difficulty1;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,7 +38,7 @@ public class Diff_RecyclerViewAdapter  extends RecyclerView.Adapter<Diff_Recycle
         public ViewHolder(@NonNull View itemView, onCategoryListener onCategoryListener) {
             super(itemView);
             this.onCategoryListener = onCategoryListener;
-            textView = itemView.findViewById(R.id.diffCategory);
+            textView = itemView.findViewById(R.id.wordTranslationText);
             // TODO: here set image and base word
 
             itemView.setOnClickListener(this);
