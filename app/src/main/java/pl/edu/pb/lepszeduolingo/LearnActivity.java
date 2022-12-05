@@ -35,22 +35,27 @@ public class LearnActivity extends AppCompatActivity {
         answerView_4 = findViewById(R.id.answer_4);
         questionViewText = findViewById(R.id.question_view);
         questionWrapper = findViewById(R.id.question_wrapper);
+        // set parameters for db
         setParams();
+        // listen inputs
         getAnswer();
+        // show answer and redirect
         handleAnswer();
     }
+    // TODO: add logic when every word was unlocked
+    // perhaps show every word without deleting them?
     void handleAnswer(){
         answer.observe(this, chosenAnswer -> {
             if(Objects.equals(chosenAnswer, correctAnswer)){
                 // test
-                Log.d(TAG, String.format("Good answer: %2d", chosenAnswer));
+                // Log.d(TAG, String.format("Good answer: %2d", chosenAnswer));
                 // remove that question from list and db
                 // givenList.removeIf(givenList -> givenList.getId().equals(Id));
                 showMessage("Correct answer");
                 recreate();
             }else{
                 // test
-                Log.d(TAG, String.format("Wrong Answer: %2d", chosenAnswer));
+                // Log.d(TAG, String.format("Wrong Answer: %2d", chosenAnswer));
                 // question stays
                 showMessage("Wrong answer");
                 recreate();
@@ -58,6 +63,7 @@ public class LearnActivity extends AppCompatActivity {
         });
     }
     void showMessage(String message){
+        int delay = 400;
         answerMessage = Toast.makeText(this, message,
                 Toast.LENGTH_LONG);
         answerMessage.show();
@@ -68,7 +74,7 @@ public class LearnActivity extends AppCompatActivity {
             public void run() {
                 answerMessage.cancel();
             }
-        }, 300);
+        }, delay);
     }
     void setParams(){
         // TODO: pass correct params
