@@ -14,6 +14,10 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import pl.edu.pb.lepszeduolingo.databinding.ActivityMainBinding;
 import pl.edu.pb.lepszeduolingo.rest.IVolley;
 import pl.edu.pb.lepszeduolingo.rest.VolleyRequest;
@@ -48,13 +52,34 @@ public class MainActivity extends AppCompatActivity {
 
         //TODO przykładowe zapytanie GET - aby z niego skorzystać należy odpalić server i zmienić tutaj adres IP
         VolleyRequest.getInstance(this, new IVolley() {
+//            public void onResponse(String responde) {
+//                //Show result from API
+//                //Toast.makeText(getActivity(),""+responde,Toast.LENGTH_SHORT).show();
+//                System.out.println("lalalal"+responde);
+//                try {
+//                    //JSONObject obj = new JSONObject(responde);
+//                    JSONArray array = new JSONArray(responde);
+//                    JSONObject obj = array.getJSONObject(0);
+//                    System.out.println(obj.getString("text"));
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+
             @Override
-            public void onResponse(String responde) {
-                //Show result from API
-                //Toast.makeText(getActivity(),""+responde,Toast.LENGTH_SHORT).show();
-                System.out.println("lalalal"+responde);
+            public void onResponse(JSONArray jsonArray) {
+                System.out.println("lalalal");
+                try {
+                    //JSONObject obj = new JSONObject(responde);
+                    //JSONArray array = new JSONArray(responde);
+                    JSONObject obj = jsonArray.getJSONObject(0);
+                    System.out.println(obj.getString("text"));
+                    System.out.println(obj.getString("imagePath"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-        }).getRequest("http://192.168.56.1:8090/language");
+        }).getRequest("http://82.139.136.139:8090/api/word"); //TODO swój adres
 
 //        //    final TextView textView = (TextView) findViewById(R.id.text);
 //// ...
