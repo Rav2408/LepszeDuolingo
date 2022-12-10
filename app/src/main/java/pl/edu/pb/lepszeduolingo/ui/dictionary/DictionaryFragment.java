@@ -29,7 +29,7 @@ import pl.edu.pb.lepszeduolingo.ui.word.WordActivity;
 
 public class DictionaryFragment extends Fragment implements Dict_RecyclerViewAdapter.onWordListener{
     // test values
-    private int unlockedWords = 20;
+    private int unlockedWords = 4;
     private int allWords = 50;
 
     private DictionaryViewModel dictionaryViewModel;

@@ -32,4 +32,5 @@ public class WordActivity extends AppCompatActivity {
         WordView.setText("Abomination");
         WordTranslationView.setText("Abominacja");
     }
+
 }

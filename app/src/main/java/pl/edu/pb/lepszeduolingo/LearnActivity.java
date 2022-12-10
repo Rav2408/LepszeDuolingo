@@ -10,15 +10,19 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.squareup.picasso.Picasso;
 import java.util.Objects;
 import java.util.Random;
+import pl.edu.pb.lepszeduolingo.rest.IVolley;
+import pl.edu.pb.lepszeduolingo.rest.VolleyRequest;
 
 public class LearnActivity extends AppCompatActivity {
     Button answerView_1, answerView_2, answerView_3, answerView_4;
-    TextView questionViewText;
+    String url = "https://upload.wikimedia.org/wikipedia/commons/c/cb/Pineapple_and_cross_section.jpg";
+    ImageView imageView;
     CardView questionWrapper;
     MutableLiveData<Integer> answer = new MutableLiveData<>();
     Toast answerMessage;
@@ -33,7 +37,7 @@ public class LearnActivity extends AppCompatActivity {
         answerView_2 = findViewById(R.id.answer_2);
         answerView_3 = findViewById(R.id.answer_3);
         answerView_4 = findViewById(R.id.answer_4);
-        questionViewText = findViewById(R.id.question_view);
+        imageView = findViewById(R.id.imageView);
         questionWrapper = findViewById(R.id.question_wrapper);
         // set parameters for db
         setParams();
@@ -85,7 +89,7 @@ public class LearnActivity extends AppCompatActivity {
             Random rand = new Random();
             int Id = givenList.get(rand.nextInt(givenList.size()));
         */
-        questionViewText.setText("Fajne pytanie tej");
+        Picasso.get().load(url).fit().into(imageView);
         answerView_1.setText("tak");
         answerView_2.setText("nie");
         answerView_3.setText("tej");

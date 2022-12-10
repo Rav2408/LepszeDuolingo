@@ -12,11 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import pl.edu.pb.lepszeduolingo.R;
 import pl.edu.pb.lepszeduolingo.ui.difficulty1.Diff_RecyclerViewAdapter;
 
+
+
 public class Dict_RecyclerViewAdapter extends RecyclerView.Adapter<Dict_RecyclerViewAdapter.ViewHolder> {
     private onWordListener onWordListener;
+    private String[] data = {"asdf","fasd","dupa","kupa"};
     public Dict_RecyclerViewAdapter(onWordListener onWordListener){
         this.onWordListener = onWordListener;
     }
+
     @NonNull
     @Override
     public Dict_RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -27,12 +31,12 @@ public class Dict_RecyclerViewAdapter extends RecyclerView.Adapter<Dict_Recycler
 
     @Override
     public void onBindViewHolder(@NonNull Dict_RecyclerViewAdapter.ViewHolder holder, int position) {
-
+        holder.getTextView().setText(data[position]);
     }
 
     @Override
     public int getItemCount() {
-        return 20;
+        return 4;
     }
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         onWordListener onWordListener;
@@ -51,6 +55,10 @@ public class Dict_RecyclerViewAdapter extends RecyclerView.Adapter<Dict_Recycler
         @Override
         public void onClick(View v) {
             onWordListener.onWordClick(getAdapterPosition());
+        }
+
+        public TextView getTextView() {
+            return textView;
         }
     }
     public interface onWordListener{

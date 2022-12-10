@@ -88,18 +88,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
 
-        <TextView
-            android:id="@+id/question_view"
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:text="a a a a a a a a a a a a a a a a a a a a a a a a a"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/MainDark"
-            android:textSize="24sp" />
+            android:layout_height="match_parent"/>
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

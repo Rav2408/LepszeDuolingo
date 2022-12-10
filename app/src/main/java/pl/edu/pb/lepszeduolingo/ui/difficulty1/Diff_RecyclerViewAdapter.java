@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import pl.edu.pb.lepszeduolingo.R;
 
 public class Diff_RecyclerViewAdapter  extends RecyclerView.Adapter<Diff_RecyclerViewAdapter.ViewHolder> {
+    private String[] data = {"asdf","fasd","dupa","kupa","pupa"};
     private onCategoryListener onCategoryListener;
     public Diff_RecyclerViewAdapter(onCategoryListener onCategoryListener){
         this.onCategoryListener = onCategoryListener;
@@ -25,7 +26,7 @@ public class Diff_RecyclerViewAdapter  extends RecyclerView.Adapter<Diff_Recycle
 
     @Override
     public void onBindViewHolder(@NonNull Diff_RecyclerViewAdapter.ViewHolder holder, int position) {
-
+        holder.getTextView().setText(data[position]);
     }
     @Override
     public int getItemCount() {
@@ -43,7 +44,9 @@ public class Diff_RecyclerViewAdapter  extends RecyclerView.Adapter<Diff_Recycle
 
             itemView.setOnClickListener(this);
         }
-
+        public TextView getTextView() {
+            return textView;
+        }
         @Override
         public void onClick(View v) {
             onCategoryListener.onCategoryClick(getAdapterPosition());
