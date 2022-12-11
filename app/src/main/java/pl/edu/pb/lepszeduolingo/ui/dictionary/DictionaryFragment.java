@@ -12,19 +12,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Objects;
-
-import pl.edu.pb.lepszeduolingo.LearnActivity;
 import pl.edu.pb.lepszeduolingo.R;
 import pl.edu.pb.lepszeduolingo.databinding.FragmentDictionaryBinding;
-import pl.edu.pb.lepszeduolingo.ui.difficulty1.Diff_RecyclerViewAdapter;
 import pl.edu.pb.lepszeduolingo.ui.word.WordActivity;
 
 public class DictionaryFragment extends Fragment implements Dict_RecyclerViewAdapter.onWordListener{

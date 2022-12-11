@@ -1,4 +1,4 @@
-package pl.edu.pb.lepszeduolingo.ui.difficulty1;
+package pl.edu.pb.lepszeduolingo.ui.difficulty;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
@@ -17,19 +17,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import pl.edu.pb.lepszeduolingo.LearnActivity;
 import pl.edu.pb.lepszeduolingo.R;
-import pl.edu.pb.lepszeduolingo.databinding.FragmentDifficulty1Binding;
+import pl.edu.pb.lepszeduolingo.databinding.FragmentDifficultyBinding;
 
-public class Difficulty1Fragment extends Fragment implements Diff_RecyclerViewAdapter.onCategoryListener{
+public class DifficultyFragment extends Fragment implements Diff_RecyclerViewAdapter.onCategoryListener{
 
-    private Difficulty1ViewModel difficulty1ViewModel;
-    private FragmentDifficulty1Binding binding;
+    private DifficultyViewModel difficultyViewModel;
+    private FragmentDifficultyBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        difficulty1ViewModel =
-                new ViewModelProvider(this).get(Difficulty1ViewModel.class);
+        difficultyViewModel =
+                new ViewModelProvider(this).get(DifficultyViewModel.class);
 
-        binding = FragmentDifficulty1Binding.inflate(inflater, container, false);
+        binding = FragmentDifficultyBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         // get recycler view
