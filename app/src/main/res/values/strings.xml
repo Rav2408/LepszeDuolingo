@@ -8,8 +8,9 @@
     <string name="action_logout">Log out</string>
 
     <string name="menu_dictionary">Dictionary</string>
-    <string name="menu_level">Difficulty %1$d</string>
     <string name="menu_logout">Log out</string>
+
+    <string name="difficulties">Difficulty</string>
 
     <string name="menu_drawer_open">Open</string>
     <string name="menu_drawer_close">Close</string>

@@ -42,7 +42,6 @@ public class DrawerMainActivity extends AppCompatActivity implements NavigationV
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         drawerLayout.closeDrawer(GravityCompat.START);
-        Log.d("Navigation", "Item clicked");
         switch(item.getItemId()){
             case R.id.nav_dictionary:
                 startActivity(new Intent(this, MainActivity.class));

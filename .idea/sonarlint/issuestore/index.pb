@@ -9,7 +9,5 @@ l
 <app/src/main/java/pl/edu/pb/lepszeduolingo/rest/IVolley.java,3\0\307788f1097224108fd95d155affef7d32bf7746
 @
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
-m
-=app/src/main/java/pl/edu/pb/lepszeduolingo/LoginActivity.java,4\2\420bb3e39be9c3266625aa45015882409e3c8de0
 t
 Dapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/word/WordActivity.java,d\8\d8cf1e881074dc692fd2f035f02219a5b18e148c
