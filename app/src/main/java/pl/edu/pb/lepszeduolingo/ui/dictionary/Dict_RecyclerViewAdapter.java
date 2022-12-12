@@ -10,8 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import pl.edu.pb.lepszeduolingo.R;
-import pl.edu.pb.lepszeduolingo.ui.difficulty1.Diff_RecyclerViewAdapter;
-
 
 
 public class Dict_RecyclerViewAdapter extends RecyclerView.Adapter<Dict_RecyclerViewAdapter.ViewHolder> {

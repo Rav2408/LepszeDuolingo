@@ -1,14 +1,11 @@
 package pl.edu.pb.lepszeduolingo.ui.word;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.TextView;
 
 import pl.edu.pb.lepszeduolingo.R;
-import pl.edu.pb.lepszeduolingo.ui.difficulty1.Diff_RecyclerViewAdapter;
 
 public class WordActivity extends AppCompatActivity {
     TextView WordView, WordTranslationView;
