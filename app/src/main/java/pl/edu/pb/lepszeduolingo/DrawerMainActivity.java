@@ -54,7 +54,7 @@ public class DrawerMainActivity extends AppCompatActivity implements NavigationV
         }
         return false;
     }
-
+    // set name at toolbar
     protected void allocateActivityTitle(String titleString){
         if(getSupportActionBar() != null){
             getSupportActionBar().setTitle(titleString);

@@ -1,22 +1,18 @@
 package pl.edu.pb.lepszeduolingo.ui.difficulties;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import java.util.ArrayList;
 
 import pl.edu.pb.lepszeduolingo.DrawerMainActivity;
 import pl.edu.pb.lepszeduolingo.R;
 import pl.edu.pb.lepszeduolingo.databinding.ActivityDifficultiesBinding;
-import pl.edu.pb.lepszeduolingo.ui.difficulty.DifficultyFragment;
-import pl.edu.pb.lepszeduolingo.ui.word.WordActivity;
+import pl.edu.pb.lepszeduolingo.ui.difficulty.DifficultyActivity;
 
 public class DifficultiesActivity extends DrawerMainActivity implements DifficultiesRecyclerViewAdapter.onDifficultyListener{
     ActivityDifficultiesBinding activityDifficultiesBinding;
@@ -42,11 +38,11 @@ public class DifficultiesActivity extends DrawerMainActivity implements Difficul
 
     @Override
     public void onDifficultyClick(int position) {
-/*        Intent intent = new Intent(this, DifficultyFragment.class);
+        Intent intent = new Intent(this, DifficultyActivity.class);
         Bundle bundle = new Bundle();
         bundle.putInt("id", position);
         intent.putExtras(bundle);
-        startActivity(intent);*/
+        startActivity(intent);
         Log.d("difficulty", String.format("difficulty: %2d", position));
     }
 }
