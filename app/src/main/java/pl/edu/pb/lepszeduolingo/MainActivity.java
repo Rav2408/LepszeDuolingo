@@ -1,5 +1,7 @@
 package pl.edu.pb.lepszeduolingo;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,32 +23,22 @@ import org.json.JSONObject;
 import pl.edu.pb.lepszeduolingo.databinding.ActivityMainBinding;
 import pl.edu.pb.lepszeduolingo.rest.IVolley;
 import pl.edu.pb.lepszeduolingo.rest.VolleyRequest;
+import pl.edu.pb.lepszeduolingo.ui.dictionary.DictionaryFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends DrawerMainActivity {
 
-    private AppBarConfiguration mAppBarConfiguration;
-    private ActivityMainBinding binding;
-    private MenuItem logoutButton;
+    ActivityMainBinding activityMainBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        setSupportActionBar(binding.appBarMain.toolbar);
-        DrawerLayout drawer = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_dictionary,
-                R.id.nav_level)
-                .setOpenableLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+        activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(activityMainBinding.getRoot());
+        allocateActivityTitle("Main");
+        // set dictionary fragment(home)
+        if(findViewById(R.id.fragmentDictionary) != null){
+            getSupportFragmentManager().beginTransaction().add(R.id.fragmentDictionary, new DictionaryFragment(), null).commit();
+        }
 
         //TODO przykładowe zapytanie GET - aby z niego skorzystać należy odpalić server i zmienić tutaj adres IP
         VolleyRequest.getInstance(this, new IVolley() {
@@ -119,28 +111,5 @@ public class MainActivity extends AppCompatActivity {
 //
 //        // Add the request to the RequestQueue.
 //        queue.add(stringRequest);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        logoutButton = menu.findItem(R.id.action_logout);
-        logoutButton.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                startActivity(new Intent(MainActivity.this, TitleActivity.class));
-                return false;
-            }
-        });
-
-        return true;
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
     }
 }
