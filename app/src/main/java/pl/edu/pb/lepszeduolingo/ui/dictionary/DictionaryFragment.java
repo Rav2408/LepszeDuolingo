@@ -30,7 +30,6 @@ public class DictionaryFragment extends Fragment implements Dict_RecyclerViewAda
     private FragmentDictionaryBinding binding;
     TextView unlockedView;
 
-    @SuppressLint("DefaultLocale")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         dictionaryViewModel =
@@ -39,8 +38,8 @@ public class DictionaryFragment extends Fragment implements Dict_RecyclerViewAda
         View root = binding.getRoot();
         // set unlocked header
         unlockedView = root.findViewById(R.id.unlocked);
-        String unlockedString = String.format("Unlocked %s / %s", String.valueOf(unlockedWords),
-                String.valueOf(allWords));
+        String unlockedString = String.format("Unlocked %s / %s", unlockedWords,
+                allWords);
         unlockedView.setText(unlockedString);
         // set recycler view
         RecyclerView recyclerView = root.findViewById(R.id.dictRecyclerView);

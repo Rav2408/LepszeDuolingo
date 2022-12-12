@@ -1,5 +1,6 @@
 package pl.edu.pb.lepszeduolingo.ui.difficulty;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,29 +9,34 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import pl.edu.pb.lepszeduolingo.R;
+import java.util.List;
 
-public class Diff_RecyclerViewAdapter  extends RecyclerView.Adapter<Diff_RecyclerViewAdapter.ViewHolder> {
-    private String[] data = {"asdf","fasd","dupa","kupa","pupa"};
+import pl.edu.pb.lepszeduolingo.R;
+import pl.edu.pb.lepszeduolingo.ui.difficulties.DifficultiesRecyclerViewAdapter;
+
+public class DifficultyRecyclerViewAdapter extends RecyclerView.Adapter<DifficultyRecyclerViewAdapter.ViewHolder> {
     private onCategoryListener onCategoryListener;
-    public Diff_RecyclerViewAdapter(onCategoryListener onCategoryListener){
+    private List<String> Data;
+    private Context context;
+    DifficultyRecyclerViewAdapter(Context context, List<String> data, DifficultyRecyclerViewAdapter.onCategoryListener onCategoryListener) {
+        this.Data = data;
+        this.context = context;
         this.onCategoryListener = onCategoryListener;
     }
-    @NonNull
     @Override
-    public Diff_RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.diff_recycler_view_row, parent, false);
-        return new Diff_RecyclerViewAdapter.ViewHolder(view, onCategoryListener);
+    public DifficultyRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.diff_recycler_view_row, parent, false);
+        return new DifficultyRecyclerViewAdapter.ViewHolder(view, onCategoryListener);
     }
-
+    // bind data
     @Override
-    public void onBindViewHolder(@NonNull Diff_RecyclerViewAdapter.ViewHolder holder, int position) {
-        holder.getTextView().setText(data[position]);
+    public void onBindViewHolder(@NonNull DifficultyRecyclerViewAdapter.ViewHolder holder, int position) {
+        holder.getTextView().setText(Data.get(position));
     }
     @Override
     public int getItemCount() {
-        return 5;
+        return Data.size();
     }
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView textView;
@@ -40,8 +46,6 @@ public class Diff_RecyclerViewAdapter  extends RecyclerView.Adapter<Diff_Recycle
             super(itemView);
             this.onCategoryListener = onCategoryListener;
             textView = itemView.findViewById(R.id.wordTranslationText);
-            // TODO: here set image and base word
-
             itemView.setOnClickListener(this);
         }
         public TextView getTextView() {
