@@ -1,3 +1,21 @@
 
 @
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
+l
+<app/src/main/java/pl/edu/pb/lepszeduolingo/rest/IVolley.java,3\0\307788f1097224108fd95d155affef7d32bf7746
+r
+Bapp/src/main/java/pl/edu/pb/lepszeduolingo/rest/VolleyRequest.java,9\b\9bef5fc5607de52dfa41439039794cde01b8f23e
+„
+Tapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/difficulties/DifficultiesActivity.java,e\2\e2b29a17c5272b9196eb66a0716a149ee0e1e5f6
+
+_app/src/main/java/pl/edu/pb/lepszeduolingo/ui/difficulties/DifficultiesRecyclerViewAdapter.java,8\b\8ba27ccff7f1cd57e9eb65a165a0de3cfd378c71
+
+Qapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/dictionary/DictionaryViewModel.java,d\7\d7354acfc86447601aee02fdda93bad64a46596e
+m
+=app/src/main/java/pl/edu/pb/lepszeduolingo/TitleActivity.java,9\d\9de34e2c69fee99f82d367d3f2e97c70a6ae1038
+p
+@app/src/main/java/pl/edu/pb/lepszeduolingo/RegisterActivity.java,9\1\9163af1cafc6171a607fd372c155130c3caac6c5
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+r
+Bapp/src/main/java/pl/edu/pb/lepszeduolingo/DrawerMainActivity.java,a\0\a0c8e358c50524ab6d0b5f5d2c55b9fe0ef22a97
