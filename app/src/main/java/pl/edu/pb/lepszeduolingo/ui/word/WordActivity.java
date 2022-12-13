@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.edu.pb.lepszeduolingo.R;
+import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
 import pl.edu.pb.lepszeduolingo.db.DatabaseHelper;
 
 public class WordActivity extends AppCompatActivity {
@@ -38,16 +39,10 @@ public class WordActivity extends AppCompatActivity {
     }
     void setParams(int id){
         // TODO: translation recycle view
-        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this);
+        DatabaseFacade databaseFacade = new DatabaseFacade(this);
         try {
-            JSONObject word = databaseHelper.getWords().getJSONObject(id);
-            JSONArray allTranlations = databaseHelper.getTranslations();
-
-            for(int i=0;i<allTranlations.length();i++){
-                if(allTranlations.getJSONObject(i).getJSONObject("word").getInt("id") == word.getInt("id")){
-                    translations.add(allTranlations.getJSONObject(i).getString("translationText"));
-                }
-            }
+            JSONObject word = databaseFacade.getWord(id);
+            translations = databaseFacade.getTranslationsByWordId(word.getInt("id"));
 
             WordView.setText(word.getString("text"));
             if(translations.isEmpty()){

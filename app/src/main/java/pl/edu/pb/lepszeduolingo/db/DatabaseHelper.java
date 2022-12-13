@@ -8,7 +8,7 @@ import org.json.JSONArray;
 import pl.edu.pb.lepszeduolingo.rest.IVolley;
 import pl.edu.pb.lepszeduolingo.rest.VolleyRequest;
 
-public class DatabaseHelper {
+public class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do tworzenia kolejnych JSSONArray
     private static final String URL = "http://34.118.90.148:8090/api/";
 
     Context context;
@@ -78,6 +78,8 @@ public class DatabaseHelper {
         Log.d("data", difficulties.toString());
     }
 
+
+    //TODO DatabaseFacade
     public JSONArray getWords() {
         return words;
     }

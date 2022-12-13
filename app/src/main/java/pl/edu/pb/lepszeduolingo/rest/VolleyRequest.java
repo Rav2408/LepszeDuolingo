@@ -111,7 +111,7 @@ public class VolleyRequest {
         addToRequestQueue(getRequest);
     }
 
-//    //POST Method with Params
+    //POST Method with Params
 //    public void postRequest(String url,String name){
 //        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST,
 //                url,
@@ -119,7 +119,7 @@ public class VolleyRequest {
 //                new Response.Listener<JSONObject>() {
 //                    @Override
 //                    public void onResponse(JSONObject response) {
-//                        iVolley.onResponse(response.toString());
+//                        iVolley.onResponse(response);
 //                    }
 //                }, new Response.ErrorListener() {
 //            @Override
@@ -129,15 +129,6 @@ public class VolleyRequest {
 //
 //        })
 //        {
-//            //UWAGA COŚ TAKIEGO ISTNIEJE- MAGIA
-//            //@Nullable
-//            //@Override
-//            //protected Map getParams() throws AuthFailureError {
-//            //    Map params = new HashMap<>();
-//            //    params.put("id", String.valueOf(1));
-//            //    return params;
-//            //}
-//
 //            @Override
 //            public byte[] getBody(){
 //                String jsonString = "{\"id\":11,\"name\":\""+name+"\"}";
@@ -157,6 +148,8 @@ public class VolleyRequest {
 //        };
 //        addToRequestQueue(postRequest);
 //    }
+
+//================================================
 //
 //    // //PUT Method with Params
 //    public void putRequest(String url){
