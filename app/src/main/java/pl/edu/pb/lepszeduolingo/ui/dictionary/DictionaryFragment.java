@@ -17,8 +17,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
+
 import pl.edu.pb.lepszeduolingo.R;
 import pl.edu.pb.lepszeduolingo.databinding.FragmentDictionaryBinding;
+import pl.edu.pb.lepszeduolingo.db.DatabaseHelper;
 import pl.edu.pb.lepszeduolingo.ui.word.WordActivity;
 
 public class DictionaryFragment extends Fragment implements Dict_RecyclerViewAdapter.onWordListener{
@@ -41,9 +47,24 @@ public class DictionaryFragment extends Fragment implements Dict_RecyclerViewAda
         String unlockedString = String.format("Unlocked %s / %s", unlockedWords,
                 allWords);
         unlockedView.setText(unlockedString);
+
+
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this.getContext());
+        JSONArray words = databaseHelper.getWords();
+
+
+        ArrayList<String> wordsData = new ArrayList<>();
+        for(int i=0;i<words.length();i++){
+            try {
+                wordsData.add(words.getJSONObject(i).getString("text"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
         // set recycler view
         RecyclerView recyclerView = root.findViewById(R.id.dictRecyclerView);
-        Dict_RecyclerViewAdapter adapter = new Dict_RecyclerViewAdapter(this);
+        Dict_RecyclerViewAdapter adapter = new Dict_RecyclerViewAdapter(this, wordsData);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setAdapter(adapter);
         return root;

@@ -1,42 +1,100 @@
-//package pl.edu.pb.lepszeduolingo.db;
-//
-//import android.content.Context;
-//import android.database.sqlite.SQLiteDatabase;
-//
-//import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
-//import com.j256.ormlite.support.ConnectionSource;
-//import com.j256.ormlite.table.TableUtils;
-//
-//import java.sql.SQLException;
-//
-//import pl.edu.pb.lepszeduolingo.R;
-//import pl.edu.pb.lepszeduolingo.models.Language;
-//
-//public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
-//
-//    private static final String DATABASE_NAME = "";
-//    private static final int DATABASE_VERSION = 1;
-//
-//    public DatabaseHelper(Context context){
-//        super(context,DATABASE_NAME,null,DATABASE_VERSION, R.raw.ormlite_config);
-//    }
-//
-//    @Override
-//    public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
-//        try {
-//            TableUtils.createTable(connectionSource, Language.class)
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//    }
-//
-//    @Override
-//    public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
-//        try {
-//            TableUtils.dropTable(connectionSource,Language.class,true);
-//            onCreate(database, connectionSource);
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//    }
-//}
+package pl.edu.pb.lepszeduolingo.db;
+
+import android.content.Context;
+import android.util.Log;
+
+import org.json.JSONArray;
+
+import pl.edu.pb.lepszeduolingo.rest.IVolley;
+import pl.edu.pb.lepszeduolingo.rest.VolleyRequest;
+
+public class DatabaseHelper {
+    private static final String URL = "http://34.118.90.148:8090/api/";
+
+    Context context;
+    JSONArray words;
+    JSONArray categories;
+    JSONArray translations;
+    JSONArray questions;
+    JSONArray difficulties;
+    private static DatabaseHelper databaseHelper;
+
+    public static DatabaseHelper getInstance(Context context){
+        if(databaseHelper == null){
+            databaseHelper = new DatabaseHelper(context);
+        }
+        return databaseHelper;
+    }
+
+    private DatabaseHelper(Context context) {
+        this.context = context;
+        pullData();
+
+    }
+
+    public void pullData(){
+
+        VolleyRequest.getInstance(context, new IVolley() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                words=jsonArray;
+            }
+        }).getRequest(URL +"word");
+
+        VolleyRequest.getInstance(context, new IVolley() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                categories=jsonArray;
+            }
+        }).getRequest(URL +"category");
+
+        VolleyRequest.getInstance(context, new IVolley() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                translations=jsonArray;
+            }
+        }).getRequest(URL +"translation");
+
+        VolleyRequest.getInstance(context, new IVolley() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                questions=jsonArray;
+            }
+        }).getRequest(URL +"question");
+
+        VolleyRequest.getInstance(context, new IVolley() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                difficulties=jsonArray;
+            }
+        }).getRequest(URL +"difficulty");
+    }
+
+    public void printConsole(){
+        Log.d("data", words.toString());
+        Log.d("data", categories.toString());
+        Log.d("data", translations.toString());
+        Log.d("data", questions.toString());
+        Log.d("data", difficulties.toString());
+    }
+
+    public JSONArray getWords() {
+        return words;
+    }
+
+    public JSONArray getCategories() {
+        return categories;
+    }
+
+    public JSONArray getTranslations() {
+        return translations;
+    }
+
+    public JSONArray getQuestions() {
+        return questions;
+    }
+
+    public JSONArray getDifficulties() {
+        return difficulties;
+    }
+}

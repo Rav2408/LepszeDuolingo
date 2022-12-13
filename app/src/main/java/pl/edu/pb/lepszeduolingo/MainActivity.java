@@ -1,27 +1,13 @@
 package pl.edu.pb.lepszeduolingo;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import pl.edu.pb.lepszeduolingo.databinding.ActivityMainBinding;
+import pl.edu.pb.lepszeduolingo.db.DatabaseHelper;
 import pl.edu.pb.lepszeduolingo.rest.IVolley;
 import pl.edu.pb.lepszeduolingo.rest.VolleyRequest;
 import pl.edu.pb.lepszeduolingo.ui.dictionary.DictionaryFragment;
@@ -33,12 +19,16 @@ public class MainActivity extends DrawerMainActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this);
+        databaseHelper.printConsole();
+
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(activityMainBinding.getRoot());
         // set dictionary fragment(home)
         if(findViewById(R.id.fragmentDictionary) != null){
             getSupportFragmentManager().beginTransaction().add(R.id.fragmentDictionary, new DictionaryFragment(), null).commit();
         }
+
 
         //TODO przykładowe zapytanie GET - aby z niego skorzystać należy odpalić server i zmienić tutaj adres IP
         VolleyRequest.getInstance(this, new IVolley() {

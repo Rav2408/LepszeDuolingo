@@ -9,14 +9,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 import pl.edu.pb.lepszeduolingo.R;
 
 
 public class Dict_RecyclerViewAdapter extends RecyclerView.Adapter<Dict_RecyclerViewAdapter.ViewHolder> {
     private onWordListener onWordListener;
     private String[] data = {"asdf","fasd","dupa","kupa"};
-    public Dict_RecyclerViewAdapter(onWordListener onWordListener){
+    ArrayList<String> wordsData;
+    public Dict_RecyclerViewAdapter(onWordListener onWordListener, ArrayList<String> wordsData){
         this.onWordListener = onWordListener;
+        this.wordsData = wordsData;
     }
 
     @NonNull
@@ -29,12 +33,12 @@ public class Dict_RecyclerViewAdapter extends RecyclerView.Adapter<Dict_Recycler
 
     @Override
     public void onBindViewHolder(@NonNull Dict_RecyclerViewAdapter.ViewHolder holder, int position) {
-        holder.getTextView().setText(data[position]);
+        holder.getTextView().setText(wordsData.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 4;
+        return wordsData.size();
     }
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         onWordListener onWordListener;
