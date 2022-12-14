@@ -1,4 +1,4 @@
-package pl.edu.pb.lepszeduolingo.ui.word.strategy;
+package pl.edu.pb.lepszeduolingo.ui.dictionary.strategy;
 
 import pl.edu.pb.lepszeduolingo.R;
 

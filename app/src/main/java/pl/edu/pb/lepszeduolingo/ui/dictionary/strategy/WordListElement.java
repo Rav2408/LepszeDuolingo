@@ -1,6 +1,6 @@
-package pl.edu.pb.lepszeduolingo.ui.word;
+package pl.edu.pb.lepszeduolingo.ui.dictionary.strategy;
 
-import pl.edu.pb.lepszeduolingo.ui.word.strategy.Strategy;
+import pl.edu.pb.lepszeduolingo.ui.dictionary.strategy.Strategy;
 
 public class WordListElement {
 

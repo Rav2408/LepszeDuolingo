@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import pl.edu.pb.lepszeduolingo.builder.JSONDataBuilder;
+import pl.edu.pb.lepszeduolingo.builder.WordJsonBuilder;
 import pl.edu.pb.lepszeduolingo.databinding.ActivityMainBinding;
 import pl.edu.pb.lepszeduolingo.db.DatabaseHelper;
 import pl.edu.pb.lepszeduolingo.rest.IVolley;
@@ -47,6 +49,9 @@ public class MainActivity extends DrawerMainActivity {
             }
         }).getRequest("http://34.118.90.148:8090/api/word"); //TODO swój adres
 
+
+        JSONDataBuilder jsonDataBuilder = new WordJsonBuilder(this);
+        System.out.println(jsonDataBuilder.create().put("lalala", "lalala").put("word", new WordJsonBuilder(this).create().put("lalala", "lalala").build()).build());
 
 //        //TODO przykładowe zapytanie POST - aby z niego skorzystać należy podać odpowiedni adres i body czyli JSONObject
 //        try {

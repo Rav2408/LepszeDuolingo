@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
             return password;
         }
     }
-    ArrayList<User> data = new ArrayList<User>();
+    ArrayList<User>  data = new ArrayList<User>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
