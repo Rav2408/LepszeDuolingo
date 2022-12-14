@@ -45,15 +45,15 @@ public class MainActivity extends DrawerMainActivity {
                     e.printStackTrace();
                 }
             }
-        }).getRequest("http://82.139.136.139:8090/api/word"); //TODO swój adres
+        }).getRequest("http://34.118.90.148:8090/api/word"); //TODO swój adres
 
 
-        //TODO przykładowe zapytanie POST - aby z niego skorzystać należy podać odpowiedni adres i body czyli JSONObject
+//        //TODO przykładowe zapytanie POST - aby z niego skorzystać należy podać odpowiedni adres i body czyli JSONObject
 //        try {
 //            VolleyRequest.getInstance(this, new IVolley() {
 //                @Override
-//                public void onResponse(JSONArray jsonArray) {
-//                    //System.out.println(jsonArray.toString());
+//                public void onResponse(JSONObject jsonObject) {
+//                    System.out.println(jsonObject.toString());
 //                }
 //            }).postRequest("http://34.118.90.148:8090/api/duolingouser",
 //                    new JSONObject("{\"role\":\"USER\",\"name\":\"Testowy POST\"}"));

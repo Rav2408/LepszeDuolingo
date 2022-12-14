@@ -76,7 +76,7 @@ public class VolleyRequest {
         return instance;
     }
 
-        public static synchronized VolleyRequest getInstance(Context context, IVolley iVolley) {
+    public static synchronized VolleyRequest getInstance(Context context, IVolley iVolley) {
         instance = new VolleyRequest(context, iVolley);
         return instance;
     }

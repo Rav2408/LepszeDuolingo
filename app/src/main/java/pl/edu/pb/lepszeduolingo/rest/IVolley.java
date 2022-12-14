@@ -1,8 +1,15 @@
 package pl.edu.pb.lepszeduolingo.rest;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 public interface IVolley {
     //void onResponse(String responde);
-    void onResponse(JSONArray jsonArray);
+    default void onResponse(JSONArray jsonArray){
+
+    };
+
+    default void onResponse(JSONObject jsonObject){
+
+    };
 }
