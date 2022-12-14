@@ -19,6 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -112,42 +113,41 @@ public class VolleyRequest {
     }
 
     //POST Method with Params
-//    public void postRequest(String url,String name){
-//        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST,
-//                url,
-//                null,
-//                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        iVolley.onResponse(response);
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                iVolley.onResponse(error.getMessage());
-//            }
-//
-//        })
-//        {
-//            @Override
-//            public byte[] getBody(){
+    public void postRequest(String url,JSONObject jsonObject){
+        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST,
+                url,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        System.out.println(response.toString());
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+
+        })
+        {
+            @Override
+            public byte[] getBody(){
 //                String jsonString = "{\"id\":11,\"name\":\""+name+"\"}";
-//                return jsonString.getBytes();
-//            }
-//
-//            @Override
-//            public String getBodyContentType() {
-//                return "application/json";
-//            }
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                Map<String,String> params = new HashMap<String, String>();
-//                params.put("Content-Type","application/json");
-//                return params;
-//            }
-//        };
-//        addToRequestQueue(postRequest);
-//    }
+                return jsonObject.toString().getBytes();
+            }
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("Content-Type","application/json");
+                return params;
+            }
+        };
+        addToRequestQueue(postRequest);
+    }
 
 //================================================
 //
