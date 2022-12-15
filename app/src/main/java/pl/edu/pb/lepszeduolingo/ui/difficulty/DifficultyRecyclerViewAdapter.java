@@ -12,14 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import pl.edu.pb.lepszeduolingo.R;
-import pl.edu.pb.lepszeduolingo.ui.difficulties.DifficultiesRecyclerViewAdapter;
 
 public class DifficultyRecyclerViewAdapter extends RecyclerView.Adapter<DifficultyRecyclerViewAdapter.ViewHolder> {
     private onCategoryListener onCategoryListener;
-    private List<String> Data;
+    private List<String> data;
     private Context context;
     DifficultyRecyclerViewAdapter(Context context, List<String> data, DifficultyRecyclerViewAdapter.onCategoryListener onCategoryListener) {
-        this.Data = data;
+        this.data = data;
         this.context = context;
         this.onCategoryListener = onCategoryListener;
     }
@@ -32,11 +31,11 @@ public class DifficultyRecyclerViewAdapter extends RecyclerView.Adapter<Difficul
     // bind data
     @Override
     public void onBindViewHolder(@NonNull DifficultyRecyclerViewAdapter.ViewHolder holder, int position) {
-        holder.getTextView().setText(Data.get(position));
+        holder.getTextView().setText(data.get(position));
     }
     @Override
     public int getItemCount() {
-        return Data.size();
+        return data.size();
     }
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView textView;

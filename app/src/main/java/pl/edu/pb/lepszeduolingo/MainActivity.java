@@ -22,7 +22,7 @@ public class MainActivity extends DrawerMainActivity {
         super.onCreate(savedInstanceState);
 
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this);
-        databaseHelper.printConsole();
+        //databaseHelper.printConsole();
 
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(activityMainBinding.getRoot());

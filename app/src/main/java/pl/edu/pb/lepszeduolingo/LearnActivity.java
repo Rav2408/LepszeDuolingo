@@ -14,14 +14,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
+
+import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
 import pl.edu.pb.lepszeduolingo.rest.IVolley;
 import pl.edu.pb.lepszeduolingo.rest.VolleyRequest;
 
 public class LearnActivity extends AppCompatActivity {
     Button answerView_1, answerView_2, answerView_3, answerView_4;
     String url = "https://upload.wikimedia.org/wikipedia/commons/c/cb/Pineapple_and_cross_section.jpg";
+    String word;
+    String translation;
     ImageView imageView;
     CardView questionWrapper;
     MutableLiveData<Integer> answer = new MutableLiveData<>();
@@ -29,6 +39,9 @@ public class LearnActivity extends AppCompatActivity {
     // test data
     Random rand = new Random();
     Integer correctAnswer = rand.nextInt(4);
+    JSONArray questions;
+    int question_number;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +52,11 @@ public class LearnActivity extends AppCompatActivity {
         answerView_4 = findViewById(R.id.answer_4);
         imageView = findViewById(R.id.imageView);
         questionWrapper = findViewById(R.id.question_wrapper);
+
+        DatabaseFacade databaseFacade = new DatabaseFacade(this);
+        questions = databaseFacade.getQuestions();
+        question_number = rand.nextInt(questions.length());
+
         // set parameters for db
         setParams();
         // listen inputs
@@ -89,11 +107,21 @@ public class LearnActivity extends AppCompatActivity {
             Random rand = new Random();
             int Id = givenList.get(rand.nextInt(givenList.size()));
         */
+        try {
+            question_number = rand.nextInt(questions.length());
+            JSONObject question = questions.getJSONObject(question_number);
+            url = question.getJSONObject("word").getString("imagePath");
+            word = question.getJSONObject("word").getString("text");
+            translation = question.getJSONObject("translation").getString("translationText");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         Picasso.get().load(url).fit().into(imageView);
         answerView_1.setText("tak");
         answerView_2.setText("nie");
         answerView_3.setText("tej");
-        answerView_4.setText("wuchta wiary");
+        answerView_4.setText(translation);
     }
     void getAnswer(){
         answerView_1.setOnClickListener(v -> answer.setValue(0));

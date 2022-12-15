@@ -15,19 +15,22 @@ import java.util.ArrayList;
 import pl.edu.pb.lepszeduolingo.DrawerMainActivity;
 import pl.edu.pb.lepszeduolingo.R;
 import pl.edu.pb.lepszeduolingo.databinding.ActivityDifficultiesBinding;
+import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
 import pl.edu.pb.lepszeduolingo.db.DatabaseHelper;
 import pl.edu.pb.lepszeduolingo.ui.difficulty.DifficultyActivity;
 
 public class DifficultiesActivity extends DrawerMainActivity implements DifficultiesRecyclerViewAdapter.onDifficultyListener{
     ActivityDifficultiesBinding activityDifficultiesBinding;
+    JSONArray difficulties;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityDifficultiesBinding = ActivityDifficultiesBinding.inflate(getLayoutInflater());
         setContentView(activityDifficultiesBinding.getRoot());
 
-        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this);
-        JSONArray difficulties = databaseHelper.getDifficulties();
+        DatabaseFacade databaseFacade = new DatabaseFacade(this);
+        difficulties = databaseFacade.getDifficulties();
 
 
         ArrayList<String> difficultiesData = new ArrayList<>();
@@ -57,6 +60,11 @@ public class DifficultiesActivity extends DrawerMainActivity implements Difficul
         Intent intent = new Intent(this, DifficultyActivity.class);
         Bundle bundle = new Bundle();
         bundle.putInt("id", position);
+        try {
+            bundle.putInt("difficultyId",difficulties.getJSONObject(position).getInt("id"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         intent.putExtras(bundle);
         startActivity(intent);
         Log.d("difficulty", String.format("difficulty: %2d", position));

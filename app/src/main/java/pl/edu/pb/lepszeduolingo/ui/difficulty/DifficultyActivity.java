@@ -9,29 +9,34 @@ import android.util.Log;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import pl.edu.pb.lepszeduolingo.DrawerMainActivity;
 import pl.edu.pb.lepszeduolingo.LearnActivity;
 import pl.edu.pb.lepszeduolingo.R;
 import pl.edu.pb.lepszeduolingo.databinding.ActivityDifficultyBinding;
+import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
 
 public class DifficultyActivity extends DrawerMainActivity implements DifficultyRecyclerViewAdapter.onCategoryListener{
     ActivityDifficultyBinding activityDifficultyBinding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityDifficultyBinding = ActivityDifficultyBinding.inflate(getLayoutInflater());
         setContentView(activityDifficultyBinding.getRoot());
 
-        // test data
-        ArrayList<String> difficultyData = new ArrayList<>();
-        difficultyData.add("Birds");
-        difficultyData.add("Sloths");
-        difficultyData.add(":{");
+
+
+        DatabaseFacade databaseFacade = new DatabaseFacade(this);
+        ArrayList<String> categories = databaseFacade.getCategoriesByDifficultyId(getIntent().getExtras().getInt("difficultyId"));
 
         RecyclerView recyclerView = findViewById(R.id.diffRecyclerView);
-        DifficultyRecyclerViewAdapter adapter = new DifficultyRecyclerViewAdapter(this, difficultyData, this);
+        DifficultyRecyclerViewAdapter adapter = new DifficultyRecyclerViewAdapter(this, categories, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

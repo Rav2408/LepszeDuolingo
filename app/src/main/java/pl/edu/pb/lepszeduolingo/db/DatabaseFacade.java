@@ -44,6 +44,21 @@ public class DatabaseFacade {
     public JSONArray getCategories() {
         return databaseHelper.getCategories();
     }
+    public ArrayList<String> getCategoriesByDifficultyId(int id) {
+        JSONArray allCategories = getCategories();
+        ArrayList<String> categories = new ArrayList<>();
+
+        for(int i=0;i<allCategories.length();i++){
+            try {
+                if(allCategories.getJSONObject(i).getJSONObject("difficulty").getInt("id") == id){
+                    categories.add(allCategories.getJSONObject(i).getString("name"));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return categories;
+    }
 
     public JSONArray getTranslations() {
         return databaseHelper.getTranslations();
