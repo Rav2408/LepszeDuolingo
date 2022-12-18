@@ -1,7 +1,5 @@
 package pl.edu.pb.lepszeduolingo.ui.difficulty;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,16 +7,12 @@ import android.util.Log;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import java.util.ArrayList;
-import java.util.List;
 
 import pl.edu.pb.lepszeduolingo.DrawerMainActivity;
-import pl.edu.pb.lepszeduolingo.LearnActivity;
-import pl.edu.pb.lepszeduolingo.R;
 import pl.edu.pb.lepszeduolingo.databinding.ActivityDifficultyBinding;
+import pl.edu.pb.lepszeduolingo.ui.learn.LearnActivity;
+import pl.edu.pb.lepszeduolingo.R;
 import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
 
 public class DifficultyActivity extends DrawerMainActivity implements DifficultyRecyclerViewAdapter.onCategoryListener{

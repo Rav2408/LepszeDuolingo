@@ -15,7 +15,13 @@ m
 =app/src/main/java/pl/edu/pb/lepszeduolingo/TitleActivity.java,9\d\9de34e2c69fee99f82d367d3f2e97c70a6ae1038
 p
 @app/src/main/java/pl/edu/pb/lepszeduolingo/RegisterActivity.java,9\1\9163af1cafc6171a607fd372c155130c3caac6c5
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 r
 Bapp/src/main/java/pl/edu/pb/lepszeduolingo/DrawerMainActivity.java,a\0\a0c8e358c50524ab6d0b5f5d2c55b9fe0ef22a97
+t
+Dapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/word/WordActivity.java,d\8\d8cf1e881074dc692fd2f035f02219a5b18e148c
+q
+Aapp/src/main/java/pl/edu/pb/lepszeduolingo/models/Collection.java,4\3\43abea2c8028eb577e3329e3a9db4824f83eab40
+<
+build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
+m
+=app/src/main/java/pl/edu/pb/lepszeduolingo/LoginActivity.java,4\2\420bb3e39be9c3266625aa45015882409e3c8de0
