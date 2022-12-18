@@ -68,9 +68,9 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             // success
             // main test
-            // startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
             // admin test
-            startActivity(new Intent(this, AdminActivity.class));
+            //startActivity(new Intent(this, AdminActivity.class));
         }
     }
 }

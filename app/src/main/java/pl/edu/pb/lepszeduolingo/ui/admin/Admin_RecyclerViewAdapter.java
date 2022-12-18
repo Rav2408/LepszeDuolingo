@@ -14,7 +14,7 @@ public class Admin_RecyclerViewAdapter extends RecyclerView.Adapter<Admin_Recycl
     ArrayList<String> data = new ArrayList<String>();
     public Admin_RecyclerViewAdapter(Admin_RecyclerViewAdapter.onDataListener onDataListener){
         this.onDataListener = onDataListener;
-        data.add("Word");
+        data.add("Word");       //TODO w słowie będzie dodawanie tłumaczeń i pytań
         data.add("Category");
         data.add("Difficulty");
         data.add("Language");

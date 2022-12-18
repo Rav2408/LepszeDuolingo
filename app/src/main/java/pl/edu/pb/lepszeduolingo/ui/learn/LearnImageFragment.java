@@ -29,7 +29,7 @@ public class LearnImageFragment extends LearnFragment {
             question = new JSONObject(tempQuestion);
             word = question.getJSONObject("word").getString("text");
             url = question.getJSONObject("word").getString("imagePath");
-            translation = question.getJSONObject("translation").getString("translationText");
+            //translation = question.getJSONObject("translation").getString("translationText");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -45,10 +45,10 @@ public class LearnImageFragment extends LearnFragment {
         // TODO: set random wrong answers
         // set view
         Picasso.get().load(url).fit().into(questionView);
-        answerView1.setText("tak");
-        answerView2.setText("uuu");
-        answerView3.setText("tej");
-        answerView4.setText(translation);
+        answerView1.setText("egg");
+        answerView2.setText("meat");
+        answerView3.setText("cheese");
+        answerView4.setText(word);
         // get answer
         getAnswer();
     }
