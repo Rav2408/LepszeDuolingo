@@ -7,10 +7,6 @@ r
 Bapp/src/main/java/pl/edu/pb/lepszeduolingo/rest/VolleyRequest.java,9\b\9bef5fc5607de52dfa41439039794cde01b8f23e
 Ñ
 Tapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/difficulties/DifficultiesActivity.java,e\2\e2b29a17c5272b9196eb66a0716a149ee0e1e5f6
-è
-_app/src/main/java/pl/edu/pb/lepszeduolingo/ui/difficulties/DifficultiesRecyclerViewAdapter.java,8\b\8ba27ccff7f1cd57e9eb65a165a0de3cfd378c71
-Å
-Qapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/dictionary/DictionaryViewModel.java,d\7\d7354acfc86447601aee02fdda93bad64a46596e
 m
 =app/src/main/java/pl/edu/pb/lepszeduolingo/TitleActivity.java,9\d\9de34e2c69fee99f82d367d3f2e97c70a6ae1038
 p
@@ -23,5 +19,13 @@ q
 Aapp/src/main/java/pl/edu/pb/lepszeduolingo/models/Collection.java,4\3\43abea2c8028eb577e3329e3a9db4824f83eab40
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
-m
-=app/src/main/java/pl/edu/pb/lepszeduolingo/LoginActivity.java,4\2\420bb3e39be9c3266625aa45015882409e3c8de0
+w
+Gapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/learn/AnswerListener.java,4\c\4cf1b10e9fd3bb372384df13c6372e88225f1235
+Ä
+Papp/src/main/java/pl/edu/pb/lepszeduolingo/ui/difficulty/DifficultyActivity.java,2\5\25a56da8b6f3048ac37119a7b559174db5b2adca
+z
+Japp/src/main/java/pl/edu/pb/lepszeduolingo/ui/learn/LearnTextFragment.java,e\c\ecde388d8fa4c9c2fdba99a7d510f2d6e4f9f463
+{
+Kapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/learn/LearnImageFragment.java,9\f\9f6b2db31e00aa78d7114c69746401c06e14287b
+v
+Fapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/learn/LearnFragment.java,a\c\ac61c85444f9f3dca12e679f4dc1056e84ba6cde

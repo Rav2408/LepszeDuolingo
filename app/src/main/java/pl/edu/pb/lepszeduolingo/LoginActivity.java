@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import pl.edu.pb.lepszeduolingo.ui.admin.AdminActivity;
+
 public class LoginActivity extends AppCompatActivity {
     Button getBack;
     Button loginButton;
@@ -45,19 +47,14 @@ public class LoginActivity extends AppCompatActivity {
         data.add(new User("trudnyemail@gmail.com", "trudnehaslo"));
         data.add(new User("skrzynkapocztowa@gmail.com", "adminadmin"));
         data.add(new User("123", "123"));
+        data.add(new User("admin", "admin"));
         // Buttons logic
         getBack = (Button) findViewById(R.id.getBackLoginButton);
-        getBack.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, TitleActivity.class));
-            }
-        });
+        getBack.setOnClickListener(v ->
+                startActivity(new Intent(LoginActivity.this, TitleActivity.class))
+        );
         loginButton = (Button) findViewById(R.id.confirmLoginButton);
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                performAuth();
-            }
-        });
+        loginButton.setOnClickListener(v -> performAuth());
     }
     private void performAuth() {
         String email = inputEmail.getText().toString();
@@ -70,9 +67,10 @@ public class LoginActivity extends AppCompatActivity {
             inputPassword.setError("Wrong Password");
         } else {
             // success
-            // TODO: add loading anim
-            // TODO: set current user
-            startActivity(new Intent(this, MainActivity.class));
+            // main test
+            // startActivity(new Intent(this, MainActivity.class));
+            // admin test
+            startActivity(new Intent(this, AdminActivity.class));
         }
     }
 }

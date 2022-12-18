@@ -1,11 +1,9 @@
 package pl.edu.pb.lepszeduolingo.ui.difficulties;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,7 +42,7 @@ public class DifficultiesRecyclerViewAdapter extends RecyclerView.Adapter<Diffic
         onDifficultyListener onDifficultyListener;
         ViewHolder(View itemView, onDifficultyListener onDifficultyListener) {
             super(itemView);
-            myTextView = itemView.findViewById(R.id.difficultiesText);
+            myTextView = itemView.findViewById(R.id.adminRowText);
             this.onDifficultyListener = onDifficultyListener;
             itemView.setOnClickListener(this);
         }
