@@ -12,4 +12,8 @@ public interface IVolley {
     default void onResponse(JSONObject jsonObject){
 
     };
+
+    default void onResponse(String string){
+
+    };
 }

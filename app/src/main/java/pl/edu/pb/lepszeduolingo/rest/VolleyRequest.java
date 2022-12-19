@@ -205,21 +205,21 @@ public class VolleyRequest {
 //        addToRequestQueue(patchRequest);
 //    }
 //
-//    //DELETE Method
-//    public void deleteRequest(String url){
-//        StringRequest deleteRequest = new StringRequest(Request.Method.DELETE,
-//                url,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        iVolley.onResponse(response.toString());
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                iVolley.onResponse(error.getMessage());
-//            }
-//        });
-//        addToRequestQueue(deleteRequest);
-//    }
+    //DELETE Method
+    public void deleteRequest(String url){
+        StringRequest deleteRequest = new StringRequest(Request.Method.DELETE,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        iVolley.onResponse(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        addToRequestQueue(deleteRequest);
+    }
 }
