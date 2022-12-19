@@ -132,7 +132,6 @@ public class VolleyRequest {
         {
             @Override
             public byte[] getBody(){
-//                String jsonString = "{\"id\":11,\"name\":\""+name+"\"}";
                 return jsonObject.toString().getBytes();
             }
             @Override
@@ -149,34 +148,51 @@ public class VolleyRequest {
         addToRequestQueue(postRequest);
     }
 
-//================================================
-//
-//    // //PUT Method with Params
-//    public void putRequest(String url){
-//        StringRequest putRequest = new StringRequest(Request.Method.PUT,
-//                url,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        iVolley.onResponse(response.toString());
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                iVolley.onResponse(error.getMessage());
-//            }
-//        }){
-//            @Nullable
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("id","1");
-//                params.put("name","Ala");
-//                return params;
-//            }
-//        };
-//        addToRequestQueue(putRequest);
+
+    // //PUT Method with Params
+    public void putRequest(String url, JSONObject jsonObject){
+        StringRequest putRequest = new StringRequest(Request.Method.PUT,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        iVolley.onResponse(response.toString());
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                iVolley.onResponse(error.getMessage());
+            }
+        }){
+            @Override
+            public byte[] getBody(){
+                return jsonObject.toString().getBytes();
+            }
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("Content-Type","application/json");
+                return params;
+            }
+        };
+        addToRequestQueue(putRequest);
+    }
+
+//    {
+//        @Nullable
+//        @Override
+//        protected Map<String, String> getParams() throws AuthFailureError {
+//        Map<String, String> params = new HashMap<>();
+//        params.put("id","1");
+//        params.put("name","Ala");
+//        return params;
 //    }
+
+
 //
 //    //PATCH Method with Params
 //    public void patchRequest(String url){
