@@ -51,6 +51,15 @@ public class WordJsonBuilder implements JSONDataBuilder{
         return this;
     }
 
+    public JSONDataBuilder put(String key, byte[] value) {
+        try {
+            jsonObject.put(key,value);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return this;
+    }
+
     @Override
     public JSONObject build() {
         return jsonObject;

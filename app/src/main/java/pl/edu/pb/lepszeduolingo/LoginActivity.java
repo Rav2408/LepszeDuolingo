@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = (Button) findViewById(R.id.confirmLoginButton);
         loginButton.setOnClickListener(v -> performAuth());
     }
-    private void performAuth() {
+    private void performAuth() {    //TODO pobranie pobranie salt dla danego użytkownika, wygenerowanie hash'a i porównanie ich
         String email = inputEmail.getText().toString();
         // user with that email
         Optional<User> user = data.stream().filter(c -> c.getEmail().equals(email)).findAny();

@@ -10,6 +10,7 @@ public interface JSONDataBuilder {
     JSONDataBuilder put(String key, String value);
     JSONDataBuilder put(String key, int value);
     JSONDataBuilder put(String key, JSONObject value);
+    JSONDataBuilder put(String key, byte[] value);
     JSONObject build();
 
 }

@@ -4,12 +4,30 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
+
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+
+import pl.edu.pb.lepszeduolingo.builder.WordJsonBuilder;
+import pl.edu.pb.lepszeduolingo.rest.IVolley;
+import pl.edu.pb.lepszeduolingo.rest.VolleyRequest;
 
 public class RegisterActivity extends AppCompatActivity {
     Button getBack;
@@ -74,6 +92,38 @@ public class RegisterActivity extends AppCompatActivity {
             // success
             // TODO: add loading anim
             // TODO: add user to db
+            SecureRandom random = new SecureRandom();
+            byte[] salt = new byte[16];
+            random.nextBytes(salt);
+            KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
+            try {
+                SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+                byte[] hash = factory.generateSecret(spec).getEncoded();
+                SecretKey secretKey = factory.generateSecret(spec);
+
+                VolleyRequest.getInstance(this, new IVolley() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        System.out.println(jsonObject.toString());
+                    }
+                }).postRequest("http://34.118.90.148:8090/api/duolingouser",
+                        new WordJsonBuilder(this).create()
+                                .put("name", email)
+                                .put("email", email)
+                                .put("role", "USER")
+                                .put("salt", salt)
+                                .put("hash", hash)
+                                .build());
+
+
+                Log.d("AUTH","Password: "+password+  " salt: " +new String(salt, StandardCharsets.UTF_8)+ " hash: " + new String(hash, StandardCharsets.UTF_8));
+                 Log.d("AUTH",secretKey.toString()+ "  " + secretKey.getFormat());
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (InvalidKeySpecException e) {
+                e.printStackTrace();
+            }
+
             startActivity(new Intent(RegisterActivity.this, TitleActivity.class));
         }
     }
