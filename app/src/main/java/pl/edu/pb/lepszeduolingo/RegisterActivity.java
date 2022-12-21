@@ -12,6 +12,7 @@ import android.widget.EditText;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -19,6 +20,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Optional;
 
 import javax.crypto.SecretKey;
@@ -99,7 +101,14 @@ public class RegisterActivity extends AppCompatActivity {
             try {
                 SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
                 byte[] hash = factory.generateSecret(spec).getEncoded();
-                SecretKey secretKey = factory.generateSecret(spec);
+                byte[] base64Hash = Base64.getEncoder().encode(hash); //szyfrowanie
+                byte[] base64Salt = Base64.getEncoder().encode(salt); //szyfrowanie
+
+//                byte[] decodedString = Base64.getDecoder().decode(new String(name).getBytes("UTF-8"));
+//                Log.d("AUTH","base64 odszyfr" + new String(decodedString));
+
+                String stringSalt = new String(base64Salt, StandardCharsets.UTF_8);
+                String stringHash = new String(base64Hash, StandardCharsets.UTF_8);
 
                 VolleyRequest.getInstance(this, new IVolley() {
                     @Override
@@ -111,13 +120,15 @@ public class RegisterActivity extends AppCompatActivity {
                                 .put("name", email)
                                 .put("email", email)
                                 .put("role", "USER")
-                                .put("salt", salt)
-                                .put("hash", hash)
+                                .put("salt", stringSalt)
+                                .put("hash", stringHash)
                                 .build());
 
+                Log.d("AUTH", new String(hash, StandardCharsets.ISO_8859_1));
 
-                Log.d("AUTH","Password: "+password+  " salt: " +new String(salt, StandardCharsets.UTF_8)+ " hash: " + new String(hash, StandardCharsets.UTF_8));
-                 Log.d("AUTH",secretKey.toString()+ "  " + secretKey.getFormat());
+                Log.d("AUTH","Password: "+password+  " salt: " +new String(salt, StandardCharsets.US_ASCII)+ " hash: " + new String(hash, StandardCharsets.US_ASCII));
+                Log.d("AUTH","Password: "+password+  " salt: " +new String(salt, StandardCharsets.ISO_8859_1)+ " hash: " + new String(hash, StandardCharsets.ISO_8859_1));
+                Log.d("AUTH","Password: "+password+  " salt: " +new String(salt, StandardCharsets.UTF_16)+ " hash: " + new String(hash, StandardCharsets.UTF_16));
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
             } catch (InvalidKeySpecException e) {

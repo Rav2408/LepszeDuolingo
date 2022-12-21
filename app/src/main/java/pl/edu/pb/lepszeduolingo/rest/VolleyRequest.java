@@ -112,6 +112,24 @@ public class VolleyRequest {
         addToRequestQueue(getRequest);
     }
 
+    public void getRequestString(String url) {
+        StringRequest getRequest = new StringRequest(Request.Method.GET,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) { //TODO jeśli uderza się na endpoint który zwraca liste obiektów to działa
+                        iVolley.onResponse(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //iVolley.onResponse(error.getMessage());
+                error.printStackTrace();
+            }
+        });
+        addToRequestQueue(getRequest);
+    }
+
     //POST Method with Params
     public void postRequest(String url,JSONObject jsonObject){
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST,
@@ -120,7 +138,7 @@ public class VolleyRequest {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        System.out.println(response.toString());
+                        iVolley.onResponse(response);
                     }
                 }, new Response.ErrorListener() {
             @Override

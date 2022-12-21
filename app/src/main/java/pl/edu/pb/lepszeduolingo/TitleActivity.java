@@ -18,7 +18,6 @@ public class TitleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_title);
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this);
-        //databaseHelper.printConsole();
 
         loginButton = (Button) findViewById(R.id.buttonLogin);
         registerButton = (Button) findViewById(R.id.buttonRegister);

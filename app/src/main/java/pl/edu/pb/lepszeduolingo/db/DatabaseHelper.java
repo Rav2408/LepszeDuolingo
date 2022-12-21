@@ -17,6 +17,7 @@ public class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do t
     JSONArray translations;
     JSONArray questions;
     JSONArray difficulties;
+    String currentSalt;
     private static DatabaseHelper databaseHelper;
 
     public static DatabaseHelper getInstance(Context context){
@@ -99,4 +100,15 @@ public class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do t
     public JSONArray getDifficulties() {
         return difficulties;
     }
+
+//    public String findUserSaltByEmail(String email){
+//
+//        VolleyRequest.getInstance(context, new IVolley() {
+//            @Override
+//            public void onResponse(String salt) {
+//                currentSalt = salt;
+//            }
+//        }).getRequest(URL +"duolingo/salt?email" + email);
+//    }
+
 }
