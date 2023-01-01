@@ -2,6 +2,7 @@ package pl.edu.pb.lepszeduolingo.rest;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.util.LruCache;
 
 import androidx.annotation.Nullable;
@@ -17,6 +18,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -112,6 +114,26 @@ public class VolleyRequest {
         addToRequestQueue(getRequest);
     }
 
+    public void getRequestJSONObject(String url) {
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) { //TODO jeśli uderza się na endpoint który zwraca liste obiektów to działa
+                        iVolley.onResponse(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //iVolley.onResponse(error.getMessage());
+                error.printStackTrace();
+            }
+
+        });
+        addToRequestQueue(getRequest);
+    }
+
     public void getRequestString(String url) {
         StringRequest getRequest = new StringRequest(Request.Method.GET,
                 url,
@@ -138,7 +160,51 @@ public class VolleyRequest {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        iVolley.onResponse(response);
+                        if(response!=null)
+                            iVolley.onResponse(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+
+        })
+        {
+            @Override
+            public byte[] getBody(){
+                return jsonObject.toString().getBytes();
+            }
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("Content-Type","application/json");
+                return params;
+            }
+        };
+        addToRequestQueue(postRequest);
+    }
+
+    public void postRequestSafeString(String url,JSONObject jsonObject){
+        StringRequest postRequest = new StringRequest(Request.Method.POST,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("AUTH", response);
+                        if(response.equals("")){
+                            iVolley.onResponse(response);
+                        }
+                        else{
+                            Gson g = new Gson();
+                            JSONObject user = g.fromJson(response, JSONObject.class);
+                            Log.d("AUTH","GSON"+ user.toString());
+                            iVolley.onResponse(user);
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override

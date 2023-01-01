@@ -72,4 +72,8 @@ public class DatabaseFacade {
         return databaseHelper.getDifficulties();
     }
 
+    public void setUser(JSONObject user){
+        databaseHelper.setUser(user);
+    }
+
 }

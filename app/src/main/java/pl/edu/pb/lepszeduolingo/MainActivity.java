@@ -54,17 +54,17 @@ public class MainActivity extends DrawerMainActivity {
         System.out.println(jsonDataBuilder.create().put("lalala", "lalala").put("word", new WordJsonBuilder(this).create().put("lalala", "lalala").build()).build());
 
         //TODO przykładowe zapytanie POST - aby z niego skorzystać należy podać odpowiedni adres i body czyli JSONObject
-        try {
-            VolleyRequest.getInstance(this, new IVolley() {
-                @Override
-                public void onResponse(JSONObject jsonObject) {
-                    System.out.println(jsonObject.toString());
-                }
-            }).postRequest("http://34.118.90.148:8090/api/duolingouser",
-                    new JSONObject("{\"role\":\"USER\",\"name\":\"Testowy POST\"}"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            VolleyRequest.getInstance(this, new IVolley() {
+//                @Override
+//                public void onResponse(JSONObject jsonObject) {
+//                    System.out.println(jsonObject.toString());
+//                }
+//            }).postRequest("http://34.118.90.148:8090/api/duolingouser",
+//                    new JSONObject("{\"role\":\"USER\",\"name\":\"Testowy POST\"}"));
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
 
     }
 }
