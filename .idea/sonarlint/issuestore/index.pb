@@ -17,8 +17,6 @@ Qapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/dictionary/DictionaryViewModel.ja
 Vapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/dictionary/Dict_RecyclerViewAdapter.java,7\f\7f6ce746f1c09de9ae4badffaae4e34aaaac5cc0
 l
 <app/src/main/java/pl/edu/pb/lepszeduolingo/MainActivity.java,8\c\8ce04d7d6e0b61b687f4ac91eb662d66b9389a90
-q
-Aapp/src/main/java/pl/edu/pb/lepszeduolingo/db/DatabaseFacade.java,4\7\47b687eb3e6a6a11ef44529ee54b17428cae9083
 l
 <app/src/main/java/pl/edu/pb/lepszeduolingo/rest/IVolley.java,3\0\307788f1097224108fd95d155affef7d32bf7746
 r

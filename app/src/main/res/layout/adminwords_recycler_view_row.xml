@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="20dp"
     android:layout_marginTop="10dp"
-    android:layout_marginRight="20dp"
     android:background="@color/MainLight"
-    android:padding="10dp">
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,6 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -31,7 +31,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
@@ -42,6 +42,7 @@
         android:id="@+id/deleteadminWordContainer"
         android:layout_width="55dp"
         android:layout_height="49dp"
+        android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/adminWordTextCintainer"
@@ -49,8 +50,8 @@
 
         <ImageButton
             android:id="@+id/deleteadminWordBtn"
-            android:layout_width="72dp"
-            android:layout_height="62dp"
+            android:layout_width="69dp"
+            android:layout_height="58dp"
             android:background="@color/MainLight"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
