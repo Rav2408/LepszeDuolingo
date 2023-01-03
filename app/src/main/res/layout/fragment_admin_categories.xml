@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.admin.AdminWordsFragment">
-
+    tools:context=".ui.admin.AdminCategoriesFragment">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/adminWordsRecyclerView"
+            android:id="@+id/adminCategoriesRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -42,13 +41,13 @@
                 app:layout_constraintVertical_bias="0.333" />
 
             <Button
-                android:id="@+id/addAdminWordBtn"
+                android:id="@+id/addAdminCategoryBtn"
                 android:layout_width="245dp"
                 android:layout_height="87dp"
-                android:text="Add Word"
+                android:text="Add Category"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                app:layout_constraintEnd_toEndOf="@+id/imageView"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="@+id/imageView" />
         </androidx.constraintlayout.widget.ConstraintLayout>

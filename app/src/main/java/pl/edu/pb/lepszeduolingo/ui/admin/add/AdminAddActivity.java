@@ -10,21 +10,29 @@ import android.os.Bundle;
 import android.util.Log;
 
 import java.net.URI;
+import java.util.Objects;
 
 import pl.edu.pb.lepszeduolingo.R;
 import pl.edu.pb.lepszeduolingo.ui.admin.AdminFragment;
 
 public class AdminAddActivity extends AppCompatActivity {
-    private static final int UPLOAD_ID = 1000;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_add);
 
         Fragment addWordFragment = new AddWordFragment();
+        Fragment addCategoryFragment = new AddCategoryFragment();
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.flAdminAdd, addWordFragment).commit();
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String activityOption = extras.getString("key");
+            if(Objects.equals(activityOption, "word")){
+                fragmentTransaction.replace(R.id.flAdminAdd, addWordFragment).commit();
+            }else if(Objects.equals(activityOption, "category")){
+                fragmentTransaction.replace(R.id.flAdminAdd, addCategoryFragment).commit();
+            }
+        }
     }
 }

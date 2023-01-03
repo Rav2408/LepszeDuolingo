@@ -3,7 +3,6 @@ package pl.edu.pb.lepszeduolingo.ui.admin;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
@@ -16,15 +15,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 
-import pl.edu.pb.lepszeduolingo.LoginActivity;
 import pl.edu.pb.lepszeduolingo.R;
-import pl.edu.pb.lepszeduolingo.TitleActivity;
 import pl.edu.pb.lepszeduolingo.databinding.FragmentAdminWordsBinding;
 import pl.edu.pb.lepszeduolingo.db.DatabaseHelper;
-import pl.edu.pb.lepszeduolingo.ui.admin.add.AddWordFragment;
 import pl.edu.pb.lepszeduolingo.ui.admin.add.AdminAddActivity;
 
-public class AdminWordsFragment extends Fragment  implements AdminWords_RecyclerViewAdapter.onDataListener{
+public class AdminWordsFragment extends Fragment implements AdminWords_RecyclerViewAdapter.onDataListener{
     private FragmentAdminWordsBinding binding;
     JSONArray words;
     Button addButton;
@@ -60,9 +56,11 @@ public class AdminWordsFragment extends Fragment  implements AdminWords_Recycler
         return root;
     }
     void onWordAdd(){
-        //add
-        startActivity(new Intent(this.getActivity(), AdminAddActivity.class));
-        Log.d("admin_test", "add");
+        // add
+        String activityOption = "word";
+        Intent intent = new Intent(this.getActivity(), AdminAddActivity.class);
+        intent.putExtra("key", activityOption);
+        startActivity(intent);
     }
     @Override
     public void onWordClick(int position) {

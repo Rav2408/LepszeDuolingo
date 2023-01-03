@@ -28,6 +28,7 @@ import pl.edu.pb.lepszeduolingo.ui.dictionary.DictionaryViewModel;
 public class AdminFragment extends Fragment implements Admin_RecyclerViewAdapter.onDataListener{
     private FragmentAdminBinding binding;
     Fragment wordsFragment = new AdminWordsFragment();
+    Fragment categoriesFragment = new AdminCategoriesFragment();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,9 +50,11 @@ public class AdminFragment extends Fragment implements Admin_RecyclerViewAdapter
 
     @Override
     public void onDataClick(int position) {
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
         if(position == 0){
-            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.flAdmin, wordsFragment).addToBackStack(null).commit();
+        }else if(position == 1){
+            fragmentTransaction.replace(R.id.flAdmin, categoriesFragment).addToBackStack(null).commit();
         }
     }
 }
