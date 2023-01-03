@@ -51,7 +51,7 @@ public class AdminFragment extends Fragment implements Admin_RecyclerViewAdapter
     public void onDataClick(int position) {
         if(position == 0){
             FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.flAdmin, wordsFragment).commit();
+            fragmentTransaction.replace(R.id.flAdmin, wordsFragment).addToBackStack(null).commit();
         }
     }
 }

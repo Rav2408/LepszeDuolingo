@@ -30,6 +30,7 @@ import pl.edu.pb.lepszeduolingo.builder.WordJsonBuilder;
 import pl.edu.pb.lepszeduolingo.db.ResponseListener;
 import pl.edu.pb.lepszeduolingo.rest.IVolley;
 import pl.edu.pb.lepszeduolingo.rest.VolleyRequest;
+import pl.edu.pb.lepszeduolingo.ui.admin.AdminActivity;
 
 public class LoginActivity extends AppCompatActivity implements ResponseListener {
     Button getBack;
@@ -126,7 +127,9 @@ public class LoginActivity extends AppCompatActivity implements ResponseListener
                             currentUser = jsonObject;
                             Log.d("AUTH", jsonObject.toString());
                             progresBar.setVisibility(View.INVISIBLE);
-                            startActivity(new Intent(context, MainActivity.class));
+                            // TESTING
+                            // startActivity(new Intent(context, MainActivity.class));
+                            startActivity(new Intent(context, AdminActivity.class));
                         }else{
                             progresBar.setVisibility(View.INVISIBLE);
                             inputPassword.setError("Wrong Password");

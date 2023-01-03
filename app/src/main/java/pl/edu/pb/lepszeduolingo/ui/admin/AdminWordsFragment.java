@@ -1,7 +1,9 @@
 package pl.edu.pb.lepszeduolingo.ui.admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
@@ -13,9 +15,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+
+import pl.edu.pb.lepszeduolingo.LoginActivity;
 import pl.edu.pb.lepszeduolingo.R;
+import pl.edu.pb.lepszeduolingo.TitleActivity;
 import pl.edu.pb.lepszeduolingo.databinding.FragmentAdminWordsBinding;
 import pl.edu.pb.lepszeduolingo.db.DatabaseHelper;
+import pl.edu.pb.lepszeduolingo.ui.admin.add.AddWordFragment;
+import pl.edu.pb.lepszeduolingo.ui.admin.add.AdminAddActivity;
 
 public class AdminWordsFragment extends Fragment  implements AdminWords_RecyclerViewAdapter.onDataListener{
     private FragmentAdminWordsBinding binding;
@@ -54,6 +61,7 @@ public class AdminWordsFragment extends Fragment  implements AdminWords_Recycler
     }
     void onWordAdd(){
         //add
+        startActivity(new Intent(this.getActivity(), AdminAddActivity.class));
         Log.d("admin_test", "add");
     }
     @Override

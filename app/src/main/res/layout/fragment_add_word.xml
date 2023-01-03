@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.admin.add.AddWordFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--        <Spinner
+                android:id="@+id/addwordLanguage"
+                android:layout_width="210dp"
+                android:layout_height="48dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addwordCategory"
+                app:layout_constraintVertical_bias="0.386" />-->
+
+            <EditText
+                android:id="@+id/addwordText"
+                android:layout_width="284dp"
+                android:layout_height="60dp"
+                android:background="@color/MainLight"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="Word"
+                android:inputType="text"
+                android:minHeight="48dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.503"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.042" />
+
+            <EditText
+                android:id="@+id/addwordTranslation"
+                android:layout_width="284dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/MainLight"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="Translation"
+                android:inputType="text"
+                android:minHeight="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addwordCategory" />
+
+            <Spinner
+                android:id="@+id/addwordDifficulty"
+                android:layout_width="284dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/MainLight"
+                android:foregroundGravity="center"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.503"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addwordImage" />
+
+            <Spinner
+                android:id="@+id/addwordCategory"
+                android:layout_width="284dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/MainLight"
+                android:foregroundGravity="center"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintVertical_bias="0.041" />
+
+            <ImageButton
+                android:id="@+id/addwordImage"
+                android:layout_width="284dp"
+                android:layout_height="284dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/MainLight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.503"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addwordText"
+                app:srcCompat="@android:drawable/ic_menu_report_image"
+                tools:src="@tools:sample/avatars" />
+
+            <Button
+                android:id="@+id/addwordAddBtn"
+                android:layout_width="211dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:src="@drawable/rectangle_light"
+                android:text="Add"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addwordTranslation"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="265dp"
+                android:layout_height="58dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="Translation"
+                android:textColor="@color/MainDark"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addwordDifficulty" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+</ScrollView>
