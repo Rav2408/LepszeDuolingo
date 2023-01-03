@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import pl.edu.pb.lepszeduolingo.rest.IVolley;
 import pl.edu.pb.lepszeduolingo.rest.VolleyRequest;
@@ -17,7 +18,8 @@ public class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do t
     JSONArray translations;
     JSONArray questions;
     JSONArray difficulties;
-    String currentSalt;
+    JSONObject user;
+
     private static DatabaseHelper databaseHelper;
 
     public static DatabaseHelper getInstance(Context context){
@@ -101,14 +103,8 @@ public class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do t
         return difficulties;
     }
 
-//    public String findUserSaltByEmail(String email){
-//
-//        VolleyRequest.getInstance(context, new IVolley() {
-//            @Override
-//            public void onResponse(String salt) {
-//                currentSalt = salt;
-//            }
-//        }).getRequest(URL +"duolingo/salt?email" + email);
-//    }
+    public void setUser(JSONObject user){
+        this.user = user;
+    }
 
 }
