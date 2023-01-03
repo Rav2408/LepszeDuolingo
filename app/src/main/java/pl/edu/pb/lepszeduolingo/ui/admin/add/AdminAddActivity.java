@@ -23,6 +23,7 @@ public class AdminAddActivity extends AppCompatActivity {
 
         Fragment addWordFragment = new AddWordFragment();
         Fragment addCategoryFragment = new AddCategoryFragment();
+        Fragment addDifficultyFragment = new AddDifficultyFragment();
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         Bundle extras = getIntent().getExtras();
@@ -32,6 +33,8 @@ public class AdminAddActivity extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.flAdminAdd, addWordFragment).commit();
             }else if(Objects.equals(activityOption, "category")){
                 fragmentTransaction.replace(R.id.flAdminAdd, addCategoryFragment).commit();
+            }else if(Objects.equals(activityOption, "difficulty")){
+                fragmentTransaction.replace(R.id.flAdminAdd, addDifficultyFragment).commit();
             }
         }
     }

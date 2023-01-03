@@ -29,6 +29,7 @@ public class AdminFragment extends Fragment implements Admin_RecyclerViewAdapter
     private FragmentAdminBinding binding;
     Fragment wordsFragment = new AdminWordsFragment();
     Fragment categoriesFragment = new AdminCategoriesFragment();
+    Fragment difficultiesFragment = new AdminDifficultiesFragment();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +56,8 @@ public class AdminFragment extends Fragment implements Admin_RecyclerViewAdapter
             fragmentTransaction.replace(R.id.flAdmin, wordsFragment).addToBackStack(null).commit();
         }else if(position == 1){
             fragmentTransaction.replace(R.id.flAdmin, categoriesFragment).addToBackStack(null).commit();
+        }else if(position == 2){
+            fragmentTransaction.replace(R.id.flAdmin, difficultiesFragment).addToBackStack(null).commit();
         }
     }
 }

@@ -24,7 +24,7 @@ public class AdminCategories_RecyclerViewAdapter extends RecyclerView.Adapter<Ad
     @Override
     public AdminCategories_RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.adminwords_recycler_view_row, parent, false);
+        View view = layoutInflater.inflate(R.layout.admincategories_recycler_view_row, parent, false);
         return new AdminCategories_RecyclerViewAdapter.ViewHolder(view, onDataListener);
     }
 
@@ -45,8 +45,8 @@ public class AdminCategories_RecyclerViewAdapter extends RecyclerView.Adapter<Ad
         public ViewHolder(@NonNull View itemView, AdminCategories_RecyclerViewAdapter.onDataListener onDataListener) {
             super(itemView);
             this.onDataListener = onDataListener;
-            textView = itemView.findViewById(R.id.adminWordText);
-            button = itemView.findViewById(R.id.deleteadminWordBtn);
+            textView = itemView.findViewById(R.id.adminCategoryText);
+            button = itemView.findViewById(R.id.deleteadminCategoryBtn);
 
             textView.setOnClickListener(this);
             button.setOnClickListener(this);

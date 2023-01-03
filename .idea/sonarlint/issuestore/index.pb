@@ -47,10 +47,6 @@ k
 ;app/src/main/java/pl/edu/pb/lepszeduolingo/models/User.java,6\8\68f62704821a0870f803a1e31bf37824d40cde6f
 r
 Bapp/src/main/java/pl/edu/pb/lepszeduolingo/models/Translation.java,4\6\46e7f9eb366895edb468ac2f06dafe84bff8e0ed
-o
-?app/src/main/java/pl/edu/pb/lepszeduolingo/models/Language.java,a\e\ae3fd1e1ef2a3f4ae734c3e3f227847f0ac10824
-q
-Aapp/src/main/java/pl/edu/pb/lepszeduolingo/models/Difficulty.java,c\4\c4b46b06e3a4e9b55427b92bb3d09137476d9ecf
 k
 ;app/src/main/java/pl/edu/pb/lepszeduolingo/models/Word.java,6\a\6ac27e0eaa4099699840e96647c2ab5e3bf24a11
 {
@@ -63,7 +59,5 @@ p
 @app/src/main/java/pl/edu/pb/lepszeduolingo/RegisterActivity.java,9\1\9163af1cafc6171a607fd372c155130c3caac6c5
 q
 Aapp/src/main/java/pl/edu/pb/lepszeduolingo/db/DatabaseFacade.java,4\7\47b687eb3e6a6a11ef44529ee54b17428cae9083
-q
-Aapp/src/main/java/pl/edu/pb/lepszeduolingo/db/DatabaseHelper.java,a\6\a6762a018ff1b91443253136335d8d1301718aa8
 €
 Papp/src/main/java/pl/edu/pb/lepszeduolingo/ui/dictionary/DictionaryFragment.java,e\3\e343dde7ca18a59aeec8bbb7f70ddbb176ff09b4

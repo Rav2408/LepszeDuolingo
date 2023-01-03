@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.admin.add.AddDifficultyFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/adddifficultyText"
+            android:layout_width="284dp"
+            android:layout_height="60dp"
+            android:background="@color/MainLight"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Difficulty"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:textColor="@color/MainDark"
+            android:textColorHint="@color/Main"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/adddifficultyAddBtn"
+            android:layout_width="211dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="188dp"
+            android:gravity="center"
+            android:src="@drawable/rectangle_light"
+            android:text="Add"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/adddifficultyText" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="265dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="224dp"
+            android:layout_marginBottom="50dp"
+            android:gravity="center"
+            android:text="Difficulty"
+            android:textColor="@color/MainDark"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/adddifficultyText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
