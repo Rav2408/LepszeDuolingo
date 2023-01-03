@@ -72,6 +72,8 @@ public class DatabaseFacade {
         return databaseHelper.getDifficulties();
     }
 
+    public JSONArray getLanguages(){ return databaseHelper.getLanguages(); }
+
     public void setUser(JSONObject user){
         databaseHelper.setUser(user);
     }
