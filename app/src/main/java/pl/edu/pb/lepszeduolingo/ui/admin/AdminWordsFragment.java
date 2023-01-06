@@ -39,16 +39,6 @@ public class AdminWordsFragment extends Fragment implements AdminWords_RecyclerV
         addButton.setOnClickListener(v -> onWordAdd());
         // get every word
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this.getContext());
-        //
-        JSONArray testLang = databaseHelper.getLanguages();
-        for(int i=0;i<testLang.length();i++){
-            try {
-                Log.d("Language", testLang.getJSONObject(i).getString("name"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        //
         words = databaseHelper.getWords();
         ArrayList<String> wordsData = new ArrayList<>();
         for(int i=0;i<words.length();i++){

@@ -42,8 +42,8 @@ public class AdminWords_RecyclerViewAdapter extends RecyclerView.Adapter<AdminWo
         public ViewHolder(@NonNull View itemView, AdminWords_RecyclerViewAdapter.onDataListener onDataListener) {
             super(itemView);
             this.onDataListener = onDataListener;
-            textView = itemView.findViewById(R.id.adminWordText);
-            button = itemView.findViewById(R.id.deleteadminWordBtn);
+            textView = itemView.findViewById(R.id.adminTranslationText);
+            button = itemView.findViewById(R.id.deleteadminTranslationBtn);
 
             textView.setOnClickListener(this);
             button.setOnClickListener(this);
@@ -52,10 +52,10 @@ public class AdminWords_RecyclerViewAdapter extends RecyclerView.Adapter<AdminWo
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.deleteadminWordBtn:
+                case R.id.deleteadminTranslationBtn:
                     onDataListener.onWordDelete(getAdapterPosition());
                     break;
-                case R.id.adminWordText:
+                case R.id.adminTranslationText:
                     onDataListener.onWordClick(getAdapterPosition());
                     break;
                 default:
