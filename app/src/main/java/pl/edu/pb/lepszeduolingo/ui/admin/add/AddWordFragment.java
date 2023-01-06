@@ -63,9 +63,6 @@ public class AddWordFragment extends Fragment
         // text inputs
         AddWordText = root.findViewById(R.id.addwordText);
         // list
-        // test values
-        TranslationsTemp.put("Word", "test");
-        TranslationsTemp.put("Slowo", "Tlumaczenia");
         TranslationsListView = root.findViewById(R.id.addwordTranslationList);
         translationsAdapter = new AddWordTranslationsAdapter(
                 this.getActivity(),
