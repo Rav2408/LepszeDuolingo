@@ -8,14 +8,13 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
-import pl.edu.pb.lepszeduolingo.ui.difficulties.DifficultiesActivity;
+import pl.edu.pb.lepszeduolingo.ui.difficulty.DifficultyActivity;
 
 public class DrawerMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -48,7 +47,7 @@ public class DrawerMainActivity extends AppCompatActivity implements NavigationV
                 overridePendingTransition(0, 0);
                 break;
             case R.id.nav_difficulties:
-                startActivity(new Intent(this, DifficultiesActivity.class));
+                startActivity(new Intent(this, DifficultyActivity.class));
                 overridePendingTransition(0, 0);
                 break;
         }

@@ -1,14 +1,8 @@
 
 @
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
-„
-Tapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/difficulties/DifficultiesActivity.java,e\2\e2b29a17c5272b9196eb66a0716a149ee0e1e5f6
-r
-Bapp/src/main/java/pl/edu/pb/lepszeduolingo/DrawerMainActivity.java,a\0\a0c8e358c50524ab6d0b5f5d2c55b9fe0ef22a97
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
-€
-Papp/src/main/java/pl/edu/pb/lepszeduolingo/ui/difficulty/DifficultyActivity.java,2\5\25a56da8b6f3048ac37119a7b559174db5b2adca
 
 Qapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/dictionary/DictionaryViewModel.java,d\7\d7354acfc86447601aee02fdda93bad64a46596e
 †
@@ -24,29 +18,17 @@ Bapp/src/main/java/pl/edu/pb/lepszeduolingo/rest/VolleyRequest.java,9\b\9bef5fc
 
 _app/src/main/java/pl/edu/pb/lepszeduolingo/ui/difficulties/DifficultiesRecyclerViewAdapter.java,8\b\8ba27ccff7f1cd57e9eb65a165a0de3cfd378c71
 v
-Fapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/learn/LearnActivity.java,0\5\055665e363c5802ab17ebe06a864364d3f83aa13
-v
 Fapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/learn/LearnFragment.java,a\c\ac61c85444f9f3dca12e679f4dc1056e84ba6cde
-w
-Gapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/learn/AnswerListener.java,4\c\4cf1b10e9fd3bb372384df13c6372e88225f1235
 z
 Japp/src/main/java/pl/edu/pb/lepszeduolingo/ui/learn/LearnTextFragment.java,e\c\ecde388d8fa4c9c2fdba99a7d510f2d6e4f9f463
 m
 =app/src/main/java/pl/edu/pb/lepszeduolingo/TitleActivity.java,9\d\9de34e2c69fee99f82d367d3f2e97c70a6ae1038
 s
 Capp/src/main/java/pl/edu/pb/lepszeduolingo/models/UnlockedWord.java,2\d\2dd51a9a0049e4bbfbc9ed97732b0c3c5ac799e3
-q
-Aapp/src/main/java/pl/edu/pb/lepszeduolingo/models/Collection.java,4\3\43abea2c8028eb577e3329e3a9db4824f83eab40
-o
-?app/src/main/java/pl/edu/pb/lepszeduolingo/models/Question.java,4\6\468c76095866ea7fc67f7903648822b2a0c8ff6c
 l
 <app/src/main/java/pl/edu/pb/lepszeduolingo/models/Score.java,5\5\558c46fb25724b0113908291215f4307e3a0bc56
-k
-;app/src/main/java/pl/edu/pb/lepszeduolingo/models/User.java,6\8\68f62704821a0870f803a1e31bf37824d40cde6f
 {
 Kapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/learn/LearnImageFragment.java,9\f\9f6b2db31e00aa78d7114c69746401c06e14287b
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 p
 @app/src/main/java/pl/edu/pb/lepszeduolingo/RegisterActivity.java,9\1\9163af1cafc6171a607fd372c155130c3caac6c5
 €
@@ -59,8 +41,6 @@ Fapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/AdminActivity.java,e\8\e8f
 Rapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/Admin_RecyclerViewAdapter.java,2\b\2b3fba92ec8ab72762c9bd939e80ba920910a5d9
 q
 Aapp/src/main/java/pl/edu/pb/lepszeduolingo/models/Difficulty.java,c\4\c4b46b06e3a4e9b55427b92bb3d09137476d9ecf
-€
-Papp/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/add/AddCategoryFragment.java,c\6\c69c12a898191901538cf7b7313c61d4df79763b
 Œ
 \app/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/AdminCategories_RecyclerViewAdapter.java,9\c\9c53bf15e54655fcc2e51a77b5400c1415721fe4
 s
@@ -71,20 +51,10 @@ Papp/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/AdminCategoriesFragment.jav
 ^app/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/AdminDifficulties_RecyclerViewAdapter.java,3\d\3d40d7420e1a25d4eca14b08781523cf559420e0
 ‚
 Rapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/AdminDifficultiesFragment.java,6\a\6ab7d44e9a0d8dc732f07a2b109eb53142a3218f
-€
-Papp/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/add/AddLanguageFragment.java,1\2\120815f8711b8b223a98890205aca85e55f08d5b
 ‹
 [app/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/AdminLanguages_RecyclerViewAdapter.java,c\c\cc311e643c21607d339210bd8105ed760c205fd6
 
 Oapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/AdminLanguagesFragment.java,2\9\29cff22b3598b341f9bf983087562135e96a0899
-q
-Aapp/src/main/java/pl/edu/pb/lepszeduolingo/db/DatabaseFacade.java,4\7\47b687eb3e6a6a11ef44529ee54b17428cae9083
-‚
-Rapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/add/AddDifficultyFragment.java,1\0\103d0690d2dcbb008ab227df1454a5b6d9d2305b
-k
-;app/src/main/java/pl/edu/pb/lepszeduolingo/models/Word.java,6\a\6ac27e0eaa4099699840e96647c2ab5e3bf24a11
-m
-=app/src/main/java/pl/edu/pb/lepszeduolingo/LoginActivity.java,4\2\420bb3e39be9c3266625aa45015882409e3c8de0
 q
 Aapp/src/main/java/pl/edu/pb/lepszeduolingo/db/DatabaseHelper.java,a\6\a6762a018ff1b91443253136335d8d1301718aa8
 r
@@ -95,7 +65,9 @@ t
 Dapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/word/WordActivity.java,d\8\d8cf1e881074dc692fd2f035f02219a5b18e148c
 v
 Fapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/AdminFragment.java,a\0\a0ffd76ea3fef0bb362c4d6fd034ebacfe193531
-}
-Mapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/add/AdminAddActivity.java,f\7\f7b918f4a2c25a9be420c29cb4e13308544ef124
 ‡
 Wapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/AdminWords_RecyclerViewAdapter.java,e\3\e3a66bd8160cdd7a2210dedf79845df181ccd01b
+{
+Kapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/AdminWordsFragment.java,5\3\531d2608333bae0dee4615a0a31af9e58112c9ac
+†
+Vapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/add/AddWordTranslationsDialog.java,1\b\1b23ff298bdc465088bd75b18873656080b08b15

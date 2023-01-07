@@ -1,4 +1,4 @@
-package pl.edu.pb.lepszeduolingo.ui.difficulties;
+package pl.edu.pb.lepszeduolingo.ui.difficulty;
 
 import android.content.Context;
 import android.view.LayoutInflater;

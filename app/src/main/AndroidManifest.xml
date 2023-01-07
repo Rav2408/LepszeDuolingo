@@ -27,14 +27,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.difficulties.DifficultiesActivity"
+            android:name=".ui.difficulty.DifficultyActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.difficulty.DifficultyActivity"
+            android:name=".ui.category.CategoryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
