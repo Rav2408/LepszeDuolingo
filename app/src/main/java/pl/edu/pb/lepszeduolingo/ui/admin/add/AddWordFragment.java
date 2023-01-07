@@ -151,18 +151,34 @@ public class AddWordFragment extends Fragment
     public void passChoice(String translation, String language) {
         TranslationsTemp.put(translation, language);
         updateTranslationList();
-        Log.d("translationTemp", translation+language);
+        /*
+        // test
+        for(String word: TranslationsTemp.keySet()){
+            Log.d("translationReceive", word);
+        }
+        */
     }
-    // update adapter list
+    // update adapter list (after element addition) from fragment
     private void updateTranslationList() {
         translationsAdapter.setList(TranslationsTemp);
         translationsAdapter.notifyDataSetChanged();
-    }
-    // get updated list from list adapter
-    @Override
-    public void updateList(LinkedHashMap<String, String> translationsTemp) {
-        for(String word: translationsTemp.keySet()){
+        /*
+        // test
+        for(String word: TranslationsTemp.keySet()){
             Log.d("translationReceive", word);
         }
+        */
+    }
+    // get updated list (after element deletion) from list adapter
+    @Override
+    public void updateList(LinkedHashMap<String, String> translationsTemp) {
+        // overwrite
+        TranslationsTemp = translationsTemp;
+        /*
+        // test
+        for(String word: TranslationsTemp.keySet()){
+            Log.d("translationReceive", word);
+        }
+        */
     }
 }

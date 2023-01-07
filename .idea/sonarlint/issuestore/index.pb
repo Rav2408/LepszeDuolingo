@@ -87,3 +87,15 @@ m
 =app/src/main/java/pl/edu/pb/lepszeduolingo/LoginActivity.java,4\2\420bb3e39be9c3266625aa45015882409e3c8de0
 q
 Aapp/src/main/java/pl/edu/pb/lepszeduolingo/db/DatabaseHelper.java,a\6\a6762a018ff1b91443253136335d8d1301718aa8
+r
+Bapp/src/main/java/pl/edu/pb/lepszeduolingo/models/Translation.java,4\6\46e7f9eb366895edb468ac2f06dafe84bff8e0ed
+o
+?app/src/main/java/pl/edu/pb/lepszeduolingo/models/Language.java,a\e\ae3fd1e1ef2a3f4ae734c3e3f227847f0ac10824
+t
+Dapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/word/WordActivity.java,d\8\d8cf1e881074dc692fd2f035f02219a5b18e148c
+v
+Fapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/AdminFragment.java,a\0\a0ffd76ea3fef0bb362c4d6fd034ebacfe193531
+}
+Mapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/add/AdminAddActivity.java,f\7\f7b918f4a2c25a9be420c29cb4e13308544ef124
+‡
+Wapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/AdminWords_RecyclerViewAdapter.java,e\3\e3a66bd8160cdd7a2210dedf79845df181ccd01b
