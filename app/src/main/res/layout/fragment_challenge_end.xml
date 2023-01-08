@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.challenge.ChallengeEndFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/challenge_end_back_btn"
+            android:layout_width="176dp"
+            android:layout_height="61dp"
+            android:text="Get Back"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/challenge_end_again_btn"
+            app:layout_constraintVertical_bias="0.100000024" />
+
+        <TextView
+            android:id="@+id/challenge_end_score"
+            android:layout_width="192dp"
+            android:layout_height="83dp"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/MainDark"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/challenge_end_again_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/challenge_end_title"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/challenge_end_again_btn"
+            android:layout_width="257dp"
+            android:layout_height="80dp"
+            android:text="Try Again"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.69" />
+
+        <TextView
+            android:id="@+id/challenge_end_best_score"
+            android:layout_width="234dp"
+            android:layout_height="61dp"
+            android:gravity="center"
+            android:text="Best Score: 0"
+            android:textColor="@color/material_dynamic_neutral50"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/challenge_end_score"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/challenge_end_title"
+            android:layout_width="363dp"
+            android:layout_height="91dp"
+            android:layout_marginTop="144dp"
+            android:gravity="center"
+            android:text="Your Score"
+            android:textColor="@color/MainDark"
+            android:textSize="60sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

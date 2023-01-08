@@ -3,6 +3,8 @@
     package="pl.edu.pb.lepszeduolingo">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LepszeDuolingo"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ui.challenge.ChallengeActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".ui.admin.add.AdminAddActivity"
             android:exported="false">
@@ -98,6 +107,5 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
 </manifest>

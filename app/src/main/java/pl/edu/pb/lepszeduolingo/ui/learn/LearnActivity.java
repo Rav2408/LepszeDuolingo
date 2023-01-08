@@ -49,7 +49,7 @@ public class LearnActivity extends AppCompatActivity implements AnswerListener{
     // get flag from fragment
     @Override
     public void addIsCorrect(boolean isCorrect) {
-        // for testing purposes ONLY!!! fr fr fr!!!!!1!
+        // for testing
         fragmentFlag = !fragmentFlag;
         setParams();
     }

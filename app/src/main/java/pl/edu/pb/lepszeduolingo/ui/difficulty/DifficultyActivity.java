@@ -31,7 +31,6 @@ public class DifficultyActivity extends DrawerMainActivity implements Difficulti
         DatabaseFacade databaseFacade = new DatabaseFacade(this);
         difficulties = databaseFacade.getDifficulties();
 
-
         ArrayList<String> difficultiesData = new ArrayList<>();
         for(int i=0;i<difficulties.length();i++){
             try {
@@ -40,14 +39,6 @@ public class DifficultyActivity extends DrawerMainActivity implements Difficulti
                 e.printStackTrace();
             }
         }
-        // test data
-
-//        difficultiesData.add("A1");
-//        difficultiesData.add("A2");
-//        difficultiesData.add("A3");
-//        difficultiesData.add("A4");
-//        difficultiesData.add("B1");
-
         RecyclerView recyclerView = findViewById(R.id.difficultiesRecyclerView);
         DifficultiesRecyclerViewAdapter adapter = new DifficultiesRecyclerViewAdapter(this, difficultiesData, this);
         recyclerView.setAdapter(adapter);
@@ -60,6 +51,7 @@ public class DifficultyActivity extends DrawerMainActivity implements Difficulti
         Bundle bundle = new Bundle();
         try {
             bundle.putInt("difficultyId", difficulties.getJSONObject(position).getInt("id"));
+            bundle.putString("difficultyName", difficulties.getJSONObject(position).getString("level"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
