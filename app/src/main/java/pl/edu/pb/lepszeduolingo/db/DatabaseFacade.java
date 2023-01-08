@@ -44,14 +44,14 @@ public class DatabaseFacade {
     public JSONArray getCategories() {
         return databaseHelper.getCategories();
     }
-    public ArrayList<String> getCategoriesByDifficultyId(int id) {
+    public List<JSONObject> getCategoriesByDifficultyId(int id) {
         JSONArray allCategories = getCategories();
-        ArrayList<String> categories = new ArrayList<>();
+        List<JSONObject> categories = new ArrayList<>();
 
         for(int i=0;i<allCategories.length();i++){
             try {
                 if(allCategories.getJSONObject(i).getJSONObject("difficulty").getInt("id") == id){
-                    categories.add(allCategories.getJSONObject(i).getString("name"));
+                    categories.add(allCategories.getJSONObject(i));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -59,6 +59,40 @@ public class DatabaseFacade {
         }
         return categories;
     }
+
+
+    public JSONObject getCollectionByCategoryId(int categoryId){
+        JSONArray allCollections = getCollections();
+        for(int i=0;i<allCollections.length();i++) {
+            try {
+                if(allCollections.getJSONObject(i).getJSONObject("category").getInt("id") == categoryId){
+                    return allCollections.getJSONObject(i);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return null;
+    }
+
+    public List<JSONObject> getQuestionsByCategoryId(int categoryId){
+        JSONArray allQuestions = getQuestions();
+        List<JSONObject> questions = new ArrayList<>();
+        for(int i=0;i<allQuestions.length();i++) {
+            try {
+                if(allQuestions.getJSONObject(i).getJSONObject("collection").getJSONObject("category").getInt("id") == categoryId){
+                     questions.add(allQuestions.getJSONObject(i));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return questions;
+    }
+
+
 
     public JSONArray getTranslations() {
         return databaseHelper.getTranslations();
@@ -73,6 +107,10 @@ public class DatabaseFacade {
     }
 
     public JSONArray getLanguages(){ return databaseHelper.getLanguages(); }
+
+    public JSONArray getCollections() {
+        return databaseHelper.getCollections();
+    }
 
     public void setUser(JSONObject user){
         databaseHelper.setUser(user);

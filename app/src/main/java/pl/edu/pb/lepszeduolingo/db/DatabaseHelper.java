@@ -19,6 +19,8 @@ public class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do t
     JSONArray questions;
     JSONArray difficulties;
     JSONArray languages;
+    JSONArray collections;
+    JSONArray unlockedWords;
     JSONObject user;
 
     private static DatabaseHelper databaseHelper;
@@ -72,6 +74,12 @@ public class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do t
                 difficulties=jsonArray;
             }
         }).getRequest(URL +"difficulty");
+        VolleyRequest.getInstance(context, new IVolley() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                collections=jsonArray;
+            }
+        }).getRequest(URL +"collection");
 
         VolleyRequest.getInstance(context, new IVolley() {
             @Override
@@ -79,6 +87,14 @@ public class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do t
                 languages=jsonArray;
             }
         }).getRequest(URL +"language");
+
+        VolleyRequest.getInstance(context, new IVolley() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                unlockedWords=jsonArray;
+            }
+        }).getRequest(URL +"unlockedword");
+
     }
 
     public void printConsole(){
@@ -116,8 +132,17 @@ public class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do t
         return languages;
     }
 
+    public JSONArray getCollections() {
+        return collections;
+    }
+
+    public JSONArray getUnlockedWords() {
+        return unlockedWords;
+    }
+
     public void setUser(JSONObject user){
         this.user = user;
     }
+
 
 }

@@ -8,7 +8,12 @@ import android.widget.Button;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import pl.edu.pb.lepszeduolingo.DrawerMainActivity;
 import pl.edu.pb.lepszeduolingo.databinding.ActivityDifficultyBinding;
@@ -23,6 +28,7 @@ public class CategoryActivity extends DrawerMainActivity implements DifficultyRe
     int difficultyId;
     String difficultyName;
     Button challengeBtn;
+    List<JSONObject> categories;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +43,18 @@ public class CategoryActivity extends DrawerMainActivity implements DifficultyRe
             difficultyName = extras.getString("difficultyName");
         }
         DatabaseFacade databaseFacade = new DatabaseFacade(this);
-        ArrayList<String> categories = databaseFacade.getCategoriesByDifficultyId(getIntent().getExtras().getInt("difficultyId"));
+        categories = databaseFacade.getCategoriesByDifficultyId(getIntent().getExtras().getInt("difficultyId"));
+        List<String> categoryNames = categories.stream().map(c-> {
+            try {
+                return c.getString("name");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }).collect(Collectors.toList());
 
         RecyclerView recyclerView = findViewById(R.id.diffRecyclerView);
-        DifficultyRecyclerViewAdapter adapter = new DifficultyRecyclerViewAdapter(this, categories, this);
+        DifficultyRecyclerViewAdapter adapter = new DifficultyRecyclerViewAdapter(this, categoryNames, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -49,7 +63,11 @@ public class CategoryActivity extends DrawerMainActivity implements DifficultyRe
     public void onCategoryClick(int position) {
         Intent intent = new Intent(this, LearnActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putInt("categoryId", position);
+        try {
+            bundle.putInt("categoryId", categories.get(position).getInt("id") );
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         intent.putExtras(bundle);
         startActivity(intent);
         Log.d("category", String.format("Category: %2d", position));

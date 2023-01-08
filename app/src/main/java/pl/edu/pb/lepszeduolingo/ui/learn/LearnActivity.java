@@ -6,6 +6,8 @@ import android.os.Bundle;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 import java.util.Random;
 import pl.edu.pb.lepszeduolingo.R;
 import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
@@ -14,7 +16,7 @@ public class LearnActivity extends AppCompatActivity implements AnswerListener{
     Fragment textFragment = new LearnTextFragment();
     Fragment imageFragment = new LearnImageFragment();
     Random rand = new Random();
-    JSONArray questions;
+    List<JSONObject> questions;
     int questionNumber;
     boolean fragmentFlag = false;
 
@@ -24,16 +26,15 @@ public class LearnActivity extends AppCompatActivity implements AnswerListener{
         setContentView(R.layout.activity_learn);
         // db
         DatabaseFacade databaseFacade = new DatabaseFacade(this);
-        questions = databaseFacade.getQuestions();
+        questions = databaseFacade.getQuestionsByCategoryId(getIntent().getExtras().getInt("categoryId"));
         // set parameters for db
         setParams();
     }
     // set parameters for db
     void setParams(){
-        try {
             // choose answer
-            questionNumber = rand.nextInt(questions.length());
-            JSONObject question = questions.getJSONObject(questionNumber);
+            questionNumber = rand.nextInt(questions.size());
+            JSONObject question = questions.get(questionNumber);
             // rand if text or image
             Fragment fragmentOut = fragmentFlag ? textFragment : imageFragment;
             // pass data
@@ -42,9 +43,6 @@ public class LearnActivity extends AppCompatActivity implements AnswerListener{
             data.putString("Question", question.toString());
             fragmentOut.setArguments(data);
             fragmentTransaction.replace(R.id.flLearn, fragmentOut).commit();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
     // get flag from fragment
     @Override
