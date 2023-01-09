@@ -1,11 +1,15 @@
 package pl.edu.pb.lepszeduolingo.ui.admin.add;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +27,11 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -35,7 +44,8 @@ import pl.edu.pb.lepszeduolingo.db.DatabaseHelper;
 public class AddWordFragment extends Fragment
         implements
         AddWordTranslationsDialog.AddWordTranslationDialogListener,
-        AddWordTranslationsAdapter.AddWordTranslationsAdapterListener {
+        AddWordTranslationsAdapter.AddWordTranslationsAdapterListener,
+        AddWordImageDialog.AddWordImageDialogListener{
     private static final int UPLOAD_ID = 1000;
     private Uri selectedImage;
     private AddWordTranslationsAdapter translationsAdapter;
@@ -48,6 +58,7 @@ public class AddWordFragment extends Fragment
     ImageButton TranslationBtn;
     ListView TranslationsListView;
     LinkedHashMap<String, String> TranslationsTemp = new LinkedHashMap<String, String>();
+    URL wordImageUrl;
 
     private FragmentAddWordBinding binding;
     @Override
@@ -60,6 +71,11 @@ public class AddWordFragment extends Fragment
                              Bundle savedInstanceState) {
         binding = FragmentAddWordBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        // prevents internet privacy error
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
         // text inputs
         AddWordText = root.findViewById(R.id.addwordText);
         // list
@@ -130,9 +146,16 @@ public class AddWordFragment extends Fragment
         }
     }
     private void handleAddImage(){
-        Intent iGallery = new Intent(Intent.ACTION_PICK);
-        iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(iGallery, UPLOAD_ID);
+        // dialog input
+        AddWordImageDialog imageDialog = new AddWordImageDialog();
+        imageDialog.setTargetFragment(this, 0);
+        imageDialog.show(getActivity().getSupportFragmentManager(), "image dialog");
+    }
+    /*
+    private void handleAddImage(){
+    Intent iGallery = new Intent(Intent.ACTION_PICK);
+    iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+    startActivityForResult(iGallery, UPLOAD_ID);
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -141,6 +164,7 @@ public class AddWordFragment extends Fragment
             UploadImageBtn.setImageURI(selectedImage);
         }
     }
+    */
     private void handleAddTranslation(){
         AddWordTranslationsDialog translationDialog = new AddWordTranslationsDialog();
         translationDialog.setTargetFragment(this, 0);
@@ -180,5 +204,39 @@ public class AddWordFragment extends Fragment
             Log.d("translationReceive", word);
         }
         */
+    }
+    @SuppressLint("ResourceAsColor")
+    @Override
+    public void passImageUrl(String imageUrl) {
+        // perform verification of url
+        // if ok
+        // transform string to url to bitmap
+        URL newUrl = null;
+        try {
+            newUrl = new URL(imageUrl);
+            // set url
+            wordImageUrl= newUrl;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        Bitmap bmp = null;
+        try {
+            bmp = BitmapFactory.decodeStream(newUrl.openConnection().getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // scale bitmap
+        int currentBitmapWidth = bmp.getWidth();
+        int currentBitmapHeight = bmp.getHeight();
+        int ivWidth = UploadImageBtn.getWidth();
+        int newWidth = ivWidth;
+        int newHeight = (int) Math.floor((double) currentBitmapHeight *( (double) newWidth / (double) currentBitmapWidth));
+        Bitmap newBitMap = Bitmap.createScaledBitmap(bmp, newWidth, newHeight, true);
+        // set image
+        UploadImageBtn.setImageBitmap(newBitMap);
+        // clear background
+        UploadImageBtn.setBackgroundColor(android.R.color.transparent);
+        // else
+        // make toast
     }
 }

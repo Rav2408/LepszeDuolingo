@@ -49,10 +49,6 @@ t
 Dapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/word/WordActivity.java,d\8\d8cf1e881074dc692fd2f035f02219a5b18e148c
 ‡
 Wapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/AdminWords_RecyclerViewAdapter.java,e\3\e3a66bd8160cdd7a2210dedf79845df181ccd01b
-†
-Vapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/add/AddWordTranslationsDialog.java,1\b\1b23ff298bdc465088bd75b18873656080b08b15
-‡
-Wapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/add/AddWordTranslationsAdapter.java,4\3\43c9b60b06aa1a7e857d343b2f4ce8e28b5230a4
 ‚
 Rapp/src/main/java/pl/edu/pb/lepszeduolingo/ui/admin/add/AddDifficultyFragment.java,1\0\103d0690d2dcbb008ab227df1454a5b6d9d2305b
 €
