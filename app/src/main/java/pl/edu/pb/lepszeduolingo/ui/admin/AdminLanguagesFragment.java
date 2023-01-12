@@ -2,15 +2,14 @@ package pl.edu.pb.lepszeduolingo.ui.admin;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,9 +17,8 @@ import org.json.JSONException;
 import java.util.ArrayList;
 
 import pl.edu.pb.lepszeduolingo.R;
-import pl.edu.pb.lepszeduolingo.databinding.FragmentAdminDifficultiesBinding;
 import pl.edu.pb.lepszeduolingo.databinding.FragmentAdminLanguagesBinding;
-import pl.edu.pb.lepszeduolingo.db.DatabaseHelper;
+import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
 import pl.edu.pb.lepszeduolingo.ui.admin.add.AdminAddActivity;
 
 public class AdminLanguagesFragment extends Fragment  implements AdminLanguages_RecyclerViewAdapter.onDataListener{
@@ -39,8 +37,8 @@ public class AdminLanguagesFragment extends Fragment  implements AdminLanguages_
         AddAdminLanguagesBtn = root.findViewById(R.id.addAdminLanguageBtn);
         AddAdminLanguagesBtn.setOnClickListener(v -> onLanguageAdd());
         // get languages
-        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this.getContext());
-        languages = databaseHelper.getLanguages();
+        DatabaseFacade databaseFacade = new DatabaseFacade(getContext());
+        languages = databaseFacade.getLanguages();
         ArrayList<String> languagesData = new ArrayList<>();
         for(int i=0; i < languages.length(); i++){
             try {

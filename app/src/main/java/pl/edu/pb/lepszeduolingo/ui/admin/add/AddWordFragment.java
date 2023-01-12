@@ -1,21 +1,15 @@
 package pl.edu.pb.lepszeduolingo.ui.admin.add;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.os.StrictMode;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,22 +18,20 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 import pl.edu.pb.lepszeduolingo.R;
-
 import pl.edu.pb.lepszeduolingo.databinding.FragmentAddWordBinding;
-import pl.edu.pb.lepszeduolingo.db.DatabaseHelper;
+import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
 
 public class AddWordFragment extends Fragment
         implements
@@ -96,9 +88,9 @@ public class AddWordFragment extends Fragment
         DifficultiesSpinner = root.findViewById(R.id.addwordDifficulty);
         LanguageSpinner = root.findViewById(R.id.addwordLanguage);
         // db
-        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this.getContext());
-        JSONArray difficulties = databaseHelper.getDifficulties();
-        JSONArray languages = databaseHelper.getLanguages();
+        DatabaseFacade databaseFacade = new DatabaseFacade(getContext());
+        JSONArray difficulties = databaseFacade.getDifficulties();
+        JSONArray languages = databaseFacade.getLanguages();
         ArrayList<String> difficultiesData = new ArrayList<>();
         ArrayList<String> languagesData = new ArrayList<>();
         for(int i=0;i<difficulties.length();i++){

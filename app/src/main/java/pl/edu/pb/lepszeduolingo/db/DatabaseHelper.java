@@ -3,13 +3,18 @@ package pl.edu.pb.lepszeduolingo.db;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.List;
+
+import pl.edu.pb.lepszeduolingo.models.Language;
 import pl.edu.pb.lepszeduolingo.rest.IVolley;
 import pl.edu.pb.lepszeduolingo.rest.VolleyRequest;
 
-public class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do tworzenia kolejnych JSSONArray
+class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do tworzenia kolejnych JSSONArray
     private static final String URL = "http://34.118.90.148:8090/api/";
 
     Context context;
@@ -85,6 +90,7 @@ public class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do t
             @Override
             public void onResponse(JSONArray jsonArray) {
                 languages=jsonArray;
+                //mapLanguages(languages);
             }
         }).getRequest(URL +"language");
 
@@ -144,5 +150,9 @@ public class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do t
         this.user = user;
     }
 
-
+//    private void mapLanguages(JSONArray jsonArray){
+//        Gson g = new Gson();
+//        List<Language> languages = g.fromJson(String.valueOf(jsonArray), Language.class);
+//        //TODO przejść po pętli żeby mapować pojedyńcze obiekty
+//    }
 }

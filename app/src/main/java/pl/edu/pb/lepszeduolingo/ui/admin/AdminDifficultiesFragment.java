@@ -2,15 +2,14 @@ package pl.edu.pb.lepszeduolingo.ui.admin;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,9 +17,8 @@ import org.json.JSONException;
 import java.util.ArrayList;
 
 import pl.edu.pb.lepszeduolingo.R;
-import pl.edu.pb.lepszeduolingo.databinding.FragmentAdminCategoriesBinding;
 import pl.edu.pb.lepszeduolingo.databinding.FragmentAdminDifficultiesBinding;
-import pl.edu.pb.lepszeduolingo.db.DatabaseHelper;
+import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
 import pl.edu.pb.lepszeduolingo.ui.admin.add.AdminAddActivity;
 
 public class AdminDifficultiesFragment extends Fragment implements AdminDifficulties_RecyclerViewAdapter.onDataListener{
@@ -39,8 +37,8 @@ public class AdminDifficultiesFragment extends Fragment implements AdminDifficul
         AddAdminDifficultiesBtn = root.findViewById(R.id.addAdminDifficultyBtn);
         AddAdminDifficultiesBtn.setOnClickListener(v -> onDifficultyAdd());
         // get categories
-        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this.getContext());
-        difficulties = databaseHelper.getDifficulties();
+        DatabaseFacade databaseFacade = new DatabaseFacade(getContext());
+        difficulties = databaseFacade.getDifficulties();
         ArrayList<String> difficultiesData = new ArrayList<>();
         for(int i=0; i<difficulties.length(); i++){
             try {

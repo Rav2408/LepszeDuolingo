@@ -19,7 +19,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 
 import pl.edu.pb.lepszeduolingo.R;
-import pl.edu.pb.lepszeduolingo.db.DatabaseHelper;
+import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
 
 public class AddWordTranslationsDialog extends AppCompatDialogFragment {
     private EditText ViewTranslation;
@@ -44,8 +44,8 @@ public class AddWordTranslationsDialog extends AppCompatDialogFragment {
                     listener.passChoice(translation, language);
                 });
         // db
-        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this.getContext());
-        JSONArray languages = databaseHelper.getLanguages();
+        DatabaseFacade databaseFacade = new DatabaseFacade(getContext());
+        JSONArray languages = databaseFacade.getLanguages();
         ArrayList<String> languagesData = new ArrayList<>();
         for(int i=0; i<languages.length(); i++){
             try {

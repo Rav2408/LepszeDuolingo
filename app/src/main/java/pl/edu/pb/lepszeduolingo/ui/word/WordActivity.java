@@ -1,11 +1,10 @@
 package pl.edu.pb.lepszeduolingo.ui.word;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.TextView;
 
-import org.json.JSONArray;
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,7 +13,6 @@ import java.util.List;
 
 import pl.edu.pb.lepszeduolingo.R;
 import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
-import pl.edu.pb.lepszeduolingo.db.DatabaseHelper;
 
 public class WordActivity extends AppCompatActivity {
     TextView WordView, WordTranslationView;

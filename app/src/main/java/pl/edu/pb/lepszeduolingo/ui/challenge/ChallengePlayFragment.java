@@ -30,6 +30,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Random;
 
@@ -50,7 +51,11 @@ public class ChallengePlayFragment extends Fragment {
     JSONArray questions;
     int questionCounter;
     boolean isCorrect;
-    int score;
+    int questionStarted;
+    //TODO @miłoszAlejster  w miejscu gdzie wybieramy rodzaj trybu wyzwania i przekazać to do tej klasy jakoś - Points points = new Points(new TimeStrategy()) / Points points = new Points(new WinStreakStrategy())
+    Points points = new Points(new TimeStrategy());
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,6 +115,8 @@ public class ChallengePlayFragment extends Fragment {
             AnswerView_2.setText("answer 2");
             AnswerView_3.setText("answer 3");
             AnswerView_4.setText(word);
+
+            questionStarted = new Date().getSeconds();
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
@@ -121,11 +128,9 @@ public class ChallengePlayFragment extends Fragment {
     void handleAnswer(int chosenAnswer){
         buttonsEnabled(false);
         isCorrect = Objects.equals(chosenAnswer, 3);
-        if(isCorrect == true){
-            score += 100;
-        } else {
-            score -= 10;
-        }
+        int time = new Date().getSeconds() - questionStarted;
+        points.countPoints(isCorrect, time);
+
         // set back message
         handleAnswerReset();
     }
@@ -136,12 +141,13 @@ public class ChallengePlayFragment extends Fragment {
         AnswerView_4.setEnabled(flag);
     }
     private void handleAnswerReset(){
-        if(questionCounter++ > 10){
+        if(++questionCounter > 10){
+
             // end challenge
             Intent intent = new Intent();
             Bundle bundle = new Bundle();
             bundle.putString("key", "end");
-            bundle.putInt("score", score);
+            bundle.putInt("score", (int)points.getScore());
             intent.putExtras(bundle);
             getActivity().getIntent().putExtras(intent);
             getActivity().recreate();

@@ -2,7 +2,6 @@ package pl.edu.pb.lepszeduolingo.ui.dictionary;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,7 +23,7 @@ import java.util.ArrayList;
 
 import pl.edu.pb.lepszeduolingo.R;
 import pl.edu.pb.lepszeduolingo.databinding.FragmentDictionaryBinding;
-import pl.edu.pb.lepszeduolingo.db.DatabaseHelper;
+import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
 import pl.edu.pb.lepszeduolingo.ui.word.WordActivity;
 
 public class DictionaryFragment extends Fragment implements Dict_RecyclerViewAdapter.onWordListener{
@@ -49,8 +48,8 @@ public class DictionaryFragment extends Fragment implements Dict_RecyclerViewAda
         unlockedView.setText(unlockedString);
 
 
-        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this.getContext());
-        JSONArray words = databaseHelper.getWords();
+        DatabaseFacade databaseFacade = new DatabaseFacade(getContext());
+        JSONArray words = databaseFacade.getWords();
 
 
         ArrayList<String> wordsData = new ArrayList<>();

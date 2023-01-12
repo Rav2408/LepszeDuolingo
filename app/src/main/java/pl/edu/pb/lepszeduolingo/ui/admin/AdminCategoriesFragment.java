@@ -2,15 +2,14 @@ package pl.edu.pb.lepszeduolingo.ui.admin;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,8 +18,7 @@ import java.util.ArrayList;
 
 import pl.edu.pb.lepszeduolingo.R;
 import pl.edu.pb.lepszeduolingo.databinding.FragmentAdminCategoriesBinding;
-import pl.edu.pb.lepszeduolingo.databinding.FragmentAdminWordsBinding;
-import pl.edu.pb.lepszeduolingo.db.DatabaseHelper;
+import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
 import pl.edu.pb.lepszeduolingo.ui.admin.add.AdminAddActivity;
 
 public class AdminCategoriesFragment extends Fragment implements AdminCategories_RecyclerViewAdapter.onDataListener{
@@ -41,8 +39,8 @@ public class AdminCategoriesFragment extends Fragment implements AdminCategories
         AddAdminCategoryBtn = root.findViewById(R.id.addAdminCategoryBtn);
         AddAdminCategoryBtn.setOnClickListener(v -> onCategoryAdd());
         // get categories
-        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this.getContext());
-        categories = databaseHelper.getCategories();
+        DatabaseFacade databaseFacade = new DatabaseFacade(getContext());
+        categories = databaseFacade.getCategories();
         ArrayList<String> categoriesData = new ArrayList<>();
         for(int i=0; i<categories.length(); i++){
             try {

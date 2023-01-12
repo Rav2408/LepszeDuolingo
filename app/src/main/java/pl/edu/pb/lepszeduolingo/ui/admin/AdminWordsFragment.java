@@ -2,22 +2,25 @@ package pl.edu.pb.lepszeduolingo.ui.admin;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import pl.edu.pb.lepszeduolingo.R;
 import pl.edu.pb.lepszeduolingo.databinding.FragmentAdminWordsBinding;
-import pl.edu.pb.lepszeduolingo.db.DatabaseHelper;
+import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
 import pl.edu.pb.lepszeduolingo.ui.admin.add.AdminAddActivity;
 
 public class AdminWordsFragment extends Fragment implements AdminWords_RecyclerViewAdapter.onDataListener{
@@ -38,8 +41,8 @@ public class AdminWordsFragment extends Fragment implements AdminWords_RecyclerV
         addButton = root.findViewById(R.id.addAdminWordBtn);
         addButton.setOnClickListener(v -> onWordAdd());
         // get every word
-        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this.getContext());
-        words = databaseHelper.getWords();
+        DatabaseFacade databaseFacade = new DatabaseFacade(getContext());
+        words = databaseFacade.getWords();
         ArrayList<String> wordsData = new ArrayList<>();
         for(int i=0;i<words.length();i++){
             try {
