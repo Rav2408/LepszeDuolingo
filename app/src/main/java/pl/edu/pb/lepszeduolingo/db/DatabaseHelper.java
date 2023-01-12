@@ -150,6 +150,15 @@ class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do tworzeni
         this.user = user;
     }
 
+    public void updateCategories(){
+        VolleyRequest.getInstance(context, new IVolley() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                categories=jsonArray;
+            }
+        }).getRequest(URL +"category");
+    }
+
 //    private void mapLanguages(JSONArray jsonArray){
 //        Gson g = new Gson();
 //        List<Language> languages = g.fromJson(String.valueOf(jsonArray), Language.class);

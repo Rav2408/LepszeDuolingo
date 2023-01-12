@@ -9,8 +9,6 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONObject;
-
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -21,7 +19,7 @@ import java.util.Base64;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
-import pl.edu.pb.lepszeduolingo.builder.WordJsonBuilder;
+import pl.edu.pb.lepszeduolingo.builder.JsonBuilder;
 import pl.edu.pb.lepszeduolingo.rest.IVolley;
 import pl.edu.pb.lepszeduolingo.rest.VolleyRequest;
 
@@ -51,11 +49,11 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton = (Button) findViewById(R.id.confirmRegisterButton);
         registerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                performAuth();
+                register();
             }
         });
     }
-    private void performAuth() {
+    private void register() {
         String email = inputEmail.getText().toString();
         String password = inputPassword.getText().toString();
         String passwordRe = inputPasswordRe.getText().toString();
@@ -74,45 +72,46 @@ public class RegisterActivity extends AppCompatActivity {
                 } else if(!passwordRe.equals(password)){
                     inputPasswordRe.setError("Passwords differs");
                 } else {
-                    SecureRandom random = new SecureRandom();
-                    byte[] salt = new byte[16];
-                    random.nextBytes(salt);
-                    KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
-                    try {
-                        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-                        byte[] hash = factory.generateSecret(spec).getEncoded();
-                        byte[] base64Hash = Base64.getEncoder().encode(hash); //szyfrowanie
-                        byte[] base64Salt = Base64.getEncoder().encode(salt); //szyfrowanie
-
-//                byte[] decodedString = Base64.getDecoder().decode(new String(name).getBytes("UTF-8"));
-
-                        String stringSalt = new String(base64Salt, StandardCharsets.UTF_8);
-                        String stringHash = new String(base64Hash, StandardCharsets.UTF_8);
-
-                        VolleyRequest.getInstance(context, new IVolley() {
-                            @Override
-                            public void onResponse(JSONObject jsonObject) {
-                                System.out.println(jsonObject.toString());
-                            }
-                        }).postRequest("http://34.118.90.148:8090/api/duolingouser",
-                                new WordJsonBuilder(context).create()
-                                        .put("name", email)
-                                        .put("email", email)
-                                        .put("role", "USER")
-                                        .put("salt", stringSalt)
-                                        .put("hash", stringHash)
-                                        .build());
-                    } catch (NoSuchAlgorithmException e) {
-                        e.printStackTrace();
-                    } catch (InvalidKeySpecException e) {
-                        e.printStackTrace();
-                    }
-
+                    hashPasswordAndCreateUser(context, password, email);
                     startActivity(new Intent(RegisterActivity.this, TitleActivity.class));
                 }
-
             }
         }).getRequestString("http://34.118.90.148:8090/api/duolingouser/salt?email=" + email);
 
     }
+
+    private void hashPasswordAndCreateUser(Context context, String password, String email){
+        SecureRandom random = new SecureRandom();
+        byte[] salt = new byte[16];
+        random.nextBytes(salt);
+        KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
+        try {
+            SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+            byte[] hash = factory.generateSecret(spec).getEncoded();
+            byte[] base64Hash = Base64.getEncoder().encode(hash); //szyfrowanie
+            byte[] base64Salt = Base64.getEncoder().encode(salt); //szyfrowanie
+
+            String stringSalt = new String(base64Salt, StandardCharsets.UTF_8);
+            String stringHash = new String(base64Hash, StandardCharsets.UTF_8);
+
+            createUser(context, email ,stringHash, stringSalt);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void createUser(Context context, String email, String stringHash, String stringSalt){
+        VolleyRequest.getInstance(context, new IVolley() {
+        }).postRequest("http://34.118.90.148:8090/api/duolingouser",
+                new JsonBuilder(context).create()
+                        .put("name", email)
+                        .put("email", email)
+                        .put("role", "USER")
+                        .put("salt", stringSalt)
+                        .put("hash", stringHash)
+                        .build());
+    }
+
 }

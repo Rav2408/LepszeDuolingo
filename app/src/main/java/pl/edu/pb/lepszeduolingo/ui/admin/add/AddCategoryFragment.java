@@ -16,16 +16,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import pl.edu.pb.lepszeduolingo.R;
+import pl.edu.pb.lepszeduolingo.builder.JsonBuilder;
 import pl.edu.pb.lepszeduolingo.databinding.FragmentAddCategoryBinding;
 import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
+import pl.edu.pb.lepszeduolingo.rest.IVolley;
+import pl.edu.pb.lepszeduolingo.rest.VolleyRequest;
 
 public class AddCategoryFragment extends Fragment {
     private FragmentAddCategoryBinding binding;
-    EditText AddCategoryText;
-    Spinner DifficultiesSpinner;
-    Button PublishBtn;
+    EditText addCategoryText;
+    Spinner difficultiesSpinner;
+    Button publishBtn;
+    DatabaseFacade databaseFacade;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,29 +41,43 @@ public class AddCategoryFragment extends Fragment {
         binding = FragmentAddCategoryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         // inputs
-        AddCategoryText = root.findViewById(R.id.addcategoryText);
-        DifficultiesSpinner = root.findViewById(R.id.addcategoryDifficulty);
-        PublishBtn = root.findViewById(R.id.addcategoryAddBtn);
+        addCategoryText = root.findViewById(R.id.addcategoryText);
+        difficultiesSpinner = root.findViewById(R.id.addcategoryDifficulty);
+        publishBtn = root.findViewById(R.id.addcategoryAddBtn);
         // db
-        DatabaseFacade databaseFacade = new DatabaseFacade(getContext());
+        databaseFacade = new DatabaseFacade(getContext());
         // difficulties
         JSONArray difficulties = databaseFacade.getDifficulties();
-        ArrayList<String> difficultiesData = new ArrayList<>();
+        List<String> diffNames = new ArrayList<>();
+        List<Integer> diffIds = new ArrayList<>();
         for(int i=0;i<difficulties.length();i++){
             try {
-                difficultiesData.add(difficulties.getJSONObject(i).getString("level"));
+                diffNames.add(difficulties.getJSONObject(i).getString("level"));
+                diffIds.add(difficulties.getJSONObject(i).getInt("id"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-        ArrayAdapter<String> diffAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, difficultiesData);
+        ArrayAdapter<String> diffAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, diffNames);
         diffAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        DifficultiesSpinner.setAdapter(diffAdapter);
+        difficultiesSpinner.setAdapter(diffAdapter);
         // publish
-        PublishBtn.setOnClickListener(v -> performAuth());
+        publishBtn.setOnClickListener(v -> save(diffIds));
         return root;
     }
-    private void performAuth(){
+    private void save(List<Integer> diffIds){
+        VolleyRequest.getInstance(getContext(), new IVolley() {
+        }).postRequest("http://34.118.90.148:8090/api/category",
+                new JsonBuilder(getContext()).create()
+                        .put("name", addCategoryText.getText().toString())
+                        .put("difficulties",
+                                new JsonBuilder(getContext())
+                                .create()
+                                .put("id",diffIds.get(difficultiesSpinner.getSelectedItemPosition()))
+                                .build()
+                        )
+                        .build());
         Log.d("categories", "publish");
+        databaseFacade.updateCategories();
     }
 }

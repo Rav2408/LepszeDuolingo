@@ -2,16 +2,7 @@ package pl.edu.pb.lepszeduolingo;
 
 import android.os.Bundle;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import pl.edu.pb.lepszeduolingo.builder.JSONDataBuilder;
-import pl.edu.pb.lepszeduolingo.builder.WordJsonBuilder;
 import pl.edu.pb.lepszeduolingo.databinding.ActivityMainBinding;
-import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
-import pl.edu.pb.lepszeduolingo.rest.IVolley;
-import pl.edu.pb.lepszeduolingo.rest.VolleyRequest;
 import pl.edu.pb.lepszeduolingo.ui.dictionary.DictionaryFragment;
 
 public class MainActivity extends DrawerMainActivity {

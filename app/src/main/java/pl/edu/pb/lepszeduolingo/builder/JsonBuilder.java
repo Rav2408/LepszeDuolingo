@@ -2,20 +2,16 @@ package pl.edu.pb.lepszeduolingo.builder;
 
 import android.content.Context;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import pl.edu.pb.lepszeduolingo.rest.IVolley;
-import pl.edu.pb.lepszeduolingo.rest.VolleyRequest;
-
-public class WordJsonBuilder implements JSONDataBuilder{
+public class JsonBuilder implements JSONDataBuilder{
 
     private static final String URL = "http://34.118.90.148:8090/api/";
     private Context context;
     JSONObject jsonObject;
 
-    public WordJsonBuilder(Context context) {
+    public JsonBuilder(Context context) {
         this.context = context;
     }
 

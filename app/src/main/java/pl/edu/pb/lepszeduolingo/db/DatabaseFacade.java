@@ -116,4 +116,7 @@ public class DatabaseFacade {
         databaseHelper.setUser(user);
     }
 
+    public void updateCategories(){
+        databaseHelper.updateCategories();
+    }
 }
