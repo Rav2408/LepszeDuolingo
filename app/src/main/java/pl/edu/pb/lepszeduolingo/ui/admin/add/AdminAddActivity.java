@@ -7,7 +7,9 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.net.URI;
 import java.util.Objects;
@@ -39,6 +41,19 @@ public class AdminAddActivity extends AppCompatActivity {
             }else if(Objects.equals(activityOption, "language")){
                 fragmentTransaction.replace(R.id.flAdminAdd, addLanguageFragment).commit();
             }
+        }
+    }
+    void showMessage(String message, boolean isBack){
+        int messageDelay = 400;
+        int switchDelay = 600;
+        Toast answerMessage = Toast.makeText(this, message, Toast.LENGTH_LONG);
+        answerMessage.show();
+        // make toast disappear faster
+        Handler handler = new Handler();
+        handler.postDelayed(answerMessage::cancel, messageDelay);
+        // get back to list view
+        if(isBack){
+            handler.postDelayed(() -> this.onBackPressed(), switchDelay);
         }
     }
 }

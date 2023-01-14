@@ -1,5 +1,7 @@
 package pl.edu.pb.lepszeduolingo.ui.admin;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +29,7 @@ public class AdminWordsFragment extends Fragment implements AdminWords_RecyclerV
     private FragmentAdminWordsBinding binding;
     JSONArray words;
     Button addButton;
+    ArrayList<String> wordsData = new ArrayList<>();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +46,6 @@ public class AdminWordsFragment extends Fragment implements AdminWords_RecyclerV
         // get every word
         DatabaseFacade databaseFacade = new DatabaseFacade(getContext());
         words = databaseFacade.getWords();
-        ArrayList<String> wordsData = new ArrayList<>();
         for(int i=0;i<words.length();i++){
             try {
                 wordsData.add(words.getJSONObject(i).getString("text"));
@@ -73,12 +75,23 @@ public class AdminWordsFragment extends Fragment implements AdminWords_RecyclerV
     @Override
     public void onWordDelete(int position) {
         // delete
-        try {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
+        builder.setMessage("Do you want to delete category "+wordsData.get(position)+"?")
+                .setCancelable(false)
+                .setNegativeButton("No", (dialog, id) -> dialog.cancel())
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+/*        try {
             JSONObject obj = words.getJSONObject(position);
             Log.d("admin_test", obj.toString());
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
 //        try {
 //            VolleyRequest.getInstance(this, new IVolley() {
 //                @Override

@@ -42,13 +42,13 @@ public class AdminFragment extends Fragment implements Admin_RecyclerViewAdapter
     public void onDataClick(int position) {
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
         if(position == 0){
-            fragmentTransaction.replace(R.id.flAdmin, wordsFragment).addToBackStack(null).commit();
+            fragmentTransaction.replace(R.id.flAdmin, wordsFragment, "words").addToBackStack(null).commit();
         }else if(position == 1){
-            fragmentTransaction.replace(R.id.flAdmin, categoriesFragment).addToBackStack(null).commit();
+            fragmentTransaction.replace(R.id.flAdmin, categoriesFragment, "categories").addToBackStack(null).commit();
         }else if(position == 2){
-            fragmentTransaction.replace(R.id.flAdmin, difficultiesFragment).addToBackStack(null).commit();
+            fragmentTransaction.replace(R.id.flAdmin, difficultiesFragment, "difficulties").addToBackStack(null).commit();
         }else if(position == 3){
-            fragmentTransaction.replace(R.id.flAdmin, languagesFragment).addToBackStack(null).commit();
+            fragmentTransaction.replace(R.id.flAdmin, languagesFragment, "languages").addToBackStack(null).commit();
         }
     }
 }

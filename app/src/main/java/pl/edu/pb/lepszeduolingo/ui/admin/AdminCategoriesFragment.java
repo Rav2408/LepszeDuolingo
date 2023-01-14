@@ -1,13 +1,20 @@
 package pl.edu.pb.lepszeduolingo.ui.admin;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,23 +32,29 @@ public class AdminCategoriesFragment extends Fragment implements AdminCategories
     private FragmentAdminCategoriesBinding binding;
     Button AddAdminCategoryBtn;
     JSONArray categories;
+    View root;
+    DatabaseFacade databaseFacade = new DatabaseFacade(getContext());
+    ArrayList<String> categoriesData = new ArrayList<>();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentAdminCategoriesBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        root = binding.getRoot();
         // button
         AddAdminCategoryBtn = root.findViewById(R.id.addAdminCategoryBtn);
         AddAdminCategoryBtn.setOnClickListener(v -> onCategoryAdd());
+        return root;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
         // get categories
-        DatabaseFacade databaseFacade = new DatabaseFacade(getContext());
+        databaseFacade.updateCategories();
         categories = databaseFacade.getCategories();
-        ArrayList<String> categoriesData = new ArrayList<>();
         for(int i=0; i<categories.length(); i++){
             try {
                 categoriesData.add(categories.getJSONObject(i).getString("name"));
@@ -54,7 +67,6 @@ public class AdminCategoriesFragment extends Fragment implements AdminCategories
         AdminCategories_RecyclerViewAdapter adapter = new AdminCategories_RecyclerViewAdapter(this, categoriesData);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setAdapter(adapter);
-        return root;
     }
     void onCategoryAdd(){
         // add
@@ -72,6 +84,16 @@ public class AdminCategoriesFragment extends Fragment implements AdminCategories
     @Override
     public void onCategoryDelete(int position) {
         // delete
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
+        builder.setMessage("Do you want to delete category "+categoriesData.get(position)+"?")
+                .setCancelable(false)
+                .setNegativeButton("No", (dialog, id) -> dialog.cancel())
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
 
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

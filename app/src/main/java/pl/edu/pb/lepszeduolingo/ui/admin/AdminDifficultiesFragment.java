@@ -1,5 +1,7 @@
 package pl.edu.pb.lepszeduolingo.ui.admin;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,6 +27,7 @@ public class AdminDifficultiesFragment extends Fragment implements AdminDifficul
     private FragmentAdminDifficultiesBinding binding;
     Button AddAdminDifficultiesBtn;
     JSONArray difficulties;
+    ArrayList<String> difficultiesData = new ArrayList<>();
     @Override
     public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
 
@@ -39,7 +42,6 @@ public class AdminDifficultiesFragment extends Fragment implements AdminDifficul
         // get categories
         DatabaseFacade databaseFacade = new DatabaseFacade(getContext());
         difficulties = databaseFacade.getDifficulties();
-        ArrayList<String> difficultiesData = new ArrayList<>();
         for(int i=0; i<difficulties.length(); i++){
             try {
                 difficultiesData.add(difficulties.getJSONObject(i).getString("level"));
@@ -72,6 +74,16 @@ public class AdminDifficultiesFragment extends Fragment implements AdminDifficul
     @Override
     public void onDifficultyDelete(int position) {
         // delete
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
+        builder.setMessage("Do you want to delete category "+difficultiesData.get(position)+"?")
+                .setCancelable(false)
+                .setNegativeButton("No", (dialog, id) -> dialog.cancel())
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
 
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

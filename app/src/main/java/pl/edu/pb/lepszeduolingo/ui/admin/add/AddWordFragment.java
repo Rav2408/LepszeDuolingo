@@ -58,6 +58,7 @@ public class AddWordFragment extends Fragment
         super.onCreate(savedInstanceState);
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -83,7 +84,11 @@ public class AddWordFragment extends Fragment
         TranslationBtn = root.findViewById(R.id.addwordTranslationBtn);
         TranslationBtn.setOnClickListener(v -> handleAddTranslation());
         PublishBtn = root.findViewById(R.id.addwordAddBtn);
-        PublishBtn.setOnClickListener(v -> performAuth());
+        PublishBtn.setOnClickListener(v -> {
+            performAuth();
+            // prompt
+            ((AdminAddActivity)getActivity()).showMessage("Success", true);
+        });
         // spinners
         DifficultiesSpinner = root.findViewById(R.id.addwordDifficulty);
         LanguageSpinner = root.findViewById(R.id.addwordLanguage);
@@ -125,8 +130,7 @@ public class AddWordFragment extends Fragment
         } else if(wordOrigin.length() > 15){
             AddWordText.setError("Word is too long");
         } else if(selectedImage == null){
-            Toast toast = Toast.makeText(this.getActivity(), "Add image", Toast.LENGTH_SHORT);
-            toast.show();
+            // all good?
         } else {
             Log.d("wordPublish", wordOrigin);
             Log.d("wordPublish", selectedImage.toString());

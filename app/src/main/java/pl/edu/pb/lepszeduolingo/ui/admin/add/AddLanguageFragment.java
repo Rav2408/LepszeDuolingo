@@ -31,7 +31,11 @@ public class AddLanguageFragment extends Fragment {
         AddLanguageText = root.findViewById(R.id.addlanguageText);
         PublishBtn = root.findViewById(R.id.addlanguageAddBtn);
         // publish
-        PublishBtn.setOnClickListener(v -> performAuth());
+        PublishBtn.setOnClickListener(v -> {
+            performAuth();
+            // prompt
+            ((AdminAddActivity)getActivity()).showMessage("Success", true);
+        });
         return root;
     }
     private void performAuth(){
