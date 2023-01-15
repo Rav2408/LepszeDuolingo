@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/challengeStartDialogContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="131dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="305dp"
+            android:layout_height="83dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+            <Button
+                android:id="@+id/challenge_strategy_1"
+                android:layout_width="132dp"
+                android:layout_height="61dp"
+                android:text="Time"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/challenge_strategy_2"
+                android:layout_width="132dp"
+                android:layout_height="61dp"
+                android:text="Win Streak"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="253dp"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:text="Pick Challenge Mode"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="12dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
