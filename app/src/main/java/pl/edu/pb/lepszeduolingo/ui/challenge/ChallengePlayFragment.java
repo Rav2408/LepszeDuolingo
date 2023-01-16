@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,14 +53,15 @@ public class ChallengePlayFragment extends Fragment {
     int questionCounter;
     boolean isCorrect;
     int questionStarted;
-    //TODO @miłoszAlejster  w miejscu gdzie wybieramy rodzaj trybu wyzwania i przekazać to do tej klasy jakoś - Points points = new Points(new TimeStrategy()) / Points points = new Points(new WinStreakStrategy())
-    Points points = new Points(new TimeStrategy());
-
-
+    Points points;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        // get strategy
+        Bundle args = getArguments();
+        String pointsJsonString = args.getString("points");
+        points = GsonUtils.getGsonParser().fromJson(pointsJsonString, Points.class);
+        // Log.d("playTest", pointsJsonString);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -41,6 +41,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
     implementation 'androidx.navigation:navigation-ui:2.5.3'
     implementation 'com.google.code.gson:gson:2.10'
+    implementation("org.danilopianini:gson-extras:0.2.1")
     implementation group: 'com.j256.ormlite', name: 'ormlite-android', version: '4.45'
     implementation 'com.android.volley:volley:1.2.1'
     testImplementation 'junit:junit:4.+'

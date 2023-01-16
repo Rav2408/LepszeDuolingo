@@ -53,14 +53,15 @@ public class ChallengeStartFragment extends Fragment implements
     }
     @Override
     public void startGame() {
-        Log.d("strategy test", this.strategy);
-        // add
-        String activityOption = "play";
-        Intent intent = new Intent();
-        Bundle bundle = new Bundle();
-        bundle.putString("key", activityOption);
-        intent.putExtras(bundle);
-        getActivity().getIntent().putExtras(intent);
-        getActivity().recreate();
+        ChallengeFactory challengeFactory;
+        if(this.strategy == "time"){
+            challengeFactory = new TimeModeFactory();
+        }else if(this.strategy == "streak"){
+            challengeFactory = new StreakModeFactory();
+        }else{
+            throw new RuntimeException("Error in game starter");
+        }
+        IChallengeStarter starter =  challengeFactory.createStarter();
+        starter.startChallenge(this.getContext());
     }
 }
