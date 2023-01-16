@@ -24,17 +24,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/nav_header_email"
-        android:layout_width="match_parent"
-        android:layout_height="29dp"
-        android:text="@string/nav_header_subtitle"
-        android:textSize="20sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.023"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nav_header_title"
-        app:layout_constraintVertical_bias="1.0" />
 </LinearLayout>
