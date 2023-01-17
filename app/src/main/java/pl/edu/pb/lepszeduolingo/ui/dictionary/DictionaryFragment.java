@@ -68,7 +68,9 @@ public class DictionaryFragment extends Fragment implements Dict_RecyclerViewAda
         recyclerView.setAdapter(adapter);
         return root;
     }
+    private void handleWordCounter(){
 
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();

@@ -34,7 +34,7 @@ public class AddDifficultyFragment extends Fragment {
         PublishBtn.setOnClickListener(v -> {
             performAuth();
             // prompt
-            ((AdminAddActivity)getActivity()).showMessage("Success", true);
+            ((AdminAddActivity)getActivity()).showMessage("Success", true, AddDifficultyText.getText().toString());
         });
         return root;
     }

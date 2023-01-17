@@ -43,7 +43,7 @@ public class AdminAddActivity extends AppCompatActivity {
             }
         }
     }
-    void showMessage(String message, boolean isBack){
+    void showMessage(String message, boolean isBack, String value){
         int messageDelay = 400;
         int switchDelay = 600;
         Toast answerMessage = Toast.makeText(this, message, Toast.LENGTH_LONG);
@@ -53,7 +53,12 @@ public class AdminAddActivity extends AppCompatActivity {
         handler.postDelayed(answerMessage::cancel, messageDelay);
         // get back to list view
         if(isBack){
-            handler.postDelayed(() -> this.onBackPressed(), switchDelay);
+            handler.postDelayed(() -> {
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("addedValue", value);
+                setResult(1, returnIntent);
+                finish();
+            }, switchDelay);
         }
     }
 }

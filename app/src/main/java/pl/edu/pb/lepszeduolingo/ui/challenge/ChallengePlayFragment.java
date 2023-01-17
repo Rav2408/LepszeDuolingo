@@ -50,7 +50,7 @@ public class ChallengePlayFragment extends Fragment {
     AppCompatButton AnswerView_4;
     TextView QuestionView;
     JSONArray questions;
-    int questionCounter;
+    int questionCounter = 0;
     boolean isCorrect;
     int questionStarted;
     Points points;
@@ -143,6 +143,7 @@ public class ChallengePlayFragment extends Fragment {
         AnswerView_4.setEnabled(flag);
     }
     private void handleAnswerReset(){
+        Log.d("playChallenge", String.valueOf(points.getScore()));
         if(++questionCounter > 10){
 
             // end challenge

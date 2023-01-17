@@ -45,10 +45,8 @@ public class AddWordFragment extends Fragment
         AddWordImageDialog.AddWordImageDialogListener{
     private static final int UPLOAD_ID = 1000;
     private static final String DEFAULT_IMAGE_URL = "https://4fun.tv/uploads/media/cache/news_big/uploads/media/news/0001/19/dd91d1823a5e9bf4b3aead76d3e56cbd79ed7b87.png";
-    private Uri selectedImage;
     private AddWordTranslationsAdapter translationsAdapter;
     EditText addWordText;
-    EditText addWordTranslation;
     ImageButton uploadImageBtn;
     Spinner difficultiesSpinner;
     Spinner languageSpinner;
@@ -133,21 +131,18 @@ public class AddWordFragment extends Fragment
                     languagesIds.get(languageSpinner.getSelectedItemPosition())
             );
             // prompt
-            ((AdminAddActivity)getActivity()).showMessage("Success", true);
+            ((AdminAddActivity)getActivity()).showMessage("Success", true, addWordText.getText().toString());
         });
         return root;
     }
 
     private void save(int difficultyId, int languageId){
         String wordOrigin = addWordText.getText().toString();
-        String imagePath;
-        String wordDiff = difficultiesSpinner.getSelectedItem().toString();
         if(wordOrigin.isEmpty()){
             addWordText.setError("Word is missing");
         } else if(wordOrigin.length() > 15){
             addWordText.setError("Word is too long");
-        } else if(wordImageUrl ==null){
-            // all good?
+        } else if(wordImageUrl == null){
             sendWord(wordOrigin,languageId,difficultyId, DEFAULT_IMAGE_URL);
         } else {
             sendWord(wordOrigin,languageId,difficultyId,wordImageUrl.getPath());
@@ -162,7 +157,6 @@ public class AddWordFragment extends Fragment
             @Override
             public void onResponse(JSONArray jsonArray) {
                 databaseFacade.updateWords();
-                //TODO w tym miejscu trzeba wywołać odświerzanie listy, która się wyświetla w panelu admina
             }
         }).postRequest(URL + "word", buildJsonWord(word,languageId,difficultyId,imagePath));
     }
@@ -216,35 +210,17 @@ public class AddWordFragment extends Fragment
     public void passChoice(String translation, String language) {
         translationsTemp.put(translation, language);
         updateTranslationList();
-        /*
-        // test
-        for(String word: TranslationsTemp.keySet()){
-            Log.d("translationReceive", word);
-        }
-        */
     }
     // update adapter list (after element addition) from fragment
     private void updateTranslationList() {
         translationsAdapter.setList(translationsTemp);
         translationsAdapter.notifyDataSetChanged();
-        /*
-        // test
-        for(String word: TranslationsTemp.keySet()){
-            Log.d("translationReceive", word);
-        }
-        */
     }
     // get updated list (after element deletion) from list adapter
     @Override
     public void updateList(LinkedHashMap<String, String> translationsTemp) {
         // overwrite
         this.translationsTemp = translationsTemp;
-        /*
-        // test
-        for(String word: TranslationsTemp.keySet()){
-            Log.d("translationReceive", word);
-        }
-        */
     }
     @SuppressLint("ResourceAsColor")
     @Override

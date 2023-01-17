@@ -34,6 +34,15 @@ public class Dict_RecyclerViewAdapter extends RecyclerView.Adapter<Dict_Recycler
     @Override
     public void onBindViewHolder(@NonNull Dict_RecyclerViewAdapter.ViewHolder holder, int position) {
         holder.getTextView().setText(wordsData.get(position));
+        /*
+        *
+        * if(unlocked words.contains(wordsIds.get(position))){
+        *   // show
+        * }else{
+        *   // hide
+        * }
+        *
+        * */
     }
 
     @Override

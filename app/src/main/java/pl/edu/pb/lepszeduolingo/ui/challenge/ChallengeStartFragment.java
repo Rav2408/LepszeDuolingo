@@ -35,6 +35,7 @@ public class ChallengeStartFragment extends Fragment implements
         // get elements
         startBtn = root.findViewById(R.id.challenge_start_btn);
         difficultyView = root.findViewById(R.id.challenge_start_difficulty);
+        // TODO: get best score from db
         bestScoreView = root.findViewById(R.id.challenge_start_best_score);
         // set elements
         startBtn.setOnClickListener(v -> handleStartBtn());
@@ -53,15 +54,8 @@ public class ChallengeStartFragment extends Fragment implements
     }
     @Override
     public void startGame() {
-        ChallengeFactory challengeFactory;
-        if(this.strategy == "time"){
-            challengeFactory = new TimeModeFactory();
-        }else if(this.strategy == "streak"){
-            challengeFactory = new StreakModeFactory();
-        }else{
-            throw new RuntimeException("Error in game starter");
-        }
-        IChallengeStarter starter =  challengeFactory.createStarter();
+        ChallengeFactory challengeFactory = new ChallengeFactory();
+        IChallengeStarter starter = challengeFactory.create(this.strategy);
         starter.startChallenge(this.getContext());
     }
 }

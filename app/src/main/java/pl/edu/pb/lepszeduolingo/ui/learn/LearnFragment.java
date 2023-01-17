@@ -5,6 +5,8 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import java.util.Objects;
 
+import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
+
 public class LearnFragment extends Fragment {
     Button answerView1;
     Button answerView2;
@@ -12,12 +14,15 @@ public class LearnFragment extends Fragment {
     Button answerView4;
     Toast answerMessage;
     boolean isCorrect;
+    DatabaseFacade databaseFacade = new DatabaseFacade(this.getContext());
     void handleAnswer(int chosenAnswer){
         handleButtons(false);
         isCorrect = Objects.equals(chosenAnswer, 1);
         // set back message
         if(isCorrect){
             showMessage("Correct answer");
+            // TODO: pass word id from activity?
+            //databaseFacade.unlockWord();
         }else{
             showMessage("Wrong answer");
         }
@@ -31,7 +36,7 @@ public class LearnFragment extends Fragment {
         Handler handler = new Handler();
         handler.postDelayed(() -> answerMessage.cancel(), messageDelay);
         handler.postDelayed(() -> {
-            addIsCorrect(isCorrect);
+            checkAnswer(isCorrect);
             handleButtons(true);
         }, switchDelay);
     }
@@ -41,7 +46,7 @@ public class LearnFragment extends Fragment {
         answerView3.setOnClickListener(v -> handleAnswer(2));
         answerView4.setOnClickListener(v -> handleAnswer(3));
     }
-    void addIsCorrect(boolean isCorrect){
+    void checkAnswer(boolean isCorrect){
         AnswerListener answerListener = (AnswerListener) getActivity();
         assert answerListener != null;
         answerListener.addIsCorrect(isCorrect);

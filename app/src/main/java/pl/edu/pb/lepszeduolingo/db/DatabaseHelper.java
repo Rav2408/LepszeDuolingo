@@ -6,10 +6,12 @@ import android.util.Log;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
 
+import pl.edu.pb.lepszeduolingo.builder.JsonBuilder;
 import pl.edu.pb.lepszeduolingo.models.Language;
 import pl.edu.pb.lepszeduolingo.rest.IVolley;
 import pl.edu.pb.lepszeduolingo.rest.VolleyRequest;
@@ -168,7 +170,31 @@ class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do tworzeni
             }
         }).getRequest(URL +"unlockedword");
     }
-
+    public void unlockWord(int wordId) {
+        try{
+            VolleyRequest.getInstance(context, new IVolley() {
+                @Override
+                public void onResponse(JSONArray jsonArray) {
+                    unlockedWords=jsonArray;
+                }
+            }).postRequest(URL + "unlockedword", new JsonBuilder(context).create()
+                    .put("word",
+                            new JsonBuilder(context)
+                                    .create()
+                                    .put("id", wordId)
+                                    .build()
+                    )
+                    .put("duolingoUser",
+                            new JsonBuilder(context)
+                                    .create()
+                                    .put("id",  user.getString("id"))
+                                    .build()
+                    )
+                    .build());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
 
 //    private void mapLanguages(JSONArray jsonArray){

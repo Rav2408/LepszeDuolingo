@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,47 +36,54 @@ public class AdminWordsFragment extends Fragment implements AdminWords_RecyclerV
     Button addButton;
     ArrayList<String> wordsData = new ArrayList<>();
     ArrayList<Integer> wordsIds = new ArrayList<>();
-    DatabaseFacade databaseFacade;
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
+    DatabaseFacade databaseFacade = new DatabaseFacade(getContext());
+    AdminWords_RecyclerViewAdapter adapter;
+    RecyclerView recyclerView;
+    String onResultValue;
+    boolean isNewWordAdded;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentAdminWordsBinding.inflate(inflater, container, false);
-        databaseFacade = new DatabaseFacade(getContext());
         View root = binding.getRoot();
+        // elements
         addButton = root.findViewById(R.id.addAdminWordBtn);
+        recyclerView = root.findViewById(R.id.adminWordsRecyclerView);
+        // button
         addButton.setOnClickListener(v -> onWordAdd());
-        // get every word
-        DatabaseFacade databaseFacade = new DatabaseFacade(getContext());
-        words = databaseFacade.getWords();
-        for(int i=0;i<words.length();i++){
-            try {
-                wordsData.add(words.getJSONObject(i).getString("text"));
-                wordsIds.add(words.getJSONObject(i).getInt("id"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+        Log.d("adminWords", "onCreateView");
+        return root;
+    }
+    @Override
+    public void onResume() {
+        Log.d("adminTestResault", "onResume");
+        super.onResume();
+        // set list data; updates wordData and wordsIds
+        setListData();
+        // walk around for volley time respond
+        if(isNewWordAdded){
+            isNewWordAdded = false;
+            wordsData.add(onResultValue);
         }
         // set recycler view
-        RecyclerView recyclerView = root.findViewById(R.id.adminWordsRecyclerView);
-        AdminWords_RecyclerViewAdapter adapter = new AdminWords_RecyclerViewAdapter(this, wordsData);
+        adapter = new AdminWords_RecyclerViewAdapter(this, wordsData);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setAdapter(adapter);
-        return root;
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            onResultValue = data.getStringExtra("addedValue");
+            isNewWordAdded = true;
+        }
     }
     void onWordAdd(){
         // add
         String activityOption = "word";
         Intent intent = new Intent(this.getActivity(), AdminAddActivity.class);
         intent.putExtra("key", activityOption);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
     }
     @Override
     public void onWordClick(int position) {
@@ -93,15 +101,30 @@ public class AdminWordsFragment extends Fragment implements AdminWords_RecyclerV
                         VolleyRequest.getInstance(getContext(), new IVolley() {
                             @Override
                             public void onResponse() {
-                                databaseFacade.updateWords();
-                                //TODO tutaj
+                                setListData();
                             }
                         }).deleteRequest(URL +"word/" + wordsIds.get(position));
-                        //TODO lub tutaj, zależy jak wygodniej trzeba z listy słów które wyświetlają się, usunąć GUI tego słowa(chodzi mi po prostu o element na liście) bo to co wyżej usuwa na serwerze
+                        wordsData.remove(position);
+                        adapter.notifyDataSetChanged();
                     }
                 });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+    private void setListData(){
+        wordsData.clear();
+        wordsIds.clear();
+        databaseFacade.updateWords();
 
+        words = databaseFacade.getWords();
+        for(int i=0;i<words.length();i++){
+            try {
+                wordsData.add(words.getJSONObject(i).getString("text"));
+                wordsIds.add(words.getJSONObject(i).getInt("id"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        Log.d("adminWords", String.valueOf(words.length()));
     }
 }

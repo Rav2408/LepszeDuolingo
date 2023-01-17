@@ -116,6 +116,7 @@ public class DatabaseFacade {
         databaseHelper.setUser(user);
     }
 
+    public void unlockWord(int wordId){ databaseHelper.unlockWord(wordId); }
 
     public void updateWords() {
         databaseHelper.updateWords();

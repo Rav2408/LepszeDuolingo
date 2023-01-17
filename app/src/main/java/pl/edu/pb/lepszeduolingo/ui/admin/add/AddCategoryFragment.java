@@ -74,7 +74,7 @@ public class AddCategoryFragment extends Fragment {
             save(diffIds);
             // TODO: ask professor about db database problem
             // prompt
-            ((AdminAddActivity)getActivity()).showMessage("Success", true);
+            ((AdminAddActivity)getActivity()).showMessage("Success", true, addCategoryText.getText().toString());
         });
         return root;
     }

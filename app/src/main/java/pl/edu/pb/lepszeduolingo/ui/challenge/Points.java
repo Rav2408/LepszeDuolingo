@@ -3,7 +3,7 @@ package pl.edu.pb.lepszeduolingo.ui.challenge;
 public class Points {
     private IStrategy strategy;
     private double score = 0;
-    private double winStreak;
+    private double winStreak = 1.0;
     private int currentQuestionTimeInSeconds;
     private boolean isCurrentCorrect;
 
