@@ -116,7 +116,32 @@ public class DatabaseFacade {
         databaseHelper.setUser(user);
     }
 
+
+    public void updateWords() {
+        databaseHelper.updateWords();
+    }
+
     public void updateCategories(){
         databaseHelper.updateCategories();
     }
+
+    public void updateTranslations() {
+        databaseHelper.updateTranslations();
+    }
+    public void updateQuestions() {
+        databaseHelper.updateQuestions();
+    }
+    public void updateDifficulties() {
+        databaseHelper.updateDifficulties();
+    }
+    public void updateCollections() {
+        databaseHelper.updateCollections();
+    }
+    public void updateLanguages() {
+        databaseHelper.updateLanguages();
+    }
+    public void updateUnlockedWords() {
+        databaseHelper.updateUnlockedWords();
+    }
+
 }

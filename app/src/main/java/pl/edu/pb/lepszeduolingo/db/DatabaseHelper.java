@@ -45,62 +45,14 @@ class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do tworzeni
 
     public void pullData(){
 
-        VolleyRequest.getInstance(context, new IVolley() {
-            @Override
-            public void onResponse(JSONArray jsonArray) {
-                words=jsonArray;
-            }
-        }).getRequest(URL +"word");
-
-        VolleyRequest.getInstance(context, new IVolley() {
-            @Override
-            public void onResponse(JSONArray jsonArray) {
-                categories=jsonArray;
-            }
-        }).getRequest(URL +"category");
-
-        VolleyRequest.getInstance(context, new IVolley() {
-            @Override
-            public void onResponse(JSONArray jsonArray) {
-                translations=jsonArray;
-            }
-        }).getRequest(URL +"translation");
-
-        VolleyRequest.getInstance(context, new IVolley() {
-            @Override
-            public void onResponse(JSONArray jsonArray) {
-                questions=jsonArray;
-            }
-        }).getRequest(URL +"question");
-
-        VolleyRequest.getInstance(context, new IVolley() {
-            @Override
-            public void onResponse(JSONArray jsonArray) {
-                difficulties=jsonArray;
-            }
-        }).getRequest(URL +"difficulty");
-        VolleyRequest.getInstance(context, new IVolley() {
-            @Override
-            public void onResponse(JSONArray jsonArray) {
-                collections=jsonArray;
-            }
-        }).getRequest(URL +"collection");
-
-        VolleyRequest.getInstance(context, new IVolley() {
-            @Override
-            public void onResponse(JSONArray jsonArray) {
-                languages=jsonArray;
-                //mapLanguages(languages);
-            }
-        }).getRequest(URL +"language");
-
-        VolleyRequest.getInstance(context, new IVolley() {
-            @Override
-            public void onResponse(JSONArray jsonArray) {
-                unlockedWords=jsonArray;
-            }
-        }).getRequest(URL +"unlockedword");
-
+        updateWords();
+        updateCategories();
+        updateTranslations();
+        updateQuestions();
+        updateDifficulties();
+        updateCollections();
+        updateLanguages();
+        updateUnlockedWords();
     }
 
     public void printConsole(){
@@ -150,6 +102,15 @@ class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do tworzeni
         this.user = user;
     }
 
+    public void updateWords() {
+        VolleyRequest.getInstance(context, new IVolley() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                words=jsonArray;
+            }
+        }).getRequest(URL +"word");
+    }
+
     public void updateCategories(){
         VolleyRequest.getInstance(context, new IVolley() {
             @Override
@@ -158,6 +119,57 @@ class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do tworzeni
             }
         }).getRequest(URL +"category");
     }
+
+    public void updateTranslations(){
+        VolleyRequest.getInstance(context, new IVolley() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                translations=jsonArray;
+            }
+        }).getRequest(URL +"translation");
+    }
+    public void updateQuestions(){
+        VolleyRequest.getInstance(context, new IVolley() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                questions=jsonArray;
+            }
+        }).getRequest(URL +"question");
+    }
+    public void updateDifficulties(){
+        VolleyRequest.getInstance(context, new IVolley() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                difficulties=jsonArray;
+            }
+        }).getRequest(URL +"difficulty");
+    }
+    public void updateCollections(){
+        VolleyRequest.getInstance(context, new IVolley() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                collections=jsonArray;
+            }
+        }).getRequest(URL +"collection");
+    }
+    public void updateLanguages(){
+        VolleyRequest.getInstance(context, new IVolley() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                languages=jsonArray;
+            }
+        }).getRequest(URL +"language");
+    }
+    public void updateUnlockedWords(){
+        VolleyRequest.getInstance(context, new IVolley() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                unlockedWords=jsonArray;
+            }
+        }).getRequest(URL +"unlockedword");
+    }
+
+
 
 //    private void mapLanguages(JSONArray jsonArray){
 //        Gson g = new Gson();

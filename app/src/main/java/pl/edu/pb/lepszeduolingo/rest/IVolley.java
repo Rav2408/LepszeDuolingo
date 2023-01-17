@@ -16,4 +16,8 @@ public interface IVolley {
     default void onResponse(String string){
 
     };
+
+    default void onResponse(){
+
+    };
 }

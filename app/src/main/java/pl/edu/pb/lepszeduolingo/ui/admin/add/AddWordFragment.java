@@ -1,5 +1,7 @@
 package pl.edu.pb.lepszeduolingo.ui.admin.add;
 
+import static pl.edu.pb.lepszeduolingo.Constants.URL;
+
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,12 +18,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -30,8 +32,11 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import pl.edu.pb.lepszeduolingo.R;
+import pl.edu.pb.lepszeduolingo.builder.JsonBuilder;
 import pl.edu.pb.lepszeduolingo.databinding.FragmentAddWordBinding;
 import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
+import pl.edu.pb.lepszeduolingo.rest.IVolley;
+import pl.edu.pb.lepszeduolingo.rest.VolleyRequest;
 
 public class AddWordFragment extends Fragment
         implements
@@ -39,18 +44,20 @@ public class AddWordFragment extends Fragment
         AddWordTranslationsAdapter.AddWordTranslationsAdapterListener,
         AddWordImageDialog.AddWordImageDialogListener{
     private static final int UPLOAD_ID = 1000;
+    private static final String DEFAULT_IMAGE_URL = "https://4fun.tv/uploads/media/cache/news_big/uploads/media/news/0001/19/dd91d1823a5e9bf4b3aead76d3e56cbd79ed7b87.png";
     private Uri selectedImage;
     private AddWordTranslationsAdapter translationsAdapter;
-    EditText AddWordText;
-    EditText AddWordTranslation;
-    ImageButton UploadImageBtn;
-    Spinner DifficultiesSpinner;
-    Spinner LanguageSpinner;
-    Button PublishBtn;
-    ImageButton TranslationBtn;
-    ListView TranslationsListView;
-    LinkedHashMap<String, String> TranslationsTemp = new LinkedHashMap<String, String>();
+    EditText addWordText;
+    EditText addWordTranslation;
+    ImageButton uploadImageBtn;
+    Spinner difficultiesSpinner;
+    Spinner languageSpinner;
+    Button publishBtn;
+    ImageButton translationBtn;
+    ListView translationsListView;
+    LinkedHashMap<String, String> translationsTemp = new LinkedHashMap<>();
     URL wordImageUrl;
+    DatabaseFacade databaseFacade;
 
     private FragmentAddWordBinding binding;
     @Override
@@ -69,38 +76,38 @@ public class AddWordFragment extends Fragment
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+        databaseFacade = new DatabaseFacade(getContext());
         // text inputs
-        AddWordText = root.findViewById(R.id.addwordText);
+        addWordText = root.findViewById(R.id.addwordText);
         // list
-        TranslationsListView = root.findViewById(R.id.addwordTranslationList);
+        translationsListView = root.findViewById(R.id.addwordTranslationList);
         translationsAdapter = new AddWordTranslationsAdapter(
                 this.getActivity(),
-                TranslationsTemp,
+                translationsTemp,
                 this);
-        TranslationsListView.setAdapter(translationsAdapter);
+        translationsListView.setAdapter(translationsAdapter);
         // button
-        UploadImageBtn = root.findViewById(R.id.addwordImage);
-        UploadImageBtn.setOnClickListener(v -> handleAddImage());
-        TranslationBtn = root.findViewById(R.id.addwordTranslationBtn);
-        TranslationBtn.setOnClickListener(v -> handleAddTranslation());
-        PublishBtn = root.findViewById(R.id.addwordAddBtn);
-        PublishBtn.setOnClickListener(v -> {
-            performAuth();
-            // prompt
-            ((AdminAddActivity)getActivity()).showMessage("Success", true);
-        });
+        uploadImageBtn = root.findViewById(R.id.addwordImage);
+        uploadImageBtn.setOnClickListener(v -> handleAddImage());
+        translationBtn = root.findViewById(R.id.addwordTranslationBtn);
+        translationBtn.setOnClickListener(v -> handleAddTranslation());
+        publishBtn = root.findViewById(R.id.addwordAddBtn);
+
         // spinners
-        DifficultiesSpinner = root.findViewById(R.id.addwordDifficulty);
-        LanguageSpinner = root.findViewById(R.id.addwordLanguage);
+        difficultiesSpinner = root.findViewById(R.id.addwordDifficulty);
+        languageSpinner = root.findViewById(R.id.addwordLanguage);
         // db
         DatabaseFacade databaseFacade = new DatabaseFacade(getContext());
         JSONArray difficulties = databaseFacade.getDifficulties();
         JSONArray languages = databaseFacade.getLanguages();
         ArrayList<String> difficultiesData = new ArrayList<>();
+        ArrayList<Integer> difficultiesIds = new ArrayList<>();
         ArrayList<String> languagesData = new ArrayList<>();
+        ArrayList<Integer> languagesIds = new ArrayList<>();
         for(int i=0;i<difficulties.length();i++){
             try {
                 difficultiesData.add(difficulties.getJSONObject(i).getString("level"));
+                difficultiesIds.add(difficulties.getJSONObject(i).getInt("id"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -108,39 +115,77 @@ public class AddWordFragment extends Fragment
         for(int i=0;i<languages.length();i++){
             try {
                 languagesData.add(languages.getJSONObject(i).getString("name"));
+                languagesIds.add(languages.getJSONObject(i).getInt("id"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-        ArrayAdapter<String> diffAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, difficultiesData);
-        ArrayAdapter<String> lanAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, languagesData);
+        ArrayAdapter<String> diffAdapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_spinner_item, difficultiesData);
+        ArrayAdapter<String> lanAdapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_spinner_item, languagesData);
         diffAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         lanAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        DifficultiesSpinner.setAdapter(diffAdapter);
-        LanguageSpinner.setAdapter(lanAdapter);
+        difficultiesSpinner.setAdapter(diffAdapter);
+        languageSpinner.setAdapter(lanAdapter);
+
+        publishBtn.setOnClickListener(v -> {
+            save(
+                    difficultiesIds.get(difficultiesSpinner.getSelectedItemPosition()),
+                    languagesIds.get(languageSpinner.getSelectedItemPosition())
+            );
+            // prompt
+            ((AdminAddActivity)getActivity()).showMessage("Success", true);
+        });
         return root;
     }
-    private void performAuth(){
-        String wordOrigin = AddWordText.getText().toString();
-        /*String imagePath = selectedImage.getPath();*/
-        String wordDiff = DifficultiesSpinner.getSelectedItem().toString();
-        String wordLan = LanguageSpinner.getSelectedItem().toString();
+
+    private void save(int difficultyId, int languageId){
+        String wordOrigin = addWordText.getText().toString();
+        String imagePath;
+        String wordDiff = difficultiesSpinner.getSelectedItem().toString();
         if(wordOrigin.isEmpty()){
-            AddWordText.setError("Word is missing");
+            addWordText.setError("Word is missing");
         } else if(wordOrigin.length() > 15){
-            AddWordText.setError("Word is too long");
-        } else if(selectedImage == null){
+            addWordText.setError("Word is too long");
+        } else if(wordImageUrl ==null){
             // all good?
+            sendWord(wordOrigin,languageId,difficultyId, DEFAULT_IMAGE_URL);
         } else {
-            Log.d("wordPublish", wordOrigin);
-            Log.d("wordPublish", selectedImage.toString());
-            Log.d("wordPublish", wordDiff);
-            Log.d("wordPublish", wordLan);
-            for(String word: TranslationsTemp.keySet()){
+            sendWord(wordOrigin,languageId,difficultyId,wordImageUrl.getPath());
+            for(String word: translationsTemp.keySet()){
                 Log.d("wordPublish", word);
             }
         }
     }
+
+    private void sendWord(String word, int languageId, int difficultyId, String imagePath){
+        VolleyRequest.getInstance(getContext(), new IVolley() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                databaseFacade.updateWords();
+                //TODO w tym miejscu trzeba wywołać odświerzanie listy, która się wyświetla w panelu admina
+            }
+        }).postRequest(URL + "word", buildJsonWord(word,languageId,difficultyId,imagePath));
+    }
+
+    private JSONObject buildJsonWord(String word, int languageId, int difficultyId, String imagePath){
+        return new JsonBuilder(getContext()).create()
+                .put("text", word)
+                .put("language",
+                        new JsonBuilder(getContext())
+                                .create()
+                                .put("id", languageId)
+                                .build()
+                )
+                .put("difficulty",
+                        new JsonBuilder(getContext())
+                                .create()
+                                .put("id",  difficultyId)
+                                .build()
+                )
+                .put("imagePath", imagePath)
+                .build();
+    }
+
     private void handleAddImage(){
         // dialog input
         AddWordImageDialog imageDialog = new AddWordImageDialog();
@@ -169,7 +214,7 @@ public class AddWordFragment extends Fragment
     // get translation from dialog
     @Override
     public void passChoice(String translation, String language) {
-        TranslationsTemp.put(translation, language);
+        translationsTemp.put(translation, language);
         updateTranslationList();
         /*
         // test
@@ -180,7 +225,7 @@ public class AddWordFragment extends Fragment
     }
     // update adapter list (after element addition) from fragment
     private void updateTranslationList() {
-        translationsAdapter.setList(TranslationsTemp);
+        translationsAdapter.setList(translationsTemp);
         translationsAdapter.notifyDataSetChanged();
         /*
         // test
@@ -193,7 +238,7 @@ public class AddWordFragment extends Fragment
     @Override
     public void updateList(LinkedHashMap<String, String> translationsTemp) {
         // overwrite
-        TranslationsTemp = translationsTemp;
+        this.translationsTemp = translationsTemp;
         /*
         // test
         for(String word: TranslationsTemp.keySet()){
@@ -224,14 +269,14 @@ public class AddWordFragment extends Fragment
         // scale bitmap
         int currentBitmapWidth = bmp.getWidth();
         int currentBitmapHeight = bmp.getHeight();
-        int ivWidth = UploadImageBtn.getWidth();
+        int ivWidth = uploadImageBtn.getWidth();
         int newWidth = ivWidth;
         int newHeight = (int) Math.floor((double) currentBitmapHeight *( (double) newWidth / (double) currentBitmapWidth));
         Bitmap newBitMap = Bitmap.createScaledBitmap(bmp, newWidth, newHeight, true);
         // set image
-        UploadImageBtn.setImageBitmap(newBitMap);
+        uploadImageBtn.setImageBitmap(newBitMap);
         // clear background
-        UploadImageBtn.setBackgroundColor(android.R.color.transparent);
+        uploadImageBtn.setBackgroundColor(android.R.color.transparent);
         // else
         // make toast
     }
