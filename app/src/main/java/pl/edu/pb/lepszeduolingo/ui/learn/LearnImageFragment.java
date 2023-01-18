@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
+
 import pl.edu.pb.lepszeduolingo.R;
 
 public class LearnImageFragment extends LearnFragment {
@@ -45,10 +48,11 @@ public class LearnImageFragment extends LearnFragment {
 
         // set view
         Picasso.get().load(url).fit().into(questionView);
-        answerView1.setText(((LearnActivity)getActivity()).orderChange.getAnswers().get(0));
-        answerView2.setText(((LearnActivity)getActivity()).orderChange.getAnswers().get(1));
-        answerView3.setText(((LearnActivity)getActivity()).orderChange.getAnswers().get(2));
-        answerView4.setText(((LearnActivity)getActivity()).orderChange.getAnswers().get(3));
+        List<String> answers = ((LearnActivity)getActivity()).letterChange.getAnswers();
+        answerView1.setText(answers.get(0));
+        answerView2.setText(answers.get(1));
+        answerView3.setText(answers.get(2));
+        answerView4.setText(answers.get(3));
         // get answer
         getAnswer();
     }
