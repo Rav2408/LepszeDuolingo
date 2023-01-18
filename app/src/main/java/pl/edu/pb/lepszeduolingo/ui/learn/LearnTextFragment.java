@@ -42,10 +42,10 @@ public class LearnTextFragment extends LearnFragment {
         // TODO: set random wrong answers
         // set view
         questionView.setText(word);
-        answerView1.setText("jabłko");
-        answerView2.setText("gruszka");
-        answerView3.setText("mleko");
-        answerView4.setText(translation);
+        answerView1.setText(((LearnActivity)getActivity()).orderChange.getAnswer(0));
+        answerView2.setText(((LearnActivity)getActivity()).orderChange.getAnswer(1));
+        answerView3.setText(((LearnActivity)getActivity()).orderChange.getAnswer(2));
+        answerView4.setText(((LearnActivity)getActivity()).orderChange.getAnswer(3));
         // get answer
         getAnswer();
     }
