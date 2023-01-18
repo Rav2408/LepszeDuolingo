@@ -17,11 +17,13 @@ import java.util.Random;
 import pl.edu.pb.lepszeduolingo.R;
 import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
 import pl.edu.pb.lepszeduolingo.decorator.Answers;
+import pl.edu.pb.lepszeduolingo.decorator.AnswersLetterChange;
 import pl.edu.pb.lepszeduolingo.decorator.AnswersOrderChange;
 import pl.edu.pb.lepszeduolingo.decorator.ConcreteAnswers;
 
 public class LearnActivity extends AppCompatActivity implements AnswerListener{
     Answers orderChange;
+    Answers letterChange;
     Fragment textFragment = new LearnTextFragment();
     Fragment imageFragment = new LearnImageFragment();
     Random rand = new Random();
@@ -98,6 +100,9 @@ public class LearnActivity extends AppCompatActivity implements AnswerListener{
 
             Answers answers = new ConcreteAnswers(answersStrings, correctAnswer);
             orderChange = new AnswersOrderChange(answers);
+            Answers answers2 = new ConcreteAnswers(answersStrings, correctAnswer);
+            Answers orderChange2 = new AnswersOrderChange(answers2);
+            letterChange = new AnswersLetterChange(orderChange2);
 
 //            //przejść po questions i wybrać/wylosować niepoprawne odpowiedzi różne od porpawnej
 //            Answers answers = new ConcreteAnswers(poprawna, niepoprawna1, niepo2, niepo3);
