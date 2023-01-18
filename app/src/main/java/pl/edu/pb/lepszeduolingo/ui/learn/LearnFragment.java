@@ -1,5 +1,6 @@
 package pl.edu.pb.lepszeduolingo.ui.learn;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
@@ -18,11 +19,15 @@ public class LearnFragment extends Fragment {
     void handleAnswer(int chosenAnswer){
         handleButtons(false);
         isCorrect = Objects.equals(chosenAnswer, 1);
+        int wordId = ((LearnActivity)getActivity()).getWordId();
         // set back message
         if(isCorrect){
             showMessage("Correct answer");
-            // TODO: pass word id from activity?
-            //databaseFacade.unlockWord();
+            // unlock word
+            if(!databaseFacade.isWordUnlocked(wordId)){
+                databaseFacade.unlockWord(wordId);
+            }
+            Log.d("unlockedWord", String.valueOf(wordId));
         }else{
             showMessage("Wrong answer");
         }

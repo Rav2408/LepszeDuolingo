@@ -41,6 +41,10 @@ public class DatabaseFacade {
         return getWords().getJSONObject(id);
     }
 
+    public JSONObject getUnlockedWord(int id) throws JSONException{
+        return getUnlockedWords().getJSONObject(id).getJSONObject("word");
+    }
+
     public JSONArray getCategories() {
         return databaseHelper.getCategories();
     }
@@ -91,8 +95,19 @@ public class DatabaseFacade {
         }
         return questions;
     }
-
-
+    public boolean isWordUnlocked(int wordId){
+        JSONArray unlockedWords = getUnlockedWords();
+        for(int i = 0; i < unlockedWords.length(); i++){
+            try{
+                if(unlockedWords.getJSONObject(i).getJSONObject("word").getInt("id") == wordId){
+                    return true;
+                }
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
 
     public JSONArray getTranslations() {
         return databaseHelper.getTranslations();
@@ -117,6 +132,10 @@ public class DatabaseFacade {
     }
 
     public void unlockWord(int wordId){ databaseHelper.unlockWord(wordId); }
+
+    public JSONArray getUnlockedWords(){
+        return databaseHelper.getUnlockedWords();
+    }
 
     public void updateWords() {
         databaseHelper.updateWords();

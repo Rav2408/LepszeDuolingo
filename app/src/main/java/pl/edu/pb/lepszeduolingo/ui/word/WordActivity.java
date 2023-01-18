@@ -17,16 +17,12 @@ import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
 public class WordActivity extends AppCompatActivity {
     TextView WordView, WordTranslationView;
     List<String> translations = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word);
         WordView = findViewById(R.id.word_text);
         WordTranslationView = findViewById(R.id.word_translation);
-
-
-
         // get parameter
         Bundle bundle = getIntent().getExtras();
         int wordId = -1;
@@ -39,22 +35,17 @@ public class WordActivity extends AppCompatActivity {
         // TODO: translation recycle view
         DatabaseFacade databaseFacade = new DatabaseFacade(this);
         try {
-            JSONObject word = databaseFacade.getWord(id);
-            translations = databaseFacade.getTranslationsByWordId(word.getInt("id"));
+            JSONObject unlockedWord = databaseFacade.getUnlockedWord(id);
+            translations = databaseFacade.getTranslationsByWordId(unlockedWord.getInt("id"));
 
-            WordView.setText(word.getString("text"));
+            WordView.setText(unlockedWord.getString("text"));
             if(translations.isEmpty()){
                 WordTranslationView.setText("Brak tłumaczenia!");
             }else{
                 WordTranslationView.setText(translations.get(0));
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
-
     }
-
 }

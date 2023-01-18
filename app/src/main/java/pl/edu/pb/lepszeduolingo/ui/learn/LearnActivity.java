@@ -55,6 +55,14 @@ public class LearnActivity extends AppCompatActivity implements AnswerListener{
             e.printStackTrace();
         }
     }
+    public int getWordId(){
+        try {
+            return Integer.parseInt(questions.get(questionNumber).getString("id"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
     // set parameters for db
     void setParams() throws JSONException {
 
