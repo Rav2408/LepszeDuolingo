@@ -108,7 +108,8 @@ public class LoginActivity extends AppCompatActivity {
             if(currentUser.getString("role").equals("ADMIN")){
                 startActivity(new Intent(this, AdminActivity.class));
             }else{
-                startActivity(new Intent(this, MainActivity.class));
+                // go to starter menu
+                startActivity(new Intent(this, StartMenuActivity.class));
             }
         } catch (JSONException e) {
             e.printStackTrace();

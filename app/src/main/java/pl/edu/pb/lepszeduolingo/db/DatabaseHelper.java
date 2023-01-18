@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pl.edu.pb.lepszeduolingo.builder.Creator;
@@ -177,20 +178,29 @@ class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do tworzeni
 
     public void unlockWord(int wordId) {
         try{
-            JSONObject newWord = creator.createUnlockedWord(wordId, user.getInt("id"));
-        unlockedWords.put(newWord);
-
+            unlockedWords.put(creator.createUnlockedWordWithText(getWordById(wordId), user));
             VolleyRequest.getInstance(context, new IVolley() {
                 @Override
                 public void onResponse(JSONArray jsonArray) {
                     unlockedWords=jsonArray;
                 }
-            }).postRequest(URL + "unlockedword", newWord);
+            }).postRequest(URL + "unlockedword", creator.createUnlockedWord(wordId, user.getInt("id")));
         }catch (Exception e){
             e.printStackTrace();
         }
     }
-
+    public JSONObject getWordById(int wordId){
+        for(int i = 0; i < words.length(); i++){
+            try {
+                if(words.getJSONObject(i).getInt("id") == wordId){
+                    return words.getJSONObject(i);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
 
 //    private void mapLanguages(JSONArray jsonArray){
 //        Gson g = new Gson();

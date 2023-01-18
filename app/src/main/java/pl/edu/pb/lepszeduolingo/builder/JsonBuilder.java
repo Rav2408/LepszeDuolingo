@@ -60,5 +60,4 @@ public class JsonBuilder implements JSONDataBuilder{
     public JSONObject build() {
         return jsonObject;
     }
-
 }

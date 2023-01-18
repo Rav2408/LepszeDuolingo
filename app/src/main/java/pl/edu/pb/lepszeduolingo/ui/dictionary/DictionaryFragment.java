@@ -28,50 +28,52 @@ import pl.edu.pb.lepszeduolingo.ui.word.WordActivity;
 
 public class DictionaryFragment extends Fragment implements Dict_RecyclerViewAdapter.onWordListener{
     DatabaseFacade databaseFacade = new DatabaseFacade(getContext());
-    private int unlockedWords;
-    private int allWords = databaseFacade.getWords().length();
-    private DictionaryViewModel dictionaryViewModel;
+    private int unlockedWordsCount;
+    private int allWordsCount;
+    private JSONArray unlockedWords;
     private FragmentDictionaryBinding binding;
     TextView unlockedView;
-
+    Dict_RecyclerViewAdapter adapter;
+    ArrayList<String> wordsData;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dictionaryViewModel =
-                new ViewModelProvider(this).get(DictionaryViewModel.class);
         binding = FragmentDictionaryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        // set unlocked header
+        // elements
         unlockedView = root.findViewById(R.id.unlocked);
-        unlockedWords = 0;
-        String unlockedString = String.format("Unlocked %s / %s", unlockedWords,
-                allWords);
-        unlockedView.setText(unlockedString);
-        handleWordCounter();
-        // get list data
-        JSONArray unlockedWords = databaseFacade.getUnlockedWords();
-        ArrayList<String> wordsData = new ArrayList<>();
-//        for(int i=0;i<unlockedWords.length();i++){
-//            try {
-//                wordsData.add(unlockedWords.getJSONObject(i).getJSONObject("word").getString("text"));
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//        }
-        // set recycler view
         RecyclerView recyclerView = root.findViewById(R.id.dictRecyclerView);
-        Dict_RecyclerViewAdapter adapter = new Dict_RecyclerViewAdapter(this, wordsData);
+        // set recycler view
+        setDictionaryData();
+        adapter = new Dict_RecyclerViewAdapter(this, wordsData);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setAdapter(adapter);
         return root;
     }
-    private void handleWordCounter(){
-        // TODO: same problem as in the admin
-        // have to reload to see update
-        // user is global
-        // dictionary shows item twice
+    public void setDictionaryData() {
+        // update data
         databaseFacade.updateUnlockedWords();
-        unlockedWords = 0;
-        allWords = databaseFacade.getWords().length();
+        // set header
+        handleWordCounter();
+        // set recycler adapter
+        handleAdapterData();
+    }
+    private void handleAdapterData(){
+        unlockedWords = databaseFacade.getUnlockedWords();
+        wordsData = new ArrayList<>();
+        for(int i=0;i<unlockedWords.length();i++){
+            try {
+                wordsData.add(unlockedWords.getJSONObject(i).getJSONObject("word").getString("text"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private void handleWordCounter(){
+        unlockedWordsCount = databaseFacade.getUnlockedWords().length();
+        allWordsCount = databaseFacade.getWords().length();
+        String unlockedString = String.format("Unlocked %s / %s", unlockedWordsCount,
+                allWordsCount);
+        unlockedView.setText(unlockedString);
     }
     @Override
     public void onDestroyView() {

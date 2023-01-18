@@ -32,6 +32,10 @@ public class Creator {
                 )
                 .build();
     }
-
-
+    public JSONObject createUnlockedWordWithText(JSONObject word, JSONObject user){
+        return new JsonBuilder(context).create()
+                .put("word", word)
+                .put("duolingoUser", user)
+                .build();
+    }
 }

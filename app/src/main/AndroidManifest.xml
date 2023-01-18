@@ -15,6 +15,13 @@
         android:theme="@style/Theme.LepszeDuolingo"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".StartMenuActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.challenge.ChallengeActivity"
             android:exported="false">
             <meta-data

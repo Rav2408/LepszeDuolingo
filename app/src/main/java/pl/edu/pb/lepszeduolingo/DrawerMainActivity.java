@@ -53,7 +53,7 @@ public class DrawerMainActivity extends AppCompatActivity implements NavigationV
                 break;
             case R.id.nav_logout:
                 startActivity(new Intent(this, TitleActivity.class));
-                overridePendingTransition(0, 1);
+                overridePendingTransition(0, 0);
                 break;
         }
         return false;
