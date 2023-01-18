@@ -1,5 +1,8 @@
 package pl.edu.pb.lepszeduolingo.decorator;
 
+import java.util.Collections;
+import java.util.List;
+
 public class AnswersOrderChange extends AnswersDecorator {
 
     public AnswersOrderChange(Answers _answers) {
@@ -8,12 +11,8 @@ public class AnswersOrderChange extends AnswersDecorator {
     }
 
     private void changeOrderRandomly(){
-        String odp1 = answers.getAnswer(0);
-        String odp2 = answers.getAnswer(1);
-        String odp3 = answers.getAnswer(2);
-        String odp4 = answers.getAnswer(3);
-
-        //TODO randomowo ustawiać odpowiedzi
-        //answers.setAnswer();
+        List<String> answerList = answers.getAnswers();
+        Collections.shuffle(answerList);
+        answers.setAnswers(answerList);
     }
 }

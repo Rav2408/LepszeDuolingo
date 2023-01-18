@@ -1,8 +1,8 @@
 package pl.edu.pb.lepszeduolingo.decorator;
-import pl.edu.pb.lepszeduolingo.models.*;
+import java.util.List;
 
 public interface Answers {
-    public String getAnswer(int i);
+    public List<String> getAnswers();
     public String getCorrectAnswer();
-    public void setAnswer(int position, String answer);
+    public void setAnswers(List<String> answerList);
 }

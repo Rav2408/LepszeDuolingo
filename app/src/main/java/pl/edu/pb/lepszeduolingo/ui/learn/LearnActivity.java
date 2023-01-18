@@ -70,17 +70,33 @@ public class LearnActivity extends AppCompatActivity implements AnswerListener{
             List<Integer> randomUniqueNumbers = drawRandomNumbers(questions.size());
             questionNumber = randomUniqueNumbers.get(0);
             JSONObject question = questions.get(questionNumber);
-            String word = question.getJSONObject("word").getString("text");
-            String incorrect1 = questions.get(randomUniqueNumbers.get(1)).getJSONObject("word").getString("text");
-            String incorrect2 = questions.get(randomUniqueNumbers.get(2)).getJSONObject("word").getString("text");
-            String incorrect3 = questions.get(randomUniqueNumbers.get(3)).getJSONObject("word").getString("text");
-            List<String> answersString = new ArrayList<>();
-            answersString.add(word);
-            answersString.add(incorrect1);
-            answersString.add(incorrect2);
-            answersString.add(incorrect3);
 
-            Answers answers = new ConcreteAnswers(answersString, word);
+            String correctAnswer;
+            String incorrect1;
+            String incorrect2;
+            String incorrect3;
+
+
+
+            if(fragmentFlag){
+                correctAnswer = question.getJSONObject("translation").getString("translationText");
+                incorrect1 = questions.get(randomUniqueNumbers.get(1)).getJSONObject("translation").getString("translationText");
+                incorrect2 = questions.get(randomUniqueNumbers.get(2)).getJSONObject("translation").getString("translationText");
+                incorrect3 = questions.get(randomUniqueNumbers.get(3)).getJSONObject("translation").getString("translationText");
+            }else{
+                correctAnswer = question.getJSONObject("word").getString("text");
+                incorrect1 = questions.get(randomUniqueNumbers.get(1)).getJSONObject("word").getString("text");
+                incorrect2 = questions.get(randomUniqueNumbers.get(2)).getJSONObject("word").getString("text");
+                incorrect3 = questions.get(randomUniqueNumbers.get(3)).getJSONObject("word").getString("text");
+            }
+
+            List<String> answersStrings = new ArrayList<>();
+            answersStrings.add(correctAnswer);
+            answersStrings.add(incorrect1);
+            answersStrings.add(incorrect2);
+            answersStrings.add(incorrect3);
+
+            Answers answers = new ConcreteAnswers(answersStrings, correctAnswer);
             orderChange = new AnswersOrderChange(answers);
 
 //            //przejść po questions i wybrać/wylosować niepoprawne odpowiedzi różne od porpawnej

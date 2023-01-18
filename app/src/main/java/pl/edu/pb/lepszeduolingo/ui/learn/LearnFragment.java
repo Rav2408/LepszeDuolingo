@@ -1,6 +1,5 @@
 package pl.edu.pb.lepszeduolingo.ui.learn;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
@@ -16,18 +15,19 @@ public class LearnFragment extends Fragment {
     Toast answerMessage;
     boolean isCorrect;
     DatabaseFacade databaseFacade = new DatabaseFacade(this.getContext());
-    void handleAnswer(int chosenAnswer){
+    void handleAnswer(int chosenAnswer, String answer){
         handleButtons(false);
         isCorrect = Objects.equals(chosenAnswer, 1);
         int wordId = ((LearnActivity)getActivity()).getWordId();
         // set back message
+
+        isCorrect = ((LearnActivity)getActivity()).orderChange.getCorrectAnswer().equals(answer);
         if(isCorrect){
             showMessage("Correct answer");
             // unlock word
             if(!databaseFacade.isWordUnlocked(wordId)){
                 databaseFacade.unlockWord(wordId);
             }
-            Log.d("unlockedWord", String.valueOf(wordId));
         }else{
             showMessage("Wrong answer");
         }
@@ -46,10 +46,10 @@ public class LearnFragment extends Fragment {
         }, switchDelay);
     }
     void getAnswer(){
-        answerView1.setOnClickListener(v -> handleAnswer(0));
-        answerView2.setOnClickListener(v -> handleAnswer(1));
-        answerView3.setOnClickListener(v -> handleAnswer(2));
-        answerView4.setOnClickListener(v -> handleAnswer(3));
+        answerView1.setOnClickListener(v -> handleAnswer(0,answerView1.getText().toString()));
+        answerView2.setOnClickListener(v -> handleAnswer(1,answerView2.getText().toString()));
+        answerView3.setOnClickListener(v -> handleAnswer(2,answerView3.getText().toString()));
+        answerView4.setOnClickListener(v -> handleAnswer(3,answerView4.getText().toString()));
     }
     void checkAnswer(boolean isCorrect){
         AnswerListener answerListener = (AnswerListener) getActivity();

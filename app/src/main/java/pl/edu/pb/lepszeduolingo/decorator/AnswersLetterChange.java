@@ -7,10 +7,6 @@ public class AnswersLetterChange extends AnswersDecorator {
         changeLettersRandomly();
     }
 
-    @Override
-    public String getAnswer(int i) {
-        return super.getAnswer(i);
-    }
 
     @Override
     public String getCorrectAnswer() {

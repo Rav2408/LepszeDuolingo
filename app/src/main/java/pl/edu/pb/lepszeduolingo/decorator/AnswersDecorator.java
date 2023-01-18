@@ -1,14 +1,17 @@
 package pl.edu.pb.lepszeduolingo.decorator;
 
+import java.util.List;
+
 public class AnswersDecorator implements Answers {
     Answers answers;
     public AnswersDecorator(Answers _answers){
         answers = _answers;
     }
 
+
     @Override
-    public String getAnswer(int i) {
-        return answers.getAnswer(i);
+    public List<String> getAnswers() {
+        return answers.getAnswers();
     }
 
     @Override
@@ -17,7 +20,9 @@ public class AnswersDecorator implements Answers {
     }
 
     @Override
-    public void setAnswer(int position, String answer) {
-        answers.setAnswer(position,answer);
+    public void setAnswers(List<String> answerList) {
+        answers.setAnswers(answerList);
     }
+
+
 }
