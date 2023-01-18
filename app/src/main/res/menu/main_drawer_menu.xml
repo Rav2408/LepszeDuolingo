@@ -9,5 +9,8 @@
             android:id="@+id/nav_difficulties"
             android:icon="@drawable/ic_menu_level"
             android:title="Play" />
+        <item
+            android:id="@+id/nav_logout"
+            android:title="Logout" />
     </group>
 </menu>
