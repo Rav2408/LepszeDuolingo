@@ -23,6 +23,11 @@ public class ConcreteAnswers implements Answers {
         return correctAnswer;
     }
 
+    @Override
+    public void setAnswer(int position, String answer) {
+        answers.set(position,answer);
+    }
+
     public void setCorrectAnswer(String correctAnswer) {
         this.correctAnswer = correctAnswer;
     }
@@ -30,4 +35,6 @@ public class ConcreteAnswers implements Answers {
     public String getAnswer(int i) {
         return answers.get(i);
     }
+
+
 }

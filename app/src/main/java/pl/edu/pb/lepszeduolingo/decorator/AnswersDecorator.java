@@ -15,4 +15,9 @@ public class AnswersDecorator implements Answers {
     public String getCorrectAnswer() {
         return answers.getCorrectAnswer();
     }
+
+    @Override
+    public void setAnswer(int position, String answer) {
+        answers.setAnswer(position,answer);
+    }
 }
