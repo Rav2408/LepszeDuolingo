@@ -33,4 +33,8 @@ public class TitleActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed() {
+        // Dirty walk around for log out
+    }
 }

@@ -51,6 +51,10 @@ public class DrawerMainActivity extends AppCompatActivity implements NavigationV
                 startActivity(new Intent(this, DifficultyActivity.class));
                 overridePendingTransition(0, 0);
                 break;
+            case R.id.nav_logout:
+                startActivity(new Intent(this, TitleActivity.class));
+                overridePendingTransition(0, 1);
+                break;
         }
         return false;
     }

@@ -72,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.INVISIBLE);
                     inputEmail.setError("Wrong Email");
                 }else{
+                    // get password
                     String stringHash = hashPassword(salt,inputPassword.getText().toString());
                     VolleyRequest.getInstance(context, new IVolley() {
                         @Override
@@ -91,10 +92,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void logInUser(JSONObject user){
+        // clear email input
+        inputEmail.setText("");
         currentUser = user;
         databaseFacade.setUser(currentUser);
         progressBar.setVisibility(View.INVISIBLE);
         authorization();
+        // clear password input
+        inputPassword.setText("");
     }
 
     private void authorization() {
