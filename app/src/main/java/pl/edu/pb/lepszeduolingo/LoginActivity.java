@@ -96,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
         inputEmail.setText("");
         currentUser = user;
         databaseFacade.setUser(currentUser);
+        databaseFacade.updateUnlockedWords();
         progressBar.setVisibility(View.INVISIBLE);
         authorization();
         // clear password input

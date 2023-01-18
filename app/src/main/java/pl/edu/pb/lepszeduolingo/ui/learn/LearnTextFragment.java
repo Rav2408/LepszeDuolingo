@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
+
 import pl.edu.pb.lepszeduolingo.R;
 
 public class LearnTextFragment extends LearnFragment {
@@ -39,14 +42,15 @@ public class LearnTextFragment extends LearnFragment {
         answerView3 = view.findViewById(R.id.answer_3_text);
         answerView4 = view.findViewById(R.id.answer_4_text);
         questionView = view.findViewById(R.id.questionView_text);
-        // TODO: set random wrong answers
-        // set view
+
+        List<String> questionAnswers = ((LearnActivity)getActivity()).orderChange.getAnswers();
+
         questionView.setText(word);
-        answerView1.setText(((LearnActivity)getActivity()).orderChange.getAnswers().get(0));
-        answerView2.setText(((LearnActivity)getActivity()).orderChange.getAnswers().get(1));
-        answerView3.setText(((LearnActivity)getActivity()).orderChange.getAnswers().get(2));
-        answerView4.setText(((LearnActivity)getActivity()).orderChange.getAnswers().get(3));
-        // get answer
+        answerView1.setText(questionAnswers.get(0));
+        answerView2.setText(questionAnswers.get(1));
+        answerView3.setText(questionAnswers.get(2));
+        answerView4.setText(questionAnswers.get(3));
+
         getAnswer();
     }
 }

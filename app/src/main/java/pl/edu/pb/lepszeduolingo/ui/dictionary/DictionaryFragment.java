@@ -28,7 +28,7 @@ import pl.edu.pb.lepszeduolingo.ui.word.WordActivity;
 
 public class DictionaryFragment extends Fragment implements Dict_RecyclerViewAdapter.onWordListener{
     DatabaseFacade databaseFacade = new DatabaseFacade(getContext());
-    private int unlockedWords = databaseFacade.getUnlockedWords().length();
+    private int unlockedWords;
     private int allWords = databaseFacade.getWords().length();
     private DictionaryViewModel dictionaryViewModel;
     private FragmentDictionaryBinding binding;
@@ -42,6 +42,7 @@ public class DictionaryFragment extends Fragment implements Dict_RecyclerViewAda
         View root = binding.getRoot();
         // set unlocked header
         unlockedView = root.findViewById(R.id.unlocked);
+        unlockedWords = 0;
         String unlockedString = String.format("Unlocked %s / %s", unlockedWords,
                 allWords);
         unlockedView.setText(unlockedString);
@@ -49,13 +50,13 @@ public class DictionaryFragment extends Fragment implements Dict_RecyclerViewAda
         // get list data
         JSONArray unlockedWords = databaseFacade.getUnlockedWords();
         ArrayList<String> wordsData = new ArrayList<>();
-        for(int i=0;i<unlockedWords.length();i++){
-            try {
-                wordsData.add(unlockedWords.getJSONObject(i).getJSONObject("word").getString("text"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
+//        for(int i=0;i<unlockedWords.length();i++){
+//            try {
+//                wordsData.add(unlockedWords.getJSONObject(i).getJSONObject("word").getString("text"));
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
         // set recycler view
         RecyclerView recyclerView = root.findViewById(R.id.dictRecyclerView);
         Dict_RecyclerViewAdapter adapter = new Dict_RecyclerViewAdapter(this, wordsData);
@@ -69,7 +70,7 @@ public class DictionaryFragment extends Fragment implements Dict_RecyclerViewAda
         // user is global
         // dictionary shows item twice
         databaseFacade.updateUnlockedWords();
-        unlockedWords = databaseFacade.getUnlockedWords().length();
+        unlockedWords = 0;
         allWords = databaseFacade.getWords().length();
     }
     @Override

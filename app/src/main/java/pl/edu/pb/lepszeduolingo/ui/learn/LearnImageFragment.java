@@ -42,7 +42,7 @@ public class LearnImageFragment extends LearnFragment {
         answerView3 = view.findViewById(R.id.answer_3_image);
         answerView4 = view.findViewById(R.id.answer_4_image);
         questionView = view.findViewById(R.id.imageView_image);
-        // TODO: set random wrong answers
+
         // set view
         Picasso.get().load(url).fit().into(questionView);
         answerView1.setText(((LearnActivity)getActivity()).orderChange.getAnswers().get(0));

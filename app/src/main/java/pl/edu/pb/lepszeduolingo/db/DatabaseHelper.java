@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+import pl.edu.pb.lepszeduolingo.builder.Creator;
 import pl.edu.pb.lepszeduolingo.builder.JsonBuilder;
 import pl.edu.pb.lepszeduolingo.models.Language;
 import pl.edu.pb.lepszeduolingo.rest.IVolley;
@@ -29,6 +30,7 @@ class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do tworzeni
     JSONArray collections;
     JSONArray unlockedWords;
     JSONObject user;
+    Creator creator;
 
     private static DatabaseHelper databaseHelper;
 
@@ -42,7 +44,7 @@ class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do tworzeni
     private DatabaseHelper(Context context) {
         this.context = context;
         pullData();
-
+        creator = new Creator(context);
     }
 
     public void pullData(){
@@ -54,20 +56,10 @@ class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do tworzeni
         updateDifficulties();
         updateCollections();
         updateLanguages();
-        updateUnlockedWords();
+        //updateUnlockedWords();
+        updateStartUnlockedWords();
     }
 
-    public void printConsole(){
-        Log.d("data", words.toString());
-        Log.d("data", categories.toString());
-        Log.d("data", translations.toString());
-        Log.d("data", questions.toString());
-        Log.d("data", difficulties.toString());
-        Log.d("data", languages.toString());
-    }
-
-
-    //TODO DatabaseFacade
     public JSONArray getWords() {
         return words;
     }
@@ -163,34 +155,37 @@ class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do tworzeni
         }).getRequest(URL +"language");
     }
     public void updateUnlockedWords(){
-        VolleyRequest.getInstance(context, new IVolley() {
-            @Override
-            public void onResponse(JSONArray jsonArray) {
-                unlockedWords=jsonArray;
-            }
-        }).getRequest(URL +"unlockedword");
-    }
-    public void unlockWord(int wordId) {
-        try{
+        try {
             VolleyRequest.getInstance(context, new IVolley() {
                 @Override
                 public void onResponse(JSONArray jsonArray) {
                     unlockedWords=jsonArray;
                 }
-            }).postRequest(URL + "unlockedword", new JsonBuilder(context).create()
-                    .put("word",
-                            new JsonBuilder(context)
-                                    .create()
-                                    .put("id", wordId)
-                                    .build()
-                    )
-                    .put("duolingoUser",
-                            new JsonBuilder(context)
-                                    .create()
-                                    .put("id",  user.getString("id"))
-                                    .build()
-                    )
-                    .build());
+            }).getRequest(URL +"unlockedword/user/" + user.getInt("id"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    public void updateStartUnlockedWords(){
+            VolleyRequest.getInstance(context, new IVolley() {
+                @Override
+                public void onResponse(JSONArray jsonArray) {
+                    unlockedWords=jsonArray;
+                }
+            }).getRequest(URL +"unlockedword/");
+    }
+
+    public void unlockWord(int wordId) {
+        try{
+            JSONObject newWord = creator.createUnlockedWord(wordId, user.getInt("id"));
+        unlockedWords.put(newWord);
+
+            VolleyRequest.getInstance(context, new IVolley() {
+                @Override
+                public void onResponse(JSONArray jsonArray) {
+                    unlockedWords=jsonArray;
+                }
+            }).postRequest(URL + "unlockedword", newWord);
         }catch (Exception e){
             e.printStackTrace();
         }

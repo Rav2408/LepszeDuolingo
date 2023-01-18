@@ -30,6 +30,7 @@ public class DifficultyActivity extends DrawerMainActivity implements Difficulti
 
         DatabaseFacade databaseFacade = new DatabaseFacade(this);
         difficulties = databaseFacade.getDifficulties();
+        Log.d("unlockedWords",databaseFacade.getUnlockedWords().toString());
 
         ArrayList<String> difficultiesData = new ArrayList<>();
         for(int i=0;i<difficulties.length();i++){
