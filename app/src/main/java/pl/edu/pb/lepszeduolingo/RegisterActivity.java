@@ -19,7 +19,7 @@ import java.util.Base64;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
-import pl.edu.pb.lepszeduolingo.builder.JsonBuilder;
+import pl.edu.pb.lepszeduolingo.builder.Creator;
 import pl.edu.pb.lepszeduolingo.rest.IVolley;
 import pl.edu.pb.lepszeduolingo.rest.VolleyRequest;
 
@@ -94,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
             String stringSalt = new String(base64Salt, StandardCharsets.UTF_8);
             String stringHash = new String(base64Hash, StandardCharsets.UTF_8);
 
-            createUser(context, email ,stringHash, stringSalt);
+            saveUser(context, email ,stringHash, stringSalt);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (InvalidKeySpecException e) {
@@ -102,16 +102,10 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    private void createUser(Context context, String email, String stringHash, String stringSalt){
+    private void saveUser(Context context, String email, String stringHash, String stringSalt){
         VolleyRequest.getInstance(context, new IVolley() {
         }).postRequest("http://34.118.90.148:8090/api/duolingouser",
-                new JsonBuilder(context).create()
-                        .put("name", email)
-                        .put("email", email)
-                        .put("role", "USER")
-                        .put("salt", stringSalt)
-                        .put("hash", stringHash)
-                        .build());
+                new Creator(this).createUser(email,email,"USER",stringSalt,stringHash));
     }
 
 }

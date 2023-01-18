@@ -5,7 +5,6 @@ import static pl.edu.pb.lepszeduolingo.Constants.URL;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -23,7 +22,6 @@ import androidx.fragment.app.Fragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -32,7 +30,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import pl.edu.pb.lepszeduolingo.R;
-import pl.edu.pb.lepszeduolingo.builder.JsonBuilder;
+import pl.edu.pb.lepszeduolingo.builder.Creator;
 import pl.edu.pb.lepszeduolingo.databinding.FragmentAddWordBinding;
 import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
 import pl.edu.pb.lepszeduolingo.rest.IVolley;
@@ -158,26 +156,7 @@ public class AddWordFragment extends Fragment
             public void onResponse(JSONArray jsonArray) {
                 databaseFacade.updateWords();
             }
-        }).postRequest(URL + "word", buildJsonWord(word,languageId,difficultyId,imagePath));
-    }
-
-    private JSONObject buildJsonWord(String word, int languageId, int difficultyId, String imagePath){
-        return new JsonBuilder(getContext()).create()
-                .put("text", word)
-                .put("language",
-                        new JsonBuilder(getContext())
-                                .create()
-                                .put("id", languageId)
-                                .build()
-                )
-                .put("difficulty",
-                        new JsonBuilder(getContext())
-                                .create()
-                                .put("id",  difficultyId)
-                                .build()
-                )
-                .put("imagePath", imagePath)
-                .build();
+        }).postRequest(URL + "word", new Creator(getContext()).createWord(word,languageId,difficultyId,imagePath));
     }
 
     private void handleAddImage(){

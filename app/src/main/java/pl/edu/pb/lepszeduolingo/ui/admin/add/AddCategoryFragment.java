@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Objects;
 
 import pl.edu.pb.lepszeduolingo.R;
+import pl.edu.pb.lepszeduolingo.builder.Creator;
 import pl.edu.pb.lepszeduolingo.builder.JsonBuilder;
 import pl.edu.pb.lepszeduolingo.databinding.FragmentAddCategoryBinding;
 import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
@@ -81,15 +82,11 @@ public class AddCategoryFragment extends Fragment {
     private void save(List<Integer> diffIds){
         VolleyRequest.getInstance(getContext(), new IVolley() {
         }).postRequest("http://34.118.90.148:8090/api/category",
-                new JsonBuilder(getContext()).create()
-                        .put("name", addCategoryText.getText().toString())
-                        .put("difficulties",
-                                new JsonBuilder(getContext())
-                                .create()
-                                .put("id",diffIds.get(difficultiesSpinner.getSelectedItemPosition()))
-                                .build()
-                        )
-                        .build());
+                new Creator(getContext()).createCategory(
+                        addCategoryText.getText().toString(),
+                        diffIds.get(difficultiesSpinner.getSelectedItemPosition())
+                ));
+
         databaseFacade.updateCategories();
     }
 }
