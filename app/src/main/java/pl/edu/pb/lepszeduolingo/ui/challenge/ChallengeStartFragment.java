@@ -47,7 +47,7 @@ public class ChallengeStartFragment extends Fragment implements
         // set elements
         startBtn.setOnClickListener(v -> handleStartBtn());
         difficultyView.setText(((ChallengeActivity) requireActivity()).difficultyName);
-        bestScoreView.setText(String.valueOf(facade.getBestScore(difficultyId)));
+        bestScoreView.setText(getString(R.string.best_score, facade.getBestScore(difficultyId)));
         return root;
     }
     private void handleStartBtn(){

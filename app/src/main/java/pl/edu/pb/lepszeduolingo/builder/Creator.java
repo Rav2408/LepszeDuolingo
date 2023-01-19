@@ -58,8 +58,36 @@ public class Creator {
     public JSONObject createScore(int newScore, int difficultyId, int userId){
         return new JsonBuilder(context).create()
                 .put("bestScore", newScore)
-                .put("difficulty", difficultyId)
-                .put("duolingoUser", userId)
+                .put("difficulty",
+                        new JsonBuilder(context)
+                                .create()
+                                .put("id", difficultyId)
+                                .build()
+                )
+                .put("duolingoUser",
+                        new JsonBuilder(context)
+                                .create()
+                                .put("id", userId)
+                                .build()
+                )
+                .build();
+    }
+    public JSONObject updateScore(int newScore, int difficultyId, int userId, int scoreId){
+        return new JsonBuilder(context).create()
+                .put("id", scoreId)
+                .put("bestScore", newScore)
+                .put("difficulty",
+                        new JsonBuilder(context)
+                                .create()
+                                .put("id", difficultyId)
+                                .build()
+                )
+                .put("duolingoUser",
+                        new JsonBuilder(context)
+                                .create()
+                                .put("id", userId)
+                                .build()
+                )
                 .build();
     }
 

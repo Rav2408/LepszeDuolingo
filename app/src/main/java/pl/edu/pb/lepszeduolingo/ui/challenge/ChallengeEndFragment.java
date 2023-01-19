@@ -54,7 +54,7 @@ public class ChallengeEndFragment extends Fragment {
         backBtn.setOnClickListener(v -> getActivity().finish());
         // set elements
         scoreView.setText(String.valueOf(score));
-        bestScoreView.setText(String.valueOf(facade.getBestScore(difficultyId)));
+        bestScoreView.setText(getString(R.string.best_score, facade.getBestScore(difficultyId)));
         return root;
     }
     private void handleAgain(){

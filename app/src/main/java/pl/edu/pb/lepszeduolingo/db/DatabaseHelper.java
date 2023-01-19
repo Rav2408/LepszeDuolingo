@@ -1,6 +1,7 @@
 package pl.edu.pb.lepszeduolingo.db;
 
 import android.content.Context;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -246,15 +247,21 @@ class DatabaseHelper {
         JSONObject score = getScoreByDifficultyId(difficultyId);
         try {
             if(score != null && newScore > score.getInt("bestScore")){
-                setBestScoreById(newScore, score.getInt("id"));
+                updateBestScoreById(newScore, score.getInt("id"), difficultyId);
             }else{
-                creator.createScore(newScore, difficultyId, user.getInt("id"));
+                scores.put(creator.createScore(newScore, difficultyId, user.getInt("id")));
+                VolleyRequest.getInstance(context, new IVolley() {
+                    @Override
+                    public void onResponse(JSONArray jsonArray) {
+                        scores=jsonArray;
+                    }
+                }).postRequest(URL + "score", creator.createScore(newScore, difficultyId, user.getInt("id")));
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-    public void setBestScoreById(int newScore, int scoreId){
+    public void updateBestScoreById(int newScore, int scoreId, int difficultyId){
         try {
             // get old data
             JSONArray tempArray = scores;
@@ -264,6 +271,12 @@ class DatabaseHelper {
             tempArray.put(scoreId, tempScore);
             // update score
             scores = tempArray;
+            VolleyRequest.getInstance(context, new IVolley() {
+                @Override
+                public void onResponse(JSONArray jsonArray) {
+                    scores=jsonArray;
+                }
+            }).postRequest(URL + "score", creator.updateScore(newScore, difficultyId, user.getInt("id"), scoreId));
         }catch (JSONException e){
             e.printStackTrace();
         }
