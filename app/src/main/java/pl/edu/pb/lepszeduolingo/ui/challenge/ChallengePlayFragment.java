@@ -25,13 +25,20 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
 import pl.edu.pb.lepszeduolingo.R;
 import pl.edu.pb.lepszeduolingo.databinding.FragmentChallengePlayBinding;
 import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
+import pl.edu.pb.lepszeduolingo.decorator.Answers;
+import pl.edu.pb.lepszeduolingo.decorator.AnswersLetterChange;
+import pl.edu.pb.lepszeduolingo.decorator.AnswersOrderChange;
+import pl.edu.pb.lepszeduolingo.decorator.ConcreteAnswers;
 
 public class ChallengePlayFragment extends Fragment {
     FragmentChallengePlayBinding binding;
@@ -45,6 +52,7 @@ public class ChallengePlayFragment extends Fragment {
     boolean isCorrect;
     int questionStarted;
     Points points;
+    boolean fragmentFlag = false;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,32 +90,71 @@ public class ChallengePlayFragment extends Fragment {
         setParams();
         return root;
     }
+    private List<Integer> drawRandomNumbers(int max){
+        List<Integer> list = new ArrayList<>();
+        List<Integer> outputList = new ArrayList<>();
+
+        for (int i=1; i<max; i++) list.add(i);
+        Collections.shuffle(list);
+        for (int i=0; i<4; i++){
+            outputList.add(list.get(i));
+        }
+        return outputList;
+    }
     void setParams(){
         try {
-            // choose answer
-            Random rand = new Random();
-            int questionNumber = rand.nextInt(questions.length());
+            fragmentFlag = !fragmentFlag;
+            List<Integer> randomUniqueNumbers = drawRandomNumbers(questions.length());
+            int questionNumber = randomUniqueNumbers.get(0);
             JSONObject question = questions.getJSONObject(questionNumber);
+
             String word = question.getJSONObject("word").getString("text");
             String url = question.getJSONObject("word").getString("imagePath");
             // set question
-            URL newUrl = new URL(url);
-            HttpURLConnection connection = (HttpURLConnection) newUrl.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            // download image
-            // TODO: change it
-            //  this take a lot of time
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            Drawable dr = new BitmapDrawable(myBitmap);
-            QuestionView.setBackground(dr);
-            QuestionView.setText("");
+            String correctAnswer;
+            String incorrect1;
+            String incorrect2;
+            String incorrect3;
+            if(fragmentFlag){
+                QuestionView.setText(word);
+                QuestionView.setBackgroundColor(80000000);
+                correctAnswer = question.getJSONObject("translation").getString("translationText");
+                incorrect1 = questions.getJSONObject(randomUniqueNumbers.get(1)).getJSONObject("translation").getString("translationText");
+                incorrect2 = questions.getJSONObject(randomUniqueNumbers.get(2)).getJSONObject("translation").getString("translationText");
+                incorrect3 = questions.getJSONObject(randomUniqueNumbers.get(3)).getJSONObject("translation").getString("translationText");
+            }else{
+                URL newUrl = new URL(url);
+                HttpURLConnection connection = (HttpURLConnection) newUrl.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                // download image
+                InputStream input = connection.getInputStream();
+                Bitmap myBitmap = BitmapFactory.decodeStream(input);
+                Drawable dr = new BitmapDrawable(myBitmap);
+                QuestionView.setBackground(dr);
+                QuestionView.setText("");
+                correctAnswer = question.getJSONObject("word").getString("text");
+                incorrect1 = questions.getJSONObject(randomUniqueNumbers.get(1)).getJSONObject("word").getString("text");
+                incorrect2 = questions.getJSONObject(randomUniqueNumbers.get(2)).getJSONObject("word").getString("text");
+                incorrect3 = questions.getJSONObject(randomUniqueNumbers.get(3)).getJSONObject("word").getString("text");
+            }
+
+            List<String> answersStrings = new ArrayList<>();
+            answersStrings.add(correctAnswer);
+            answersStrings.add(incorrect1);
+            answersStrings.add(incorrect2);
+            answersStrings.add(incorrect3);
+
+            Answers answers = new ConcreteAnswers(answersStrings, correctAnswer);
+            Answers orderChange = new AnswersOrderChange(answers);
+            Answers letterChange = new AnswersLetterChange(orderChange);
+
+            List<String> answersNames = letterChange.getAnswers();
             // set answers
-            AnswerView_1.setText("answer 1");
-            AnswerView_2.setText("answer 2");
-            AnswerView_3.setText("answer 3");
-            AnswerView_4.setText(word);
+            AnswerView_1.setText(answersNames.get(0));
+            AnswerView_2.setText(answersNames.get(1));
+            AnswerView_3.setText(answersNames.get(2));
+            AnswerView_4.setText(answersNames.get(3));
 
             questionStarted = new Date().getSeconds();
         } catch (JSONException e) {

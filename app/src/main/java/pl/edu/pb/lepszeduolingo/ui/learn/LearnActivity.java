@@ -67,7 +67,6 @@ public class LearnActivity extends AppCompatActivity implements AnswerListener{
     }
     // set parameters for db
     void setParams() throws JSONException {
-
             // choose answer
             List<Integer> randomUniqueNumbers = drawRandomNumbers(questions.size());
             questionNumber = randomUniqueNumbers.get(0);
@@ -77,8 +76,6 @@ public class LearnActivity extends AppCompatActivity implements AnswerListener{
             String incorrect1;
             String incorrect2;
             String incorrect3;
-
-
 
             if(fragmentFlag){
                 correctAnswer = question.getJSONObject("translation").getString("translationText");
@@ -103,14 +100,6 @@ public class LearnActivity extends AppCompatActivity implements AnswerListener{
             Answers answers2 = new ConcreteAnswers(answersStrings, correctAnswer);
             Answers orderChange2 = new AnswersOrderChange(answers2);
             letterChange = new AnswersLetterChange(orderChange2);
-
-//            //przejść po questions i wybrać/wylosować niepoprawne odpowiedzi różne od porpawnej
-//            Answers answers = new ConcreteAnswers(poprawna, niepoprawna1, niepo2, niepo3);
-//            Answers decoratedAnswers = new AnsersLetterChange(answers);
-//
-//            List<String> lista = decoratedAnswers.getAnswers();
-//            String correct = decoratedAnswers.getCorrectAnswer();
-
             // rand if text or image
             Fragment fragmentOut = fragmentFlag ? textFragment : imageFragment;
             // pass data

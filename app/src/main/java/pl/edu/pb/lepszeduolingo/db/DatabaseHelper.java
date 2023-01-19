@@ -268,11 +268,4 @@ class DatabaseHelper {
             e.printStackTrace();
         }
     }
-
-
-//    private void mapLanguages(JSONArray jsonArray){
-//        Gson g = new Gson();
-//        List<Language> languages = g.fromJson(String.valueOf(jsonArray), Language.class);
-//        //TODO przejść po pętli żeby mapować pojedyńcze obiekty
-//    }
 }
