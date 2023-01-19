@@ -14,7 +14,21 @@ public class DatabaseFacade {
 
     public DatabaseFacade(Context context) {
         this.databaseHelper = DatabaseHelper.getInstance(context);
+        pullData();
     }
+
+    public void pullData(){
+
+        databaseHelper.updateWords();
+        databaseHelper.updateCategories();
+        databaseHelper.updateTranslations();
+        databaseHelper.updateQuestions();
+        databaseHelper.updateDifficulties();
+        databaseHelper.updateCollections();
+        databaseHelper.updateLanguages();
+        databaseHelper.updateScores();
+    }
+
 
     public List<String> getTranslationsByWordId(int wordId){
         JSONArray allTranlations = databaseHelper.getTranslations();
