@@ -40,23 +40,10 @@ class DatabaseHelper {
 
     private DatabaseHelper(Context context) {
         this.context = context;
-        pullData();
         creator = new Creator(context);
     }
 
-    public void pullData(){
 
-        updateWords();
-        updateCategories();
-        updateTranslations();
-        updateQuestions();
-        updateDifficulties();
-        updateCollections();
-        updateLanguages();
-        //updateUnlockedWords();
-        updateStartUnlockedWords();
-        updateScores();
-    }
 
     public JSONArray getWords() {
         return words;
@@ -164,14 +151,14 @@ class DatabaseHelper {
             e.printStackTrace();
         }
     }
-    public void updateStartUnlockedWords(){
-            VolleyRequest.getInstance(context, new IVolley() {
-                @Override
-                public void onResponse(JSONArray jsonArray) {
-                    unlockedWords=jsonArray;
-                }
-            }).getRequest(URL +"unlockedword");
-    }
+//    public void updateStartUnlockedWords(){
+//            VolleyRequest.getInstance(context, new IVolley() {
+//                @Override
+//                public void onResponse(JSONArray jsonArray) {
+//                    unlockedWords=jsonArray;
+//                }
+//            }).getRequest(URL +"unlockedword");
+//    }
     public void updateScores(){
         VolleyRequest.getInstance(context, new IVolley() {
             @Override
