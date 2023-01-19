@@ -12,8 +12,6 @@ public class MainActivity extends DrawerMainActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //databaseHelper.printConsole();
-
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(activityMainBinding.getRoot());
         // set dictionary fragment(home)

@@ -32,7 +32,7 @@ public class WordActivity extends AppCompatActivity {
         setParams(wordId);
     }
     void setParams(int id){
-        // TODO: translation recycle view
+        // TODO: translation recycle view to show many translations
         DatabaseFacade databaseFacade = new DatabaseFacade(this);
         try {
             JSONObject unlockedWord = databaseFacade.getUnlockedWord(id);

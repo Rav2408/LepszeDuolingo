@@ -7,13 +7,12 @@ import android.os.Bundle;
 public class StreakMode implements IChallengeStarter{
     @Override
     public void startChallenge(Context context) {
-        // arguments
         Points points = new Points(new WinStreakStrategy());
         String activityOption = "play";
-        // bundle
+
         Intent intent = new Intent(context, ChallengeActivity.class);
         Bundle bundle = new Bundle();
-        // pass
+
         bundle.putString("key", activityOption);
         bundle.putString("points", GsonUtils.getGsonParser().toJson(points));
         intent.putExtras(bundle);

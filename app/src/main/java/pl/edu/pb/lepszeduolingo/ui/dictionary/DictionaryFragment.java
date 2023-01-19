@@ -1,10 +1,7 @@
 package pl.edu.pb.lepszeduolingo.ui.dictionary;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,6 +31,7 @@ public class DictionaryFragment extends Fragment implements Dict_RecyclerViewAda
     TextView unlockedView;
     Dict_RecyclerViewAdapter adapter;
     ArrayList<String> wordsData;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentDictionaryBinding.inflate(inflater, container, false);
@@ -49,15 +46,14 @@ public class DictionaryFragment extends Fragment implements Dict_RecyclerViewAda
         recyclerView.setAdapter(adapter);
         return root;
     }
+
     public void setDictionaryData() {
-        // update data
         databaseFacade.updateUnlockedWords();
-        // set header
-        handleWordCounter();
-        // set recycler adapter
-        handleAdapterData();
+        updateWordCounter();
+        updateListData();
     }
-    private void handleAdapterData(){
+
+    private void updateListData(){
         unlockedWords = databaseFacade.getUnlockedWords();
         wordsData = new ArrayList<>();
         for(int i=0;i<unlockedWords.length();i++){
@@ -68,19 +64,21 @@ public class DictionaryFragment extends Fragment implements Dict_RecyclerViewAda
             }
         }
     }
-    private void handleWordCounter(){
+
+    private void updateWordCounter(){
         unlockedWordsCount = databaseFacade.getUnlockedWords().length();
         allWordsCount = databaseFacade.getWords().length();
         String unlockedString = String.format("Unlocked %s / %s", unlockedWordsCount,
                 allWordsCount);
         unlockedView.setText(unlockedString);
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
-    // set onClick
+
     @Override
     public void onWordClick(int position) {
         // send parameter wordId and start activity word
@@ -89,6 +87,5 @@ public class DictionaryFragment extends Fragment implements Dict_RecyclerViewAda
         bundle.putInt("id", position);
         intent.putExtras(bundle);
         startActivity(intent);
-        Log.d(TAG, String.format("Word: %2d", position));
     }
 }

@@ -22,16 +22,16 @@ public class ChallengeStartStrategyDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.challenge_start_dialog, null);
-        // views
+
         strategyTime_btn = view.findViewById(R.id.challenge_strategy_1);
         strategyStreak_btn = view.findViewById(R.id.challenge_strategy_2);
-        // builder
+
         builder.setView(view)
                 .setCancelable(true)
                 .setNegativeButton("Cancel", (dialog, which) -> {
                     dialog.cancel();
                 });
-        // buttons
+
         strategyTime_btn.setOnClickListener(v -> {
             listener.pickStrategy("time");
             this.getDialog().cancel();
@@ -42,6 +42,7 @@ public class ChallengeStartStrategyDialog extends AppCompatDialogFragment {
             this.getDialog().cancel();
             listener.startGame();
         });
+
         return builder.create();
     }
     @Override

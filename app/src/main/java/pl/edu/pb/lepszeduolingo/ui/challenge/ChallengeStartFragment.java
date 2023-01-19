@@ -36,30 +36,32 @@ public class ChallengeStartFragment extends Fragment implements
                              Bundle savedInstanceState) {
         binding = FragmentChallengeStartBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        // difficulty
+
         difficultyName = ((ChallengeActivity)requireActivity()).difficultyName;
         difficultyId = facade.getDifficultyIdByName(difficultyName);
-        // get elements
+
         startBtn = root.findViewById(R.id.challenge_start_btn);
         difficultyView = root.findViewById(R.id.challenge_start_difficulty);
-        // TODO: get best score from db
+
         bestScoreView = root.findViewById(R.id.challenge_start_best_score);
-        // set elements
+
         startBtn.setOnClickListener(v -> handleStartBtn());
         difficultyView.setText(((ChallengeActivity) requireActivity()).difficultyName);
         bestScoreView.setText(getString(R.string.best_score, facade.getBestScore(difficultyId)));
+
         return root;
     }
     private void handleStartBtn(){
-        // dialog input
         ChallengeStartStrategyDialog dialog = new ChallengeStartStrategyDialog();
         dialog.setTargetFragment(this, 0);
         dialog.show(getActivity().getSupportFragmentManager(), "challenge dialog");
     }
+
     @Override
     public void pickStrategy(String strategy) {
         this.strategy = strategy;
     }
+
     @Override
     public void startGame() {
         ChallengeFactory challengeFactory = new ChallengeFactory();

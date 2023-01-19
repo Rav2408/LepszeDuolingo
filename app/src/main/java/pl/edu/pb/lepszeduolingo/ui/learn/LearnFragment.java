@@ -3,7 +3,6 @@ import android.os.Handler;
 import android.widget.Button;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
-import java.util.Objects;
 
 import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
 
@@ -15,16 +14,14 @@ public class LearnFragment extends Fragment {
     Toast answerMessage;
     boolean isCorrect;
     DatabaseFacade databaseFacade = new DatabaseFacade(this.getContext());
+
     void handleAnswer(int chosenAnswer, String answer){
         handleButtons(false);
-        isCorrect = Objects.equals(chosenAnswer, 1);
         int wordId = ((LearnActivity)getActivity()).getWordId();
-        // set back message
 
         isCorrect = ((LearnActivity)getActivity()).orderChange.getCorrectAnswer().equals(answer);
         if(isCorrect){
             showMessage("Correct answer");
-            // unlock word
             if(!databaseFacade.isWordUnlocked(wordId)){
                 databaseFacade.unlockWord(wordId);
             }
@@ -32,6 +29,7 @@ public class LearnFragment extends Fragment {
             showMessage("Wrong answer");
         }
     }
+
     void showMessage(String message){
         int messageDelay = 400;
         int switchDelay = 600;
@@ -41,7 +39,7 @@ public class LearnFragment extends Fragment {
         Handler handler = new Handler();
         handler.postDelayed(() -> answerMessage.cancel(), messageDelay);
         handler.postDelayed(() -> {
-            checkAnswer(isCorrect);
+            nextQuestion();
             handleButtons(true);
         }, switchDelay);
     }
@@ -51,10 +49,10 @@ public class LearnFragment extends Fragment {
         answerView3.setOnClickListener(v -> handleAnswer(2,answerView3.getText().toString()));
         answerView4.setOnClickListener(v -> handleAnswer(3,answerView4.getText().toString()));
     }
-    void checkAnswer(boolean isCorrect){
+    void nextQuestion(){
         AnswerListener answerListener = (AnswerListener) getActivity();
         assert answerListener != null;
-        answerListener.addIsCorrect(isCorrect);
+        answerListener.nextQuestion();
     }
     void handleButtons(boolean flag){
         answerView1.setEnabled(flag);

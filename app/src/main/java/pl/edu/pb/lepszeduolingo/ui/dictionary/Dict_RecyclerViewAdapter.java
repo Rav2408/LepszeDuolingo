@@ -16,7 +16,6 @@ import pl.edu.pb.lepszeduolingo.R;
 
 public class Dict_RecyclerViewAdapter extends RecyclerView.Adapter<Dict_RecyclerViewAdapter.ViewHolder> {
     private onWordListener onWordListener;
-    private String[] data = {"asdf","fasd","dupa","kupa"};
     ArrayList<String> wordsData;
     public Dict_RecyclerViewAdapter(onWordListener onWordListener, ArrayList<String> wordsData){
         this.onWordListener = onWordListener;
@@ -66,7 +65,5 @@ public class Dict_RecyclerViewAdapter extends RecyclerView.Adapter<Dict_Recycler
     public interface onWordListener{
         void onWordClick(int position);
     }
-    public void updateData(final ArrayList<String> wordsData){
-        this.wordsData = wordsData;
-    }
+
 }
