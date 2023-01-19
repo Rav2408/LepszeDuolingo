@@ -7,12 +7,12 @@ public class AnswersOrderChange extends AnswersDecorator {
 
     public AnswersOrderChange(Answers _answers) {
         super(_answers);
-        changeOrderRandomly();
     }
 
-    private void changeOrderRandomly(){
+    @Override
+    public List<String> getAnswers() {
         List<String> answerList = answers.getAnswers();
         Collections.shuffle(answerList);
-        answers.setAnswers(answerList);
+        return answerList;
     }
 }

@@ -7,16 +7,10 @@ import java.util.Random;
 public class AnswersLetterChange extends AnswersDecorator {
     public AnswersLetterChange(Answers answers) {
         super(answers);
-        changeLettersRandomly();
     }
-
 
     @Override
-    public String getCorrectAnswer() {
-        return super.getCorrectAnswer();
-    }
-
-    private void changeLettersRandomly() {
+    public List<String> getAnswers() {
         List<String> answerList = answers.getAnswers();
         for (int i = 0; i < answerList.size(); i++) {
             String answer = answerList.get(i);
@@ -53,5 +47,6 @@ public class AnswersLetterChange extends AnswersDecorator {
             }
             answers.setAnswers(answerList);
         }
+        return answerList;
     }
 }
