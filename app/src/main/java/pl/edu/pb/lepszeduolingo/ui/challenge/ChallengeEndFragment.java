@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +15,17 @@ import android.widget.TextView;
 import pl.edu.pb.lepszeduolingo.R;
 import pl.edu.pb.lepszeduolingo.databinding.FragmentChallengeEndBinding;
 import pl.edu.pb.lepszeduolingo.databinding.FragmentChallengeStartBinding;
+import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
 
 public class ChallengeEndFragment extends Fragment {
     private FragmentChallengeEndBinding binding;
+    DatabaseFacade facade = new DatabaseFacade(this.getContext());
     TextView scoreView;
     TextView bestScoreView;
     Button againBtn;
     Button backBtn;
+    String difficultyName;
+    int difficultyId;
     int score;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,14 @@ public class ChallengeEndFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentChallengeEndBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        // bundle
+        Bundle arguments = getArguments();
+        score = arguments.getInt("score");
+        // difficulty
+        difficultyName = ((ChallengeActivity)requireActivity()).difficultyName;
+        difficultyId = facade.getDifficultyIdByName(difficultyName);
+        // set score to db
+        facade.setBestScore(difficultyId, score);
         // get elements
         scoreView = root.findViewById(R.id.challenge_end_score);
         bestScoreView = root.findViewById(R.id.challenge_end_best_score);
@@ -39,11 +52,9 @@ public class ChallengeEndFragment extends Fragment {
         // buttons
         againBtn.setOnClickListener(v -> handleAgain());
         backBtn.setOnClickListener(v -> getActivity().finish());
-        // bundle
-        Bundle arguments = getArguments();
-        score = arguments.getInt("score");
         // set elements
         scoreView.setText(String.valueOf(score));
+        bestScoreView.setText(String.valueOf(facade.getBestScore(difficultyId)));
         return root;
     }
     private void handleAgain(){

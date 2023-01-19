@@ -4,6 +4,8 @@ import android.content.Context;
 
 import org.json.JSONObject;
 
+import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
+
 public class Creator {
 
     Context context;
@@ -53,19 +55,13 @@ public class Creator {
                 .build();
     }
 
-    public JSONObject createScore(String name, int difficultyId){
+    public JSONObject createScore(int newScore, int difficultyId, int userId){
         return new JsonBuilder(context).create()
-                .put("name", name)
-                .put("difficulties",
-                        new JsonBuilder(context)
-                                .create()
-                                .put("id",difficultyId)
-                                .build()
-                )
+                .put("bestScore", newScore)
+                .put("difficulty", difficultyId)
+                .put("duolingoUser", userId)
                 .build();
     }
-
-
 
     public JSONObject createUnlockedWord(int wordId, int userId){
         return new JsonBuilder(context).create()

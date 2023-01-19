@@ -1,24 +1,18 @@
 package pl.edu.pb.lepszeduolingo.db;
 
 import android.content.Context;
-import android.util.Log;
-
-import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 import pl.edu.pb.lepszeduolingo.builder.Creator;
-import pl.edu.pb.lepszeduolingo.builder.JsonBuilder;
-import pl.edu.pb.lepszeduolingo.models.Language;
 import pl.edu.pb.lepszeduolingo.rest.IVolley;
 import pl.edu.pb.lepszeduolingo.rest.VolleyRequest;
 
-class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do tworzenia kolejnych JSSONArray
+class DatabaseHelper {
     private static final String URL = "http://34.118.90.148:8090/api/";
 
     Context context;
@@ -30,6 +24,7 @@ class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do tworzeni
     JSONArray languages;
     JSONArray collections;
     JSONArray unlockedWords;
+    JSONArray scores;
     JSONObject user;
     Creator creator;
 
@@ -59,6 +54,7 @@ class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do tworzeni
         updateLanguages();
         //updateUnlockedWords();
         updateStartUnlockedWords();
+        updateScores();
     }
 
     public JSONArray getWords() {
@@ -173,7 +169,15 @@ class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do tworzeni
                 public void onResponse(JSONArray jsonArray) {
                     unlockedWords=jsonArray;
                 }
-            }).getRequest(URL +"unlockedword/");
+            }).getRequest(URL +"unlockedword");
+    }
+    public void updateScores(){
+        VolleyRequest.getInstance(context, new IVolley() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                scores=jsonArray;
+            }
+        }).getRequest(URL +"score");
     }
 
     public void unlockWord(int wordId) {
@@ -201,6 +205,70 @@ class DatabaseHelper {       //TODO wzorzec fabryka (factory method) do tworzeni
         }
         return null;
     }
+    public JSONObject getDifficultyById(int difficultyID){
+        for(int i = 0; i < difficulties.length(); i++){
+            try {
+                if(difficulties.getJSONObject(i).getInt("id") == difficultyID){
+                    return difficulties.getJSONObject(i);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+    public int getDifficultyIdByName(String difficultyName){
+        for(int i = 0; i < difficulties.length(); i++){
+            try {
+                if(Objects.equals(difficulties.getJSONObject(i).getString("level"), difficultyName)){
+                    return difficulties.getJSONObject(i).getInt("id");
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return -1;
+    }
+    public JSONObject getScoreByDifficultyId(int difficultyId){
+        for(int i = 0; i < scores.length(); i++){
+            try {
+                if(scores.getJSONObject(i).getJSONObject("difficulty").getInt("id") == difficultyId
+                    && scores.getJSONObject(i).getJSONObject("duolingoUser").getInt("id") == user.getInt("id")){
+                    return scores.getJSONObject(i);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+    public void setBestScore(int difficultyId, int newScore){
+        JSONObject score = getScoreByDifficultyId(difficultyId);
+        try {
+            if(score != null && newScore > score.getInt("bestScore")){
+                setBestScoreById(newScore, score.getInt("id"));
+            }else{
+                creator.createScore(newScore, difficultyId, user.getInt("id"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    public void setBestScoreById(int newScore, int scoreId){
+        try {
+            // get old data
+            JSONArray tempArray = scores;
+            JSONObject tempScore = tempArray.getJSONObject(scoreId);
+            // set new data
+            tempScore.put("bestScore", newScore);
+            tempArray.put(scoreId, tempScore);
+            // update score
+            scores = tempArray;
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
+
 
 //    private void mapLanguages(JSONArray jsonArray){
 //        Gson g = new Gson();

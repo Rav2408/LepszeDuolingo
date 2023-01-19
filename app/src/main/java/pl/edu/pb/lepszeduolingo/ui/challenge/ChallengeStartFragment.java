@@ -14,15 +14,19 @@ import android.widget.TextView;
 
 import pl.edu.pb.lepszeduolingo.R;
 import pl.edu.pb.lepszeduolingo.databinding.FragmentChallengeStartBinding;
+import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
 import pl.edu.pb.lepszeduolingo.ui.admin.add.AddWordImageDialog;
 
 public class ChallengeStartFragment extends Fragment implements
         ChallengeStartStrategyDialog.ChallengeStartStrategyDialogListener{
     private FragmentChallengeStartBinding binding;
+    DatabaseFacade facade = new DatabaseFacade(this.getContext());
     Button startBtn;
     TextView difficultyView;
     TextView bestScoreView;
     String strategy;
+    String difficultyName;
+    int difficultyId;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +36,9 @@ public class ChallengeStartFragment extends Fragment implements
                              Bundle savedInstanceState) {
         binding = FragmentChallengeStartBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        // difficulty
+        difficultyName = ((ChallengeActivity)requireActivity()).difficultyName;
+        difficultyId = facade.getDifficultyIdByName(difficultyName);
         // get elements
         startBtn = root.findViewById(R.id.challenge_start_btn);
         difficultyView = root.findViewById(R.id.challenge_start_difficulty);
@@ -40,6 +47,7 @@ public class ChallengeStartFragment extends Fragment implements
         // set elements
         startBtn.setOnClickListener(v -> handleStartBtn());
         difficultyView.setText(((ChallengeActivity) requireActivity()).difficultyName);
+        bestScoreView.setText(String.valueOf(facade.getBestScore(difficultyId)));
         return root;
     }
     private void handleStartBtn(){

@@ -6,21 +6,15 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.Fragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,10 +31,7 @@ import java.util.Random;
 
 import pl.edu.pb.lepszeduolingo.R;
 import pl.edu.pb.lepszeduolingo.databinding.FragmentChallengePlayBinding;
-import pl.edu.pb.lepszeduolingo.databinding.FragmentChallengeStartBinding;
 import pl.edu.pb.lepszeduolingo.db.DatabaseFacade;
-import pl.edu.pb.lepszeduolingo.models.Question;
-import pl.edu.pb.lepszeduolingo.ui.learn.AnswerListener;
 
 public class ChallengePlayFragment extends Fragment {
     FragmentChallengePlayBinding binding;

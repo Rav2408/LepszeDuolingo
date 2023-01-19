@@ -145,6 +145,28 @@ public class DatabaseFacade {
         databaseHelper.updateCategories();
     }
 
+    public JSONObject getDifficultyById(int difficultyId){
+        return databaseHelper.getDifficultyById(difficultyId);
+    }
+    public int getDifficultyIdByName(String difficultyName){
+        return databaseHelper.getDifficultyIdByName(difficultyName);
+    }
+    public void setBestScore(int difficultyId, int newScore){
+        databaseHelper.setBestScore(difficultyId, newScore);
+    }
+    public int getBestScore(int difficultyId){
+        try {
+            if(databaseHelper.getScoreByDifficultyId(difficultyId) == null){
+                return 0;
+            }else{
+                return databaseHelper.getScoreByDifficultyId(difficultyId).getInt("bestScore");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
     public void updateTranslations() {
         databaseHelper.updateTranslations();
     }
@@ -163,5 +185,4 @@ public class DatabaseFacade {
     public void updateUnlockedWords() {
         databaseHelper.updateUnlockedWords();
     }
-
 }
